@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import StoryList from "../pages/EmpPicture.vue"; // Adjust the import path as necessary
-import JobPosting from "../pages/JobPosting.vue";
-import AnnouncementPage from "../pages/AnnouncementPage.vue";
+import StoryList from "../EmpPicture.vue"; // Adjust the import path as necessary
+import JobPosting from "../ToolBar/JobPosting.vue";
+import AnnouncementPage from "../AnnouncementPage.vue";
 export default {
   name: "MainLayout",
   components: {
@@ -26,7 +26,6 @@ export default {
 };
 </script>
 <style scoped>
-
 .scrollable-container {
   max-height: 93vh;
   overflow-y: auto;

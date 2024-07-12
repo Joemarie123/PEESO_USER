@@ -1,0 +1,278 @@
+<template>
+  <div>
+    <p class="title q-ma-sm">FAMILY BACKGROUND</p>
+    <q-separator class="q-ma-sm" />
+    <div class="row">
+      <div class="col-12">
+        <q-card class="q-ma-md q-pa-md">
+          <p class="" style="font-weight: 600">SPOUSE'S INFORMATION</p>
+          <div class="row">
+            <div class="col-4 col-sm-6 col-xs-12 col-md-4">
+              <!-- <p class="name">{{ personals.SpouseName }}</p> -->
+              <p class="nameLabel">Fullname</p>
+            </div>
+            <div class="col-4 col-sm-6 col-xs-12 col-md-4">
+              <!-- <p class="name">{{ this.model }}</p> -->
+              <p class="nameLabel">Name Extension</p>
+            </div>
+            <div class="col-4 col-sm-6 col-xs-12 col-md-4">
+              <!-- <p class="name">{{ personals.Occupation }}</p> -->
+              <p class="nameLabel">Occupation</p>
+            </div>
+            <div class="col-4 col-sm-6 col-xs-12 col-md-4">
+              <!-- <p class="name">{{ personals.SpouseEmployer }}</p> -->
+              <p class="nameLabel">Employers/Business Name</p>
+            </div>
+            <div class="col-4 col-sm-6 col-xs-12 col-md-4">
+              <!-- <p class="name">{{ personals.SpouseEmpAddress }}</p> -->
+              <p class="nameLabel">Business Address</p>
+            </div>
+            <div class="col-4 col-sm-6 col-xs-12 col-md-4">
+              <!-- <p class="name">{{ personals.SpouseEmpTel }}</p> -->
+              <p class="nameLabel">Business Telephone Number</p>
+            </div>
+          </div>
+        </q-card>
+      </div>
+    </div>
+    <div>
+      <q-card class="q-ma-md q-pa-md" style="margin-top: -0px">
+        <p style="font-weight: 600" class="q-mb-lg">PARENT'S INFORMATION</p>
+        <div class="row">
+          <div class="col-12 col-sm-12 col-xs-12 col-md-6">
+            <div class="row">
+              <div class="col-12 col-lg-4 col-sm-6">
+                <p class="addressTitle">FATHER'S FULLNAME:</p>
+              </div>
+              <div class="col-12 col-lg-8 col-sm-6">
+                <!-- <p class="address">{{ personals.FatherName }}</p> -->
+              </div>
+              <div class="col-12 col-lg-4 col-sm-6">
+                <p class="addressTitle">NAME EXTENSION:</p>
+              </div>
+              <div class="col-12 col-lg-8 col-sm-6">
+                <!-- <p class="address">{{ this.model }}</p> -->
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-sm-12 col-xs-12 col-md-6">
+            <div class="row">
+              <div class="col-12 col-lg-4 col-sm-6">
+                <p class="addressTitle">MOTHER'S MAIDEN NAME:</p>
+              </div>
+              <div class="col-12 col-lg-8 col-sm-6">
+                <!-- <p class="address">{{ personals.MotherName }}</p> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+    </div>
+    <div class="row">
+      <div class="col">
+        <q-card class="q-ma-md q-pa-md" style="margin-top: -0px">
+          <div class="row">
+            <div class="col-12">
+              <p style="font-weight: 600" class="">CHILDREN'S INFORMATION</p>
+              <!-- <q-table
+                :grid="$q.screen.xs"
+                class="my-sticky-header-table text-uppercase"
+                flat
+                bordered
+                title=""
+                dense
+                :rows="personal[0].children"
+                :columns="columns"
+                row-key="id"
+                ><template v-slot:body-cell-actions="{ row }">
+                  <div class="actionsbtn">
+                    <q-btn
+                      icon="delete"
+                      flat
+                      round
+                      color="deep-orange"
+                      @click="deleteChildren(row)"
+                    >
+                    </q-btn>
+                  </div> </template
+              ></q-table> -->
+            </div>
+          </div>
+        </q-card>
+      </div>
+    </div>
+    <!-- DIALOG FOR CHILD DELETE -->
+    <q-dialog
+      v-model="DeleteChildrenDialog"
+      persistent
+      transition-show="scale"
+      transition-hide="scale"
+    >
+      <q-card class="bg-blue text-white" style="width: 300px">
+        <q-card-section>
+          <div class="text-h6">Delete Children</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          Are you sure to delete this Child?
+        </q-card-section>
+
+        <q-card-actions align="right" class="bg-white">
+          <q-btn flat label="Cancel" v-close-popup class="text-orange" />
+          <q-btn
+            flat
+            label="OK"
+            @click="deleteChildrenFinal()"
+            class="text-green"
+            v-close-popup
+          />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+  </div>
+</template>
+<script>
+// import { useLoginStore } from "src/stores/LoginStore";
+// import { useUserInfoStore } from "src/stores/AdditionalStore";
+
+// export default {
+//   data() {
+//     return {
+//       model: "",
+//       DeleteChildrenDialog: false,
+//       ChildrenID: "",
+//       personal: [],
+//       columns: [
+//         {
+//           name: "lastname",
+//           required: true,
+//           label: "Name of Children",
+//           align: "left",
+//           field: "ChildName",
+//           sortable: true,
+//         },
+//         {
+//           name: "firstname",
+//           align: "center",
+//           label: "Date of Birth",
+//           field: "BirthDate",
+//           sortable: true,
+//         },
+//         {
+//           name: "actions",
+//           label: "ACTIONS",
+//           field: "actions",
+//           align: "left",
+//         },
+//       ],
+//     };
+//   },
+//   created() {
+//     const store = useLoginStore();
+
+//     this.personal = store.userinfo.map((item) => ({ ...item }));
+//     console.log("Children=>", this.personal);
+//     this.controlno = store.controlno;
+//     if (
+//       this.personal[0].Surname.includes("JR") ||
+//       this.personal[0].Surname.includes("SR") ||
+//       this.personal[0].Surname.includes(" III") ||
+//       this.personal[0].Surname.includes(" IV")
+//     ) {
+//       this.personal[0].Surname.replace(/\s(Jr|Sr|III| IV)$/, "");
+//       const regex = /\s(Jr|Sr|III| IV)$/;
+//       const matches = this.personal[0].Surname.match(regex);
+//       this.model = matches.slice(1);
+//     } else {
+//       this.model = "N/A";
+//     }
+//   },
+//   setup() {
+//     const store = useLoginStore();
+//     const personals = store.userinfo[0];
+//     return {
+//       store,
+//       personals,
+//     };
+//   },
+//   methods: {
+//     deleteChildren(childrenid) {
+//       this.ChildrenID = childrenid.PMID;
+//       this.DeleteChildrenDialog = true;
+//     },
+//     deleteChildrenFinal() {
+
+//       const loginstore = useLoginStore();
+//       const user = new FormData();
+//       user.append("controlno", loginstore.controlno);
+//       const store = useUserInfoStore();
+//       const data = new FormData();
+//       data.append("tablename", "children");
+//       data.append("id", this.ChildrenID);
+//       store.deletedata(data).then(() => {
+//         loginstore.userdetails(user).then(() => {
+//           this.personal = loginstore.userinfo.map((item) => ({ ...item }));
+//         });
+//       });
+//     },
+//   },
+// };
+</script>
+
+<style scoped>
+.title {
+  font-size: 15px;
+}
+.item {
+  font-weight: 400;
+}
+.item1 {
+  font-weight: 400;
+  margin-left: -10px;
+}
+.item2 {
+  font-weight: 400;
+  margin-left: -38px;
+}
+.item3 {
+  font-weight: 400;
+  margin-left: -15px;
+}
+.item4 {
+  font-weight: 400;
+  margin-left: -20px;
+}
+.info-line {
+  display: grid;
+  grid-template-columns: max-content auto;
+  gap: 70px;
+  font-weight: 500;
+  margin-top: -10px;
+}
+.name {
+  font-weight: 500;
+}
+.nameLabel {
+  font-style: italic;
+  margin-top: -15px;
+}
+
+/* .label {
+  text-align: right;
+  white-space: nowrap;
+} */
+
+/* Optional: Additional styling for better readability */
+.info-line span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.address {
+  margin-top: -12px;
+}
+.addressTitle {
+  margin-top: -12px;
+  font-weight: 500;
+}
+</style>

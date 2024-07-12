@@ -226,6 +226,11 @@ import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "MainLayout",
+  data() {
+    return {
+      tab: "mails",
+    };
+  },
   setup() {
     const leftDrawerOpen = ref(false);
     const dropdownOpen = ref(false);

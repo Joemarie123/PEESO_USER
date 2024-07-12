@@ -1,12 +1,9 @@
 <template>
   <q-page class="q-pa-md q-mt-md">
-    <p class="title ">TRAININGS AND SEMINAR AVAILABLE</p>
-    <div
-      class="row"
-      style="display: flex; flex-wrap: wrap"
-    >
+    <p class="title">TRAININGS AND SEMINAR AVAILABLE</p>
+    <div class="row" style="display: flex; flex-wrap: wrap">
       <div
-        class="  col-12 q-gutter-md"
+        class="col-12 q-gutter-md"
         style="
           display: flex;
           justify-content: center;
@@ -18,7 +15,7 @@
           v-for="job in jobs"
           :key="job.id"
           class="q-mb-md custom-card"
-          style="width: 60%; height:auto; margin-bottom: auto"
+          style="width: 60%; height: auto; margin-bottom: auto"
         >
           <q-item>
             <q-item-section avatar>

@@ -35,7 +35,12 @@
             </q-item-section>
             <q-item-section class="justify-end"
               ><div class="text-right">
-                <p class="text-blue" @click="$router.push({ path: '/JobDetails' })">See More</p>
+                <p
+                  class="text-blue"
+                  @click="$router.push({ path: '/JobDetails' })"
+                >
+                  See More
+                </p>
               </div></q-item-section
             >
           </q-item>

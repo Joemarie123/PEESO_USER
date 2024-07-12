@@ -1,4 +1,3 @@
-
 const routes = [
   // {
   //   path: "/",
@@ -10,18 +9,18 @@ const routes = [
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
     children: [
-      { path: "", component: () => import("layouts/DashboardView.vue") },
+      { path: "", component: () => import("pages/ToolBar/DashboardView.vue") },
       {
         path: "/ScholarshipPosting",
-        component: () => import("layouts/ScholarshipPosting.vue"),
+        component: () => import("pages/ToolBar/ScholarshipPosting.vue"),
       },
       {
         path: "/TrainingPosting",
-        component: () => import("layouts/TrainingPosting.vue"),
+        component: () => import("pages/ToolBar/TrainingPosting.vue"),
       },
       {
         path: "/JobApplications",
-        component: () => import("pages/JobApplications/JobApp.vue"),
+        component: () => import("pages/NavBar/JobApp.vue"),
       },
       {
         path: "/Userprofile",
@@ -47,6 +46,10 @@ const routes = [
         path: "/apply",
         component: () => import("pages/JobApply.vue"),
       },
+      {
+        path: "/PDS",
+        component: () => import("pages/NavBar/PersonalSheet.vue"),
+      },
 
       // {
       //   path: "/ViewAllJobs",
@@ -62,4 +65,4 @@ const routes = [
   },
 ];
 
-export default routes
+export default routes;

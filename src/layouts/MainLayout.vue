@@ -26,7 +26,27 @@
         <q-space></q-space>
 
         <!-- Middle section: Navigation buttons or Dropdown -->
-        <div class="q-pa-md q-gutter-md" v-if="$q.screen.gt.xs">
+        <div class="q-pa-xs q-gutter-y-md" v-if="$q.screen.gt.xs">
+          <q-tabs v-model="tab" class="text-blue-9">
+            <q-tab
+              name="mails"
+              icon="work_outline"
+              @click="$router.push({ path: '/' })"
+            />
+            <q-tab
+              name="alarms"
+              icon="school"
+              @click="$router.push({ path: '/ScholarshipPosting' })"
+            />
+            <q-tab
+              name="movies"
+              icon="movie"
+              @click="$router.push({ path: '/TrainingPosting' })"
+            />
+          </q-tabs>
+        </div>
+
+        <!-- <div class="q-pa-md q-gutter-md" v-if="$q.screen.gt.xs">
           <q-btn
             flat
             round
@@ -48,7 +68,7 @@
             icon="co_present"
             @click="$router.push({ path: '/TrainingPosting' })"
           />
-        </div>
+        </div> -->
 
         <div v-else>
           <q-btn dense round flat icon="menu" @click="toggleMiddle" />
@@ -133,7 +153,7 @@
                 <q-item
                   clickable
                   class="GL__menu-link"
-                  @click="$router.push({ path: '/Profile' })"
+                  @click="$router.push({ path: '/PDS' })"
                 >
                   <q-item-section>Personal Data Sheet</q-item-section>
                 </q-item>
@@ -226,9 +246,15 @@ import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "MainLayout",
+  data() {
+    return {
+      tab: "mails",
+    };
+  },
   setup() {
     const leftDrawerOpen = ref(false);
     const dropdownOpen = ref(false);
+    const tab = "";
 
     return {
       leftDrawerOpen,
