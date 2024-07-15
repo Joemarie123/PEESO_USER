@@ -1,6 +1,7 @@
 <template>
   <div class="profile-card">
     <q-card>
+     
       <q-card-section
         style="background-color: rgb(3, 69, 113)"
         class="text-center text-white"

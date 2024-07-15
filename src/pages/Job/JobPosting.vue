@@ -33,6 +33,7 @@
                 <q-badge outline color="primary" label="Part Time"
               /></q-item-label>
             </q-item-section>
+            
             <q-item-section class="justify-end"
               ><div class="text-right">
                 <p

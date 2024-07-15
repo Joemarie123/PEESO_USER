@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="row">
-      <div class="scrollable-container col-10">
+      <div class="scrollable-container col-10 col-md-10 col-sm-12 col-xs-12">
         <story-list></story-list>
         <job-posting></job-posting>
       </div>
-      <div class="scrollable-container col-2">
+      <div class="scrollable-container col-2 col-md-2">
         <announcement-page></announcement-page>
       </div>
     </div>
@@ -14,7 +14,7 @@
 
 <script>
 import StoryList from "../EmpPicture.vue"; // Adjust the import path as necessary
-import JobPosting from "../ToolBar/JobPosting.vue";
+import JobPosting from "../Job/JobPosting.vue";
 import AnnouncementPage from "../AnnouncementPage.vue";
 export default {
   name: "MainLayout",

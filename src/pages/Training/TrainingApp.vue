@@ -1,15 +1,13 @@
 <template>
   <div class="q-pa-md">
-    <p class="title">MY SCHOLARSHIP APPLICATIONS</p>
+    <p class="title">MY TRAINING AND SEMINAR APPLICATIONS</p>
     <q-separator class="q-ma-md" inset />
     <div class="q-pa-lg" style="justify-content: center; flex-wrap: wrap">
       <q-list
         class="rounded-borders"
-        style="max-width: 90%"
+        style="max-width: 100%"
         v-for="job in scholarship"
         :key="job.id"
-        bordered
-
       >
         <q-item clickable v-ripple>
           <q-item-section avatar>
@@ -18,7 +16,7 @@
             </q-avatar>
           </q-item-section>
 
-          <q-item-section>
+          <q-item-section @click="$router.push({path: '/TrainingDetails'})">
             <q-item-label lines="1">{{ job.scholarSponsor }}</q-item-label>
             <q-item-label caption lines="2">
               <span class="text-weight-bold">{{ job.ScholarTitle }}</span>
@@ -31,7 +29,7 @@
           <q-item-section side top>{{job.DatePosted}} </q-item-section>
         </q-item>
 
-        <!-- <q-separator  /> -->
+        <q-separator inset="item"  />
       </q-list>
     </div>
   </div>

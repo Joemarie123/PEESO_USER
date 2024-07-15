@@ -9,19 +9,51 @@ const routes = [
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
     children: [
-      { path: "", component: () => import("pages/ToolBar/DashboardView.vue") },
-      {
-        path: "/ScholarshipPosting",
-        component: () => import("pages/ToolBar/ScholarshipPosting.vue"),
-      },
-      {
-        path: "/TrainingPosting",
-        component: () => import("pages/ToolBar/TrainingPosting.vue"),
-      },
+      { path: "", component: () => import("pages/NavBar/DashboardView.vue") },
+
+      // Job
       {
         path: "/JobApplications",
-        component: () => import("pages/NavBar/JobApp.vue"),
+        component: () => import("pages/Job/JobApp.vue"),
       },
+      {
+        path: "/JobDetails",
+        component: () => import("pages/Job/JobDetails.vue"),
+      },
+      {
+        path: "/apply",
+        component: () => import("pages/Job/JobApply.vue"),
+      },
+
+      // Scholarship
+      {
+        path: "/ScholarshipPosting",
+        component: () => import("pages/Scholarship/ScholarshipPosting.vue"),
+      },
+      {
+        path: "/ScholarshipApplications",
+        component: () => import("pages/Scholarship/ScholarApp.vue"),
+      },
+      {
+        path: "/ScholarshipDetails",
+        component: () => import("pages/Scholarship/ScholarshipDetails.vue"),
+      },
+
+      // Training
+      {
+        path: "/TrainingPosting",
+        component: () => import("pages/Training/TrainingPosting.vue"),
+      },
+      {
+        path: "/TrainingDetails",
+        component: () => import("pages/Training/TrainingDetails.vue"),
+      },
+      {
+        path: "/TrainingApplications",
+        component: () => import("pages/Training/TrainingApp.vue"),
+      },
+
+      // User
       {
         path: "/Userprofile",
         component: () => import("pages/NavBar/UserProfile.vue"),
@@ -30,22 +62,7 @@ const routes = [
         path: "/Profile",
         component: () => import("pages/NavBar/UserProfileEdit.vue"),
       },
-      {
-        path: "/ScholarshipApplications",
-        component: () => import("pages/NavBar/ScholarApp.vue"),
-      },
-      {
-        path: "/TrainingApplications",
-        component: () => import("pages/NavBar/TrainingApp.vue"),
-      },
-      {
-        path: "/JobDetails",
-        component: () => import("pages/JobDetails.vue"),
-      },
-      {
-        path: "/apply",
-        component: () => import("pages/JobApply.vue"),
-      },
+
       {
         path: "/PDS",
         component: () => import("pages/NavBar/PersonalSheet.vue"),
@@ -57,8 +74,6 @@ const routes = [
       // },
     ],
   },
-  // Always leave this as last one,
-  // but you can also remove it
   {
     path: "/:catchAll(.*)*",
     component: () => import("pages/ErrorNotFound.vue"),

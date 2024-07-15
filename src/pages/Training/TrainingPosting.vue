@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-md q-mt-md">
-    <p class="title">SCHOLARSHIP AVAILABLE</p>
+    <p class="title">TRAININGS AND SEMINAR AVAILABLE</p>
     <div class="row" style="display: flex; flex-wrap: wrap">
       <div
         class="col-12 q-gutter-md"
@@ -28,6 +28,17 @@
               <q-item-label>{{ job.employerName }}</q-item-label>
               <q-item-label caption>{{ job.DatePosted }}</q-item-label>
             </q-item-section>
+
+            <q-item-section class="justify-end"
+              ><div class="text-right">
+                <p
+                  class="text-blue"
+                  @click="$router.push({ path: '/TrainingDetails' })"
+                >
+                  More...
+                </p>
+              </div></q-item-section
+            >
           </q-item>
 
           <q-item-section>

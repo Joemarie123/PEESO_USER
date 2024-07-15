@@ -1,12 +1,12 @@
 <template>
   <div class="q-pa-md">
-    <p class="title">MY TRAINING AND SEMINAR APPLICATIONS</p>
+    <p class="title">MY JOB APPLICATIONS</p>
     <q-separator class="q-ma-md" inset />
     <div class="q-pa-lg" style="justify-content: center; flex-wrap: wrap">
       <q-list
         class="rounded-borders"
         style="max-width: 100%"
-        v-for="job in scholarship"
+        v-for="job in jobs"
         :key="job.id"
       >
         <q-item clickable v-ripple>
@@ -16,20 +16,20 @@
             </q-avatar>
           </q-item-section>
 
-          <q-item-section>
-            <q-item-label lines="1">{{ job.scholarSponsor }}</q-item-label>
+          <q-item-section @click="$router.push({ path: '/JobDetails' })">
+            <q-item-label lines="1">{{ job.employerName }}</q-item-label>
             <q-item-label caption lines="2">
-              <span class="text-weight-bold">{{ job.ScholarTitle }}</span>
+              <span class="text-weight-bold">{{ job.JobTitle }}</span>
             </q-item-label>
             <q-item-label caption lines="3">
-              <span class="">{{ job.scholarDesc }}</span>
+              <span class="">{{ job.JobDesc }}</span>
             </q-item-label>
           </q-item-section>
 
           <q-item-section side top>{{job.DatePosted}} </q-item-section>
         </q-item>
 
-        <q-separator  />
+        <q-separator inset="item" />
       </q-list>
     </div>
   </div>
@@ -40,7 +40,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      scholarship: [], // This should be initialized here, not users
+      jobs: [], // This should be initialized here, not users
       page: 1,
       limit: 10, // Number of records per request
       hasMore: true, // To check if more data is available
@@ -54,7 +54,7 @@ export default {
 
       try {
         const response = await axios.get(
-          `https://run.mocky.io/v3/7d64c7cf-f4c2-4410-9570-24cc47e458a2`,
+          `https://run.mocky.io/v3/6228305b-5055-49b9-8f30-3431dc155f16`,
           {
             params: {
               _page: this.page,
@@ -64,9 +64,9 @@ export default {
         );
         console.log("Response Data:", response.data); // Log the response data
         // Extract the jobs array from the response
-        const newJobs = response.data.scholarship;
+        const newJobs = response.data.jobs;
 
-        this.scholarship = this.scholarship.concat(newJobs); // Append new jobs to the existing list
+        this.jobs = this.jobs.concat(newJobs); // Append new jobs to the existing list
         this.page++;
         this.hasMore = newJobs.length === this.limit;
       } catch (error) {

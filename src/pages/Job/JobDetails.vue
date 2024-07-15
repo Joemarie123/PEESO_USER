@@ -2,15 +2,25 @@
   <div class="profile-card">
     <q-card>
       <q-card-section
-        style="background-color: rgb(3, 69, 113)"
-        class="text-center text-white"
+        style="
+          background-color: rgb(3, 69, 113);
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        "
+        class="text-white"
       >
-        <p style="font-size: 22px">Web Developer / UX Specialist</p>
+        <q-btn flat style="text-align: left" class="" icon="arrow_back" ></q-btn>
+        <p style="font-size: 22px; align-self: center">
+          Web Developer / UX Specialist
+        </p>
+        <!-- if done "APPLY FOR THIS JOB" , then it shall be changed to "APPLIED" -->
         <q-btn
           class="bg-green"
           rounded
           label="Apply For This Job"
           @click="$router.push({ path: '/apply' })"
+          style="align-self: center"
         ></q-btn>
       </q-card-section>
       <q-card-section class="">
