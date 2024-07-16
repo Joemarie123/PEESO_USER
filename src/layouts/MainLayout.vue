@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header elevated class="bg-white text-grey-10">
+    <q-header elevated class="bg-white text-grey-10 ">
       <q-toolbar>
         <!-- Left side: Logo and Drawer button -->
         <q-btn flat round dense class="bg-blue-9" @click="toggleLeftDrawer">

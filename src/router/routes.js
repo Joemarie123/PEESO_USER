@@ -68,6 +68,15 @@ const routes = [
         component: () => import("pages/NavBar/PersonalSheet.vue"),
       },
 
+
+
+      // PDS
+
+      {
+        path: "/personalinfo",
+        component: () => import("pages/EditPDS/PersonalInformation.vue"),
+      }
+
       // {
       //   path: "/ViewAllJobs",
       //   component: () => import("pages/ViewAllJobs.vue"),

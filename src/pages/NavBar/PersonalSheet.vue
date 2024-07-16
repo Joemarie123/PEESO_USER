@@ -205,7 +205,7 @@
                 style="width: 95%; margin-bottom: -10px"
                 @click="reference()"
                 >REFERENCES
-              </q-btn> 
+              </q-btn>
         </template>
       </div>
 
@@ -356,7 +356,7 @@ export default {
 
 <style scoped>
 .profile-card {
-  max-width: 70%;
+  max-width: 80%;
   margin: auto;
   margin-top: 2%;
   border-radius: 8px;

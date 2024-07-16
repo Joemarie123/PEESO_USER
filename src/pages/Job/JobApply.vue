@@ -1,15 +1,20 @@
 <template>
   <div class="profile-card">
     <q-card>
-     
       <q-card-section
-        style="background-color: rgb(3, 69, 113)"
-        class="text-center text-white"
+        style="
+          background-color: rgb(3, 69, 113);
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        "
+        class="text-white"
       >
-        <p style="font-size: 22px">Web Developer / UX Specialist</p>
+        <q-btn flat style="text-align: left" class="" icon="arrow_back" @click="$router.push({path: '/JobDetails'})"></q-btn>
+        <p style="font-size: 22px; align-self: center">Web Developer / UX Specialist</p>
         <!-- <q-btn class="bg-green" rounded label="Apply For This Job"></q-btn> -->
       </q-card-section>
-      <q-card-section class="">
+      <!-- <q-card-section class="">
         <q-card flat>
           <div class="row q-pa-md">
             <div class="col-12 col-lg-3 col-md-6 col-sm-6">
@@ -79,7 +84,7 @@
             </div>
           </div>
         </q-card>
-      </q-card-section>
+      </q-card-section> -->
     </q-card>
   </div>
   <div class="row skill-card">
@@ -102,7 +107,7 @@
         <q-item-section class="q-pa-md">
           <q-form>
             <div class="row">
-              <div class="col-12">
+              <div class="col-6">
                 <q-input
                   filled
                   label="Subject"
@@ -110,6 +115,15 @@
                   class="q-pa-sm text-uppercase"
                 />
               </div>
+              <div class="col-6">
+                <q-input
+                  filled
+                  label="Item Code"
+                  dense
+                  class="q-pa-sm text-uppercase"
+                />
+              </div>
+
               <div class="col-12">
                 <q-input
                   uppercase
