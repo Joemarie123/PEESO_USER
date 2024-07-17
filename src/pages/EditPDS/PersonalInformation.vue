@@ -1,6 +1,7 @@
 <template>
   <div>
     <q-card class="q-pa-md q-ma-md">
+      <p>Applicant Name</p>
       <q-form>
         <div class="row">
           <div class="col-12 col-md-6 col-sm-6 col-lg-6">
@@ -64,6 +65,7 @@
 
     <!-- Additional Information -->
     <q-card class="q-pa-md q-ma-md">
+      <p>Additional Information</p>
       <div class="row" style="margin-top: -10px">
         <div class="col-12 col-md-6 col-lg-6 col-sm-6">
           <q-input
@@ -284,12 +286,9 @@
         </div>
       </div>
       <q-separator inset class="q-mb-sm"></q-separator>
-      <q-separator inset class="q-mb-sm"></q-separator>
+      <label for="Address" class="q-pa-md q-mt-sm">Religious Sector: </label>
       <div class="row">
-        <div class="col-md-12 col-xs-12">
-          <label for="Address" class="q-pa-md q-mt-sm"
-            >Religious Sector:
-          </label>
+        <div class="col-md-6 col-xs-12">
           <div class="">
             <q-select
               class="q-pa-sm"
@@ -313,7 +312,7 @@
             </q-select>
           </div>
         </div>
-        <div class="col-md-12 col-xs-12">
+        <div class="col-md-6 col-xs-12">
           <div>
             <q-input
               filled
@@ -326,6 +325,193 @@
         </div>
       </div>
     </q-card>
+
+    <!-- Address -->
+    <q-card class="q-pa-md q-ma-md">
+      <label for="Address" class="q-ml-sm">Residential Address </label>
+      <div class="row">
+        <div class="col-12 col-lg-6 col-md-6 col-sm-6">
+          <q-select
+            :rules="inputRules"
+            lazy-rules
+            filled
+            label="Region"
+            :options="regionOptions"
+            emit-value
+            map-options
+            class="q-pa-sm"
+            dense
+          />
+        </div>
+        <div class="col-12 col-lg-6 col-md-6 col-sm-6">
+          <q-select
+            lazy-rules
+            :rules="inputRules"
+            filled
+            label="Province"
+            :options="provinceOptions"
+            class="q-pa-sm"
+            dense
+          />
+        </div>
+        <div class="col-12 col-lg-6 col-md-6 col-sm-6">
+          <q-select
+            lazy-rules
+            :rules="inputRules"
+            filled
+            label="City/Municipality"
+            :options="cityOptions"
+            class="q-pa-sm"
+            dense
+          />
+        </div>
+        <div class="col-12 col-lg-6 col-md-6 col-sm-6">
+          <q-select
+            lazy-rules
+            :rules="inputRules"
+            filled
+            label="Barangay"
+            :options="brgyOptions"
+            class="q-pa-sm"
+            dense
+          />
+        </div>
+        <div class="col-12 col-lg-6 col-md-6 col-sm-6">
+          <q-input
+            style="text-transform: uppercase"
+            filled
+            label="Subdivision/Village"
+            class="q-pa-sm"
+            dense
+          />
+        </div>
+        <div class="col-12 col-lg-6 col-md-6 col-sm-6">
+          <q-input
+            style="text-transform: uppercase"
+            filled
+            label="Street/Purok"
+            class="q-pa-sm"
+            dense
+          />
+        </div>
+        <div class="col-md-8 col-xs-6">
+          <q-input
+            style="text-transform: uppercase"
+            filled
+            label="House/Block/Lot No."
+            dense
+            class="q-pa-sm"
+          />
+        </div>
+        <div class="col-md-4 col-xs-6">
+          <q-input filled label="ZIP CODE" class="q-pa-sm" dense />
+        </div>
+      </div>
+
+      <label for="Address" class="q-mb-md q-ml-sm q-mt-md"
+        >Permanent Address:
+      </label>
+      <q-checkbox
+        @update:model-value="address()"
+        v-model="permanentAddress"
+        label="Same as Residential Address"
+        size="xs"
+        true-value="yes"
+        false-value="no"
+      />
+      <div class="row">
+        <div class="col-12 col-lg-6 col-md-6 col-sm-6">
+          <q-select
+            lazy-rules
+            :rules="inputRules"
+            filled
+            label="Region"
+            :options="regionOptions"
+            :option-label="(region) => region.region_name"
+            :option-value="(region) => region.region_name"
+            emit-value
+            map-options
+            @update:model-value="handleRRegionChange(4)"
+            class="q-pa-sm"
+            dense
+          />
+        </div>
+        <div class="col-12 col-lg-6 col-md-6 col-sm-6">
+          <q-select
+            lazy-rules
+            :rules="inputRules"
+            filled
+            label="Province"
+            :options="PprovinceOptions"
+            @update:model-value="handleRRegionChange(5)"
+            class="q-pa-sm"
+            dense
+          />
+        </div>
+        <div class="col-12 col-lg-6 col-md-6 col-sm-6">
+          <q-select
+            lazy-rules
+            :rules="inputRules"
+            filled
+            label="City/Municipality"
+            @update:model-value="handleRRegionChange(6)"
+            :options="PcityOptions"
+            class="q-pa-sm"
+            dense
+          />
+        </div>
+        <div class="col-12 col-lg-6 col-md-6 col-sm-6">
+          <q-select
+            lazy-rules
+            :rules="inputRules"
+            filled
+            label="Baranggay"
+            :options="PbrgyOptions"
+            class="q-pa-sm"
+            dense
+          />
+        </div>
+        <div class="col-12 col-lg-6 col-md-6 col-sm-6">
+          <q-input
+            style="text-transform: uppercase"
+            filled
+            label="Subdivision/Village"
+            class="q-pa-sm"
+            dense
+          />
+        </div>
+        <div class="col-12 col-lg-6 col-md-6 col-sm-6">
+          <q-input
+            style="text-transform: uppercase"
+            filled
+            label="Street"
+            class="q-pa-sm"
+            dense
+          />
+        </div>
+        <div class="col-md-8 col-xs-6">
+          <q-input
+            style="text-transform: uppercase"
+            filled
+            label="House/Block/Lot No."
+            dense
+            class="q-pa-sm"
+          />
+        </div>
+        <div class="col-md-4 col-xs-6">
+          <q-input
+            style="text-transform: uppercase"
+            filled
+            label="ZIP CODE"
+            class="q-pa-sm"
+            dense
+          />
+        </div>
+      </div>
+    </q-card>
+  </div>
+  <div class="q-pa-sm q-ma-sm">
+    <q-btn color="green" class="full-width" label="Save Changes" />
   </div>
 </template>
 <script>
@@ -338,5 +524,10 @@ export default {
       sexOptions: ["MALE", "FEMALE"],
     };
   },
+  methods: {
+    save() {
+      // this.$router.push('/PDS')
+    }
+  }
 };
 </script>

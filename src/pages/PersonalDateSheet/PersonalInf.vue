@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="title q-ma-sm">
+    <p class="title q-ma-sm text-bold q-ml-md">
       PERSONAL INFORMATION
       <q-btn
         icon="edit"
@@ -8,11 +8,12 @@
         class=""
         dense
         style="color: orange"
-        @click="$router.push({ path: '/personalinfo' })"
+        @click="EditBtn"
       ></q-btn>
     </p>
 
     <q-separator class="q-ma-sm" />
+    <div v-show="pi">
     <div class="row">
       <div class="col-12">
         <q-card class="q-ma-md q-pa-md">
@@ -44,27 +45,12 @@
         <div class="row">
           <div class="col-12 col-sm-12 col-xs-12 col-md-6">
             <div class="row">
-              <div class="col-12 col-lg-12 col-sm-12">
-                <q-input
-                  bottom-slots
-                  v-model="text"
-                  label="Label"
-                  counter
-                  maxlength="12"
-                  dense
-                >
-                  <template v-slot:before>
-                    <p style="font-size: 12px">DATE OF BIRTH:</p>
-                  </template>
-                </q-input>
-
-                <p class="addressTitle">
-                  DATE OF BIRTH:
-                  <!-- <p class="address">{{ personals.Bday }}</p> -->
-                  <q-input bordered dense>dfsdsdsddddhjh</q-input>
-                </p>
+              <div class="col-12 col-lg-4 col-sm-6">
+                <p class="addressTitle">DATE OF BIRTH:</p>
               </div>
-              <div class="col-12 col-lg-8 col-sm-6"></div>
+              <div class="col-12 col-lg-8 col-sm-6">
+                <!-- <p class="address">{{ personals.BirthPlace }}</p> -->
+              </div>
               <div class="col-12 col-lg-4 col-sm-6">
                 <p class="addressTitle">PLACE OF BIRTH:</p>
               </div>
@@ -302,17 +288,35 @@
         </q-card>
       </div>
     </div>
+    </div>
+    <div v-show="EditProfile">
+      <PersonalInformation />
+    </div>
+
   </div>
 </template>
 <script>
 // import { useLoginStore } from "src/stores/LoginStore";
+import PersonalInformation from "src/pages/EditPDS/PersonalInformation.vue"
 
 export default {
   data() {
     return {
       model: "",
+      EditProfile: false,
+      pi: true,
     };
   },
+  methods: {
+    EditBtn() {
+      this.EditProfile = true;
+      this.pi=false;
+    }
+  },
+  components: {
+    PersonalInformation,
+
+  }
   // created() {
   //   const store = useLoginStore();
   //   this.personal = store.userinfo.map((item) => ({ ...item }));

@@ -1,40 +1,54 @@
 <template>
   <div>
-    <p class="title q-ma-sm">CIVIL SERVICE ELIGIBILITY</p>
+    <p class="title q-ma-sm text-bold q-ml-md">
+      CIVIL SERVICE ELIGIBILITY<q-btn
+        icon="edit"
+        flat
+        class=""
+        dense
+        style="color: orange"
+        @click="EditBtn"
+      ></q-btn>
+    </p>
     <q-separator class="q-ma-sm" />
-    <div class="row">
-      <div class="col">
-        <q-card class="q-ma-md q-pa-md">
-          <div class="row">
-            <div class="col-12">
-              <p style="font-weight: 600" class="">ELIGIBITIES</p>
-              <!-- <q-table
-                :grid="$q.screen.lt.md"
-                class="my-sticky-header-table text-uppercase"
-                flat
-                bordered
-                wrap-cells=""
-                title=""
-                dense
-                :rows="personal"
-                :columns="columns"
-                row-key="id"
-                ><template v-slot:body-cell-actions="{ row }">
-                  <div class="actionsbtn">
-                    <q-btn
-                      icon="delete"
-                      flat
-                      round
-                      color="deep-orange"
-                      @click="deleteCivil(row)"
-                    >
-                    </q-btn>
-                  </div> </template
-              ></q-table> -->
+    <div v-show="cs">
+      <div class="row">
+        <div class="col">
+          <q-card class="q-ma-md q-pa-md">
+            <div class="row">
+              <div class="col-12">
+                <p class="text-bold">ELIGIBITIES</p>
+                <q-table
+                  :grid="$q.screen.lt.md"
+                  class="my-sticky-header-table text-uppercase"
+                  flat
+                  bordered
+                  wrap-cells=""
+                  title=""
+                  dense
+                  :rows="personal"
+                  :columns="columns"
+                  row-key="id"
+                  ><template v-slot:body-cell-actions="{ row }">
+                    <div class="actionsbtn">
+                      <q-btn
+                        icon="delete"
+                        flat
+                        round
+                        color="deep-orange"
+                        @click="deleteCivil(row)"
+                      >
+                      </q-btn>
+                    </div> </template
+                ></q-table>
+              </div>
             </div>
-          </div>
-        </q-card>
+          </q-card>
+        </div>
       </div>
+    </div>
+    <div v-show="EditProfile">
+      <CivilService />
     </div>
     <!-- DIALOG FOR CIVIL DELETE -->
     <q-dialog
@@ -69,117 +83,88 @@
 <script>
 // import { useLoginStore } from "src/stores/LoginStore";
 // import { useUserInfoStore } from "src/stores/AdditionalStore";
+import CivilService from "../EditPDS/CivilService.vue";
 
-// export default {
-//   data() {
-//     return {
-//       DeleteCivilDialog: false,
-//       CivilID: "",
-//       model: "",
-//       personal: [],
-//       columns: [
-//         {
-//           name: "Eligibility",
-//           required: true,
-//           label: "Eligibility",
-//           align: "left",
-//           field: "CivilServe",
-//           format: (val) => `${val}`,
-//           sortable: true,
-//         },
-//         {
-//           name: "Rating",
-//           align: "center",
-//           label: "Rating (if Applicable)",
-//           field: "Rates",
-//           format: (val) => {
-//             const numVal = Number(val);
-//             if (!isNaN(numVal)) {
-//               return `${numVal.toFixed(2)}`;
-//             }
-//             return val;
-//           },
-//           sortable: true,
-//         },
-//         {
-//           name: "DateofExamination",
-//           align: "center",
-//           label: "Date of Examination",
-//           field: "Dates",
-//           sortable: true,
-//         },
-//         {
-//           name: "PlaceofExamination",
-//           align: "center",
-//           label: "Place of Examination",
-//           field: "Place",
-//           sortable: true,
-//         },
-//         {
-//           name: "LicenseNumber",
-//           align: "center",
-//           label: "License Number",
-//           field: "LNumber",
-//           sortable: true,
-//         },
-//         {
-//           name: "DateofValidity",
-//           align: "center",
-//           label: "Date of Validity",
-//           field: "LDate",
-//           sortable: true,
-//         },
-//         {
-//           name: "actions",
-//           label: "ACTIONS",
-//           field: "actions",
-//           align: "left",
-//         },
-//       ],
-//     };
-//   },
-//   created() {
-//     const userstore = useLoginStore();
-//     this.personal = userstore.usereligibility;
-
-//     this.Controlno = userstore.controlno;
-//     console.log("eligibility=", this.personal);
-//   },
-//   setup() {
-//     const store = useLoginStore();
-//     const personals = store.userinfo[0];
-//     return {
-//       store,
-//       personals,
-//     };
-//   },
-//   methods: {
-//     deleteCivil(civilid) {
-//       this.CivilID = civilid.PMID;
-//       this.DeleteCivilDialog = true;
-//     },
-//     deleteCivilFinal() {
-//       console.log("Civil ID =>", this.CivilID);
-//       // const store = useUserInfoStore
-//       const loginstore = useLoginStore();
-//       const user = new FormData();
-//       user.append("controlno", loginstore.controlno);
-//       const store = useUserInfoStore();
-//       const data = new FormData();
-//       data.append("tablename", "civilservice");
-//       data.append("id", this.CivilID);
-//       store.deletedata(data).then(() => {
-//         loginstore.userdetails(user).then(() => {
-//           console.log("new data=", loginstore.usereducation);
-//           this.personal = loginstore.usereligibility;
-//           // console.log("old children=", this.personal[0].children)
-//           // this.personal = loginstore.userinfo.map((item) => ({ ...item }))
-//           // console.log("new children=", this.personal[0].children)
-//         });
-//       });
-//     },
-//   },
-// };
+export default {
+  data() {
+    return {
+      DeleteCivilDialog: false,
+      CivilID: "",
+      model: "",
+      personal: [],
+      cs: true,
+      EditProfile: false,
+      columns: [
+        {
+          name: "Eligibility",
+          required: true,
+          label: "Eligibility",
+          align: "left",
+          field: "CivilServe",
+          format: (val) => `${val}`,
+          sortable: true,
+        },
+        {
+          name: "Rating",
+          align: "center",
+          label: "Rating (if Applicable)",
+          field: "Rates",
+          format: (val) => {
+            const numVal = Number(val);
+            if (!isNaN(numVal)) {
+              return `${numVal.toFixed(2)}`;
+            }
+            return val;
+          },
+          sortable: true,
+        },
+        {
+          name: "DateofExamination",
+          align: "center",
+          label: "Date of Examination",
+          field: "Dates",
+          sortable: true,
+        },
+        {
+          name: "PlaceofExamination",
+          align: "center",
+          label: "Place of Examination",
+          field: "Place",
+          sortable: true,
+        },
+        {
+          name: "LicenseNumber",
+          align: "center",
+          label: "License Number",
+          field: "LNumber",
+          sortable: true,
+        },
+        {
+          name: "DateofValidity",
+          align: "center",
+          label: "Date of Validity",
+          field: "LDate",
+          sortable: true,
+        },
+        {
+          name: "actions",
+          label: "ACTIONS",
+          field: "actions",
+          align: "left",
+        },
+      ],
+    };
+  },
+  methods: {
+    EditBtn() {
+      this.EditProfile = true;
+      this.cs = false;
+    },
+  },
+  components: {
+    CivilService,
+  },
+};
 </script>
 
 <style scoped>

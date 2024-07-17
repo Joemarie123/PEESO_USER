@@ -1,42 +1,58 @@
 <template>
   <div>
-    <p class="title q-ma-sm">WORK EXPERIENCE</p>
+    <p class="title q-ma-sm text-bold q-ml-md">
+      WORK EXPERIENCE<q-btn
+        icon="edit"
+        flat
+        class=""
+        dense
+        style="color: orange"
+        @click="EditBtn"
+      ></q-btn>
+    </p>
     <q-separator class="q-ma-sm" />
-    <div class="row">
-      <div class="col">
-        <q-card class="q-ma-md q-pa-md">
-          <div class="row">
-            <div class="col-12">
-              <p style="font-weight: 600" class="">LIST OF WORK EXPERIENCES</p>
-              <!-- <q-table
-                :grid="$q.screen.lt.md"
-                class="my-sticky-header-table text-uppercase"
-                flat
-                bordered
-                title=""
-                wrap-cells=""
-                dense
-                :rows="personal"
-                :columns="columns"
-                row-key="id"
-              >
-                <template v-slot:body-cell-actions="{ row }">
-                  <div class="actionsbtn">
-                    <q-btn
-                      icon="delete"
-                      flat
-                      round
-                      color="deep-orange"
-                      @click="deleteExperience(row)"
-                    >
-                    </q-btn>
-                  </div>
-                </template>
-              </q-table> -->
+    <div v-show="we">
+      <div class="row">
+        <div class="col">
+          <q-card class="q-ma-md q-pa-md">
+            <div class="row">
+              <div class="col-12">
+                <p style="font-weight: 600" class="">
+                  LIST OF WORK EXPERIENCES
+                </p>
+                <q-table
+                  :grid="$q.screen.lt.md"
+                  class="my-sticky-header-table text-uppercase"
+                  flat
+                  bordered
+                  title=""
+                  wrap-cells=""
+                  dense
+                  :rows="personal"
+                  :columns="columns"
+                  row-key="id"
+                >
+                  <template v-slot:body-cell-actions="{ row }">
+                    <div class="actionsbtn">
+                      <q-btn
+                        icon="delete"
+                        flat
+                        round
+                        color="deep-orange"
+                        @click="deleteExperience(row)"
+                      >
+                      </q-btn>
+                    </div>
+                  </template>
+                </q-table>
+              </div>
             </div>
-          </div>
-        </q-card>
+          </q-card>
+        </div>
       </div>
+    </div>
+    <div v-show="EditProfile">
+      <WorkExperience />
     </div>
     <!-- DIALOG FOR EXPIRIENCE DELETE -->
     <q-dialog
@@ -69,175 +85,105 @@
   </div>
 </template>
 <script>
-// import { useLoginStore } from "src/stores/LoginStore";
-// import { useUserInfoStore } from "src/stores/AdditionalStore";
-// export default {
-//   data() {
-//     return {
-//       DeleteExperienceDialog: false,
-//       ExperienceID: "",
-//       model: "",
-//       personal: [],
-//       columns: [
-//         {
-//           name: "InclusiveDateFrom",
-//           required: true,
-//           label: "From",
-//           align: "left",
-//           field: "wfrom",
-//           format: (val) => `${val}`,
-//           sortable: true,
-//         },
-//         {
-//           name: "InclusiveDateTo",
-//           align: "center",
-//           label: "To",
-//           field: "wto",
-//           sortable: true,
-//         },
-//         {
-//           name: "PositionTitle",
-//           align: "center",
-//           label: "PositionTitle",
-//           field: "wposition",
-//           sortable: true,
-//         },
-//         {
-//           name: "Department",
-//           align: "center",
-//           label: "Department",
-//           field: "wcompany",
-//           sortable: true,
-//         },
-//         {
-//           name: "MonthlySalary",
-//           align: "center",
-//           label: "Monthly Salary",
-//           field: "wsalary",
-//           format: (val) => {
-//             const numVal = Number(val);
-//             if (!isNaN(numVal)) {
-//               return numVal.toLocaleString("en-US", {
-//                 style: "currency",
-//                 currency: "PHP",
-//               });
-//             }
-//             return val;
-//           },
-//           sortable: true,
-//         },
-//         {
-//           name: "SalaryGrade",
-//           align: "center",
-//           label: "Salary Grade",
-//           field: "wgrade",
-//           sortable: true,
-//         },
-//         {
-//           name: "StatusofAppointment",
-//           align: "center",
-//           label: "Status of Appointment",
-//           field: "status",
-//           sortable: true,
-//         },
-//         {
-//           name: "GovtService",
-//           align: "center",
-//           label: "Gov't Service",
-//           field: "wgov",
-//           sortable: true,
-//         },
-//         {
-//           name: "actions",
-//           label: "ACTIONS",
-//           field: "actions",
-//           align: "left",
-//         },
-//       ],
-//     };
-//   },
-//   created() {
-//     this.personal = [];
-//     const userstore = useLoginStore();
-//     // this.personal=userstore.userexperience.map((item)=>({...item}));
-//     this.personal = userstore.userexperience;
-//     this.ControlNo = userstore.controlno;
-//     const userinfostore = useUserInfoStore();
+import WorkExperience from "../EditPDS/WorkExperience.vue";
+export default {
+  data() {
+    return {
+      we: true,
+      EditProfile: false,
+      DeleteExperienceDialog: false,
+      ExperienceID: "",
+      model: "",
+      personal: [],
+      columns: [
+        {
+          name: "InclusiveDateFrom",
+          required: true,
+          label: "From",
+          align: "left",
+          field: "wfrom",
+          format: (val) => `${val}`,
+          sortable: true,
+        },
+        {
+          name: "InclusiveDateTo",
+          align: "center",
+          label: "To",
+          field: "wto",
+          sortable: true,
+        },
+        {
+          name: "PositionTitle",
+          align: "center",
+          label: "PositionTitle",
+          field: "wposition",
+          sortable: true,
+        },
+        {
+          name: "Department",
+          align: "center",
+          label: "Department",
+          field: "wcompany",
+          sortable: true,
+        },
+        {
+          name: "MonthlySalary",
+          align: "center",
+          label: "Monthly Salary",
+          field: "wsalary",
+          format: (val) => {
+            const numVal = Number(val);
+            if (!isNaN(numVal)) {
+              return numVal.toLocaleString("en-US", {
+                style: "currency",
+                currency: "PHP",
+              });
+            }
+            return val;
+          },
+          sortable: true,
+        },
+        {
+          name: "SalaryGrade",
+          align: "center",
+          label: "Salary Grade",
+          field: "wgrade",
+          sortable: true,
+        },
+        {
+          name: "StatusofAppointment",
+          align: "center",
+          label: "Status of Appointment",
+          field: "status",
+          sortable: true,
+        },
+        {
+          name: "GovtService",
+          align: "center",
+          label: "Gov't Service",
+          field: "wgov",
+          sortable: true,
+        },
+        {
+          name: "actions",
+          label: "ACTIONS",
+          field: "actions",
+          align: "left",
+        },
+      ],
+    };
+  },
 
-//     let data = new FormData();
-//     data.append("controlno", userstore.controlno);
-//     userinfostore.getworkexp(data).then((res) => {
-//       // console.log("service record=", userinfostore.userexperience);
-//       // console.log("experience=", this.personal);
-//       let servicerecord = userinfostore.workexp;
-
-//       servicerecord.forEach((item) => {
-//         if (
-//           !this.personal.some(
-//             (existingItem) => existingItem.wposition == item.wposition
-//           )
-//         ) {
-//           this.personal.push(item);
-//         }
-//       });
-//       // console.log("experience=",this.personal)
-//     });
-//     // console.log("experience=",this.personal)
-//   },
-//   setup() {
-//     const store = useLoginStore();
-//     const personals = store.userinfo[0];
-//     return {
-//       store,
-//       personals,
-//     };
-//   },
-//   methods: {
-//     deleteExperience(experienceid) {
-//       this.ExperienceID = experienceid.ID;
-//       this.DeleteExperienceDialog = true;
-//     },
-//     deleteExperienceFinal() {
-//       console.log("Experience ID =>", this.ExperienceID);
-//       this.DeleteExperienceDialog = false;
-//       // const store = useUserInfoStore
-//       const loginstore = useLoginStore();
-//       const user = new FormData();
-//       user.append("controlno", loginstore.controlno);
-//       const store = useUserInfoStore();
-//       const data = new FormData();
-//       data.append("tablename", "experience");
-//       data.append("id", this.ExperienceID);
-//       store.deletedata(data).then(() => {
-//         loginstore.userdetails(user).then(() => {
-//           // console.log("new data=", loginstore.usereducation)
-//           this.personal = loginstore.userexperience;
-//           const userinfostore = useUserInfoStore();
-
-//           userinfostore.getworkexp(user).then((res) => {
-//             // console.log("service record=", userinfostore.userexperience);
-//             // console.log("experience=", this.personal);
-//             let servicerecord = userinfostore.workexp;
-
-//             servicerecord.forEach((item) => {
-//               if (
-//                 !this.personal.some(
-//                   (existingItem) => existingItem.wposition == item.wposition
-//                 )
-//               ) {
-//                 this.personal.push(item);
-//               }
-//             });
-//             // console.log("experience=",this.personal)
-//           });
-//           // console.log("old children=", this.personal[0].children)
-//           // this.personal = loginstore.userinfo.map((item) => ({ ...item }))
-//           // console.log("new children=", this.personal[0].children)
-//         });
-//       });
-//     },
-//   },
-// };
+  methods: {
+    EditBtn() {
+      this.EditProfile = true;
+      this.we = false;
+    },
+  },
+  components: {
+    WorkExperience,
+  },
+};
 </script>
 
 <style scoped>

@@ -1,8 +1,17 @@
 <template>
   <div>
-    <p class="title q-ma-sm">NON-ACADEMIC DISTINCTIONS</p>
+    <p class="title q-ma-sm text-bold q-ml-md">
+      NON-ACADEMIC DISTINCTIONS<q-btn
+        icon="edit"
+        flat
+        class=""
+        dense
+        style="color: orange"
+        @click="EditBtn"
+      ></q-btn>
+    </p>
     <q-separator class="q-ma-sm" />
-    <div class="row">
+    <div class="row" v-show="non">
       <div class="col">
         <q-card class="q-ma-md q-pa-md">
           <div class="row">
@@ -10,7 +19,7 @@
               <p style="font-weight: 600" class="">
                 LIST OF NON-ACADEMIC DISTINCTIONS
               </p>
-              <!-- <q-table
+              <q-table
                 :grid="$q.screen.lt.md"
                 class="my-sticky-header-table text-uppercase"
                 flat
@@ -33,11 +42,14 @@
                     >
                     </q-btn>
                   </div> </template
-              ></q-table> -->
+              ></q-table>
             </div>
           </div>
         </q-card>
       </div>
+    </div>
+    <div v-show="EditProfile">
+      <NonAcademicDist />
     </div>
     <!-- DIALOG FOR NonAcademic DELETE -->
     <q-dialog
@@ -69,73 +81,46 @@
   </div>
 </template>
 <script>
-// import { useLoginStore } from "src/stores/LoginStore";
-// import { useUserInfoStore } from "src/stores/AdditionalStore";
-// export default {
-//   data() {
-//     return {
-//       DeleteNonAcademicDialog: false,
-//       NonAcademicID: "",
-//       model: "",
-//       personal: [],
-//       academic: [],
-//       columnAcademic: [
-//         {
-//           name: "NonAcademic",
-//           required: true,
-//           label: "Non-Academic Distinction",
-//           align: "left",
-//           field: "NonAcademic",
-//           format: (val) => `${val}`,
-//           sortable: true,
-//         },
-//         {
-//           name: "actions",
-//           label: "Actions",
-//           field: "actions",
-//           align: "left",
-//         },
-//       ],
-//     };
-//   },
-//   created() {
-//     const userstore = useLoginStore();
-//     this.controlno = userstore.controlno;
-//     this.academic = userstore.useracademic;
-//   },
-//   setup() {
-//     const store = useLoginStore();
-//     const personals = store.userinfo[0];
-//     return {
-//       store,
-//       personals,
-//     };
-//   },
-//   methods: {
-//     deleteNonAcademic(nonacademicid) {
-//       this.NonAcademicID = nonacademicid.ID;
-//       this.DeleteNonAcademicDialog = true;
-//     },
-//     deleteNonAcademicFinal() {
-//       console.log("NonAcademic ID =>", this.NonAcademicID);
-//       this.DeleteNonAcademicDialog = false;
-//       // const store = useUserInfoStore
-//       const loginstore = useLoginStore();
-//       const user = new FormData();
-//       user.append("controlno", loginstore.controlno);
-//       const store = useUserInfoStore();
-//       const data = new FormData();
-//       data.append("tablename", "nonacademic");
-//       data.append("id", this.NonAcademicID);
-//       store.deletedata(data).then(() => {
-//         loginstore.userdetails(user).then(() => {
-//           // console.log("new data=", loginstore.usereducation)
-//           this.academic = loginstore.useracademic;
-//         });
-//       });
-//     },
-//   },
-// };
+import NonAcademicDist from "../EditPDS/NonAcademicDist.vue";
+export default {
+  data() {
+    return {
+      EditProfile: false,
+      non: true,
+      DeleteNonAcademicDialog: false,
+      NonAcademicID: "",
+      model: "",
+      personal: [],
+      academic: [],
+      columnAcademic: [
+        {
+          name: "NonAcademic",
+          required: true,
+          label: "Non-Academic Distinction",
+          align: "left",
+          field: "NonAcademic",
+          format: (val) => `${val}`,
+          sortable: true,
+        },
+        {
+          name: "actions",
+          label: "Actions",
+          field: "actions",
+          align: "left",
+        },
+      ],
+    };
+  },
+   methods: {
+    EditBtn() {
+      this.EditProfile = true;
+      this.non = false;
+    },
+  },
+  components: {
+    NonAcademicDist,
+  },
+};
 </script>
 
 <style scoped>

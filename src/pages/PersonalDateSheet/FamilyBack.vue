@@ -1,7 +1,17 @@
 <template>
   <div>
-    <p class="title q-ma-sm">FAMILY BACKGROUND</p>
+    <p class="title q-ma-sm text-bold q-ml-md">
+      FAMILY BACKGROUND<q-btn
+        icon="edit"
+        flat
+        class=""
+        dense
+        style="color: orange"
+        @click="EditBtn"
+      ></q-btn>
+    </p>
     <q-separator class="q-ma-sm" />
+    <div v-show="fb">
     <div class="row">
       <div class="col-12">
         <q-card class="q-ma-md q-pa-md">
@@ -74,33 +84,28 @@
           <div class="row">
             <div class="col-12">
               <p style="font-weight: 600" class="">CHILDREN'S INFORMATION</p>
-              <!-- <q-table
+              <q-table
                 :grid="$q.screen.xs"
                 class="my-sticky-header-table text-uppercase"
                 flat
                 bordered
                 title=""
                 dense
-                :rows="personal[0].children"
+                :rows="children"
                 :columns="columns"
                 row-key="id"
-                ><template v-slot:body-cell-actions="{ row }">
-                  <div class="actionsbtn">
-                    <q-btn
-                      icon="delete"
-                      flat
-                      round
-                      color="deep-orange"
-                      @click="deleteChildren(row)"
-                    >
-                    </q-btn>
-                  </div> </template
-              ></q-table> -->
+                ></q-table>
             </div>
           </div>
         </q-card>
       </div>
     </div>
+    </div>
+
+    <div v-show="EditProfile">
+      <FamilyBackground />
+    </div>
+
     <!-- DIALOG FOR CHILD DELETE -->
     <q-dialog
       v-model="DeleteChildrenDialog"
@@ -132,91 +137,49 @@
   </div>
 </template>
 <script>
-// import { useLoginStore } from "src/stores/LoginStore";
-// import { useUserInfoStore } from "src/stores/AdditionalStore";
+import FamilyBackground from "../EditPDS/FamilyBackground.vue";
 
-// export default {
-//   data() {
-//     return {
-//       model: "",
-//       DeleteChildrenDialog: false,
-//       ChildrenID: "",
-//       personal: [],
-//       columns: [
-//         {
-//           name: "lastname",
-//           required: true,
-//           label: "Name of Children",
-//           align: "left",
-//           field: "ChildName",
-//           sortable: true,
-//         },
-//         {
-//           name: "firstname",
-//           align: "center",
-//           label: "Date of Birth",
-//           field: "BirthDate",
-//           sortable: true,
-//         },
-//         {
-//           name: "actions",
-//           label: "ACTIONS",
-//           field: "actions",
-//           align: "left",
-//         },
-//       ],
-//     };
-//   },
-//   created() {
-//     const store = useLoginStore();
+export default {
+  data() {
+    return {
+      EditProfile: false,
+      fb: true,
+       columns: [
+        {
+          name: "lastname",
+          required: true,
+          label: "Name of Children",
+          align: "left",
+          field: "ChildName",
 
-//     this.personal = store.userinfo.map((item) => ({ ...item }));
-//     console.log("Children=>", this.personal);
-//     this.controlno = store.controlno;
-//     if (
-//       this.personal[0].Surname.includes("JR") ||
-//       this.personal[0].Surname.includes("SR") ||
-//       this.personal[0].Surname.includes(" III") ||
-//       this.personal[0].Surname.includes(" IV")
-//     ) {
-//       this.personal[0].Surname.replace(/\s(Jr|Sr|III| IV)$/, "");
-//       const regex = /\s(Jr|Sr|III| IV)$/;
-//       const matches = this.personal[0].Surname.match(regex);
-//       this.model = matches.slice(1);
-//     } else {
-//       this.model = "N/A";
-//     }
-//   },
-//   setup() {
-//     const store = useLoginStore();
-//     const personals = store.userinfo[0];
-//     return {
-//       store,
-//       personals,
-//     };
-//   },
-//   methods: {
-//     deleteChildren(childrenid) {
-//       this.ChildrenID = childrenid.PMID;
-//       this.DeleteChildrenDialog = true;
-//     },
-//     deleteChildrenFinal() {
-
-//       const loginstore = useLoginStore();
-//       const user = new FormData();
-//       user.append("controlno", loginstore.controlno);
-//       const store = useUserInfoStore();
-//       const data = new FormData();
-//       data.append("tablename", "children");
-//       data.append("id", this.ChildrenID);
-//       store.deletedata(data).then(() => {
-//         loginstore.userdetails(user).then(() => {
-//           this.personal = loginstore.userinfo.map((item) => ({ ...item }));
-//         });
-//       });
-//     },
-//   },
-// };
+          sortable: true,
+        },
+        {
+          name: "firstname",
+          align: "center",
+          label: "Date of Birth",
+          field: "BirthDate",
+          sortable: true,
+        },
+      ],
+      children: [
+        {
+          lastName: "Honey Curay",
+          firstName: "11-28-99",
+        },
+      ],
+    };
+  },
+  methods: {
+    EditBtn() {
+      this.EditProfile = true;
+      this.fb = false;
+    },
+  },
+  components: {
+    FamilyBackground,
+  },
+};
 </script>
 
 <style scoped>
