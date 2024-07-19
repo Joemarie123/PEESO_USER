@@ -511,11 +511,17 @@
     </q-card>
   </div>
   <div class="q-pa-sm q-ma-sm">
-    <q-btn color="green" class="full-width" label="Save Changes" />
+    <q-btn color="green" class="full-width" @click="onSave" label="Save Changes" />
   </div>
 </template>
 <script>
 export default {
+  props: {
+    onSave: {
+      type: Function,
+      required: true
+    }
+  },
   data() {
     return {
       extension: ["JR.", "SR.", "III", "IV"],

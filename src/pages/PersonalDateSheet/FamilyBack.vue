@@ -103,7 +103,7 @@
     </div>
 
     <div v-show="EditProfile">
-      <FamilyBackground />
+      <FamilyBackground :onSave="SaveEdit"/>
     </div>
 
     <!-- DIALOG FOR CHILD DELETE -->
@@ -175,6 +175,10 @@ export default {
       this.EditProfile = true;
       this.fb = false;
     },
+    SaveEdit(){
+      this.EditProfile = false;
+      this.fb = true;
+    }
   },
   components: {
     FamilyBackground,

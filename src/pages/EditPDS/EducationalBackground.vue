@@ -2,13 +2,15 @@
   <div>
     <q-card class="q-pa-md q-ma-md">
       <div class=" text-bold">
-        EDUCATIONAL BACKGROUND
+        ATTENDED SCHOOLS
         <q-btn
           label="Add"
           @click="secondDialog = true"
           class="q-mb-sm q-ml-sm"
           style="background-color: green; color: white"
         ></q-btn>
+
+
       </div>
       <q-table
         class="my-sticky-header-table"

@@ -162,7 +162,7 @@
             @click="secondDialog = true"
             dense
             class="q-mb-sm q-ml-sm"
-          style="background-color: green; color: white"
+            style="background-color: green; color: white"
           ></q-btn>
         </div>
 
@@ -209,32 +209,43 @@
                 </div>
               </div>
             </q-card-section>
-             <q-card-actions align="right" class="">
-          <q-btn
-            flat
-            label="Cancel"
-            color="warning"
-            @click="resetFields"
-            size="md"
-          />
-          <q-btn
-            label="Add Update"
-            color="primary"
-            size="md"
-            @click="saveservice()"
-          />
-        </q-card-actions>
+            <q-card-actions align="right" class="">
+              <q-btn
+                flat
+                label="Cancel"
+                color="warning"
+                @click="resetFields"
+                size="md"
+              />
+              <q-btn
+                label="Add Update"
+                color="primary"
+                size="md"
+                @click="saveservice()"
+              />
+            </q-card-actions>
           </q-card>
         </q-dialog>
       </div>
     </q-card>
   </div>
-   <div class="q-pa-sm q-ma-sm">
-    <q-btn color="green" class="full-width" label="Save Changes" />
+  <div class="q-pa-sm q-ma-sm">
+    <q-btn
+      color="green"
+      class="full-width"
+      label="Save Changes"
+      @click="onSave"
+    />
   </div>
 </template>
 <script scoped>
 export default {
+  props: {
+    onSave: {
+      type: Function,
+      required: true,
+    },
+  },
   data() {
     return {
       secondDialog: false,

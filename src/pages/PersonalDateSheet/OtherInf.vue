@@ -113,7 +113,7 @@
     </div>
   </div>
    <div v-show="EditProfile">
-      <OtherInformation />
+      <OtherInformation :onSave="SaveEdit"/>
     </div>
 </template>
 <script>
@@ -130,6 +130,10 @@ other: true,
     EditBtn() {
       this.EditProfile = true;
       this.other = false;
+    },
+     SaveEdit() {
+      this.EditProfile = false;
+      this.other = true;
     },
   },
   components: {

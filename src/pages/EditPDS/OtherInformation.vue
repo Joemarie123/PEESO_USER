@@ -186,7 +186,12 @@
           </div>
           <div class="row justify-center">
             <div class="col-md-12 col-xs-12 q-ma-md">
-              <q-btn color="green" class="full-width" label="Save Changes" />
+              <q-btn
+                color="green"
+                class="full-width"
+                label="Save Changes"
+                @click="onSave"
+              />
             </div>
           </div>
         </q-card-section>
@@ -196,6 +201,13 @@
 </template>
 <script>
 export default {
+  props: {
+    onSave: {
+      type: Function,
+      required: true,
+    },
+  },
+
   data() {
     return {
       EditProfile: false,

@@ -290,16 +290,18 @@
     </div>
     </div>
     <div v-show="EditProfile">
-      <PersonalInformation />
+      <PersonalInformation :onSave="SaveEdit"/>
     </div>
 
   </div>
 </template>
 <script>
-// import { useLoginStore } from "src/stores/LoginStore";
 import PersonalInformation from "src/pages/EditPDS/PersonalInformation.vue"
 
 export default {
+  props:{
+    // pi: "",
+  },
   data() {
     return {
       model: "",
@@ -311,63 +313,22 @@ export default {
     EditBtn() {
       this.EditProfile = true;
       this.pi=false;
+    },
+    SaveEdit(){
+      this.EditProfile = false;
+      this.pi = true;
     }
   },
   components: {
     PersonalInformation,
 
   }
-  // created() {
-  //   const store = useLoginStore();
-  //   this.personal = store.userinfo.map((item) => ({ ...item }));
-  //   this.controlno = store.controlno;
-  //   if (
-  //     this.personal[0].Surname.includes("JR") ||
-  //     this.personal[0].Surname.includes("SR") ||
-  //     this.personal[0].Surname.includes(" III") ||
-  //     this.personal[0].Surname.includes(" IV")
-  //   ) {
-  //     this.personal[0].Surname.replace(/\s(Jr|Sr|III| IV)$/, "");
-  //     const regex = /\s(Jr|Sr|III| IV)$/;
-  //     const matches = this.personal[0].Surname.match(regex);
-  //     this.model = matches.slice(1);
-  //   } else {
-  //     this.model = "N/A";
-  //   }
-  // },
-  // setup() {
-  //   const store = useLoginStore();
-  //   const personals = store.userinfo[0];
-  //   return {
-  //     store,
-  //     personals,
-  //   };
-  // },
 };
 </script>
 
 <style scoped>
 .title {
   font-size: 15px;
-}
-.item {
-  font-weight: 400;
-}
-.item1 {
-  font-weight: 400;
-  margin-left: -10px;
-}
-.item2 {
-  font-weight: 400;
-  margin-left: -38px;
-}
-.item3 {
-  font-weight: 400;
-  margin-left: -15px;
-}
-.item4 {
-  font-weight: 400;
-  margin-left: -20px;
 }
 .info-line {
   display: grid;
@@ -384,10 +345,6 @@ export default {
   margin-top: -15px;
 }
 
-/* .label {
-  text-align: right;
-  white-space: nowrap;
-} */
 
 /* Optional: Additional styling for better readability */
 .info-line span {
