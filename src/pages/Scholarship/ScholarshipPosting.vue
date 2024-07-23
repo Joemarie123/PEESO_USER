@@ -77,7 +77,7 @@ export default {
 
       try {
         const response = await axios.get(
-          `https://run.mocky.io/v3/5b3347f0-3e5f-4dac-8957-050623712d1a`,
+          `https://run.mocky.io/v3/c03b79dd-a13b-4194-beae-8d5959b01322`,
           {
             params: {
               _page: this.page,

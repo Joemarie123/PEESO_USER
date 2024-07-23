@@ -55,7 +55,7 @@ const routes = [
 
       // User
       {
-        path: "/Userprofile",
+        path: "/UserProfile",
         component: () => import("pages/NavBar/UserProfile.vue"),
       },
       {
@@ -81,6 +81,17 @@ const routes = [
       {
         path: "/education",
         component: () => import("pages/EditPDS/EducationalBackground.vue"),
+      },
+
+      // Appointment
+
+      {
+        path: "/Appointment",
+        component: () => import("pages/Appointment/AppointmentList.vue"),
+      },
+      {
+        path: "/AppointmentDetails",
+        component: () => import("pages/Appointment/AppointmentDetails.vue"),
       },
 
       // {

@@ -33,7 +33,7 @@
                 <q-badge outline color="primary" label="Part Time"
               /></q-item-label>
             </q-item-section>
-            
+
             <q-item-section class="justify-end"
               ><div class="text-right">
                 <p
@@ -80,7 +80,7 @@ export default {
 
       try {
         const response = await axios.get(
-          `https://run.mocky.io/v3/5b3347f0-3e5f-4dac-8957-050623712d1a`,
+          `https://run.mocky.io/v3/c03b79dd-a13b-4194-beae-8d5959b01322`,
           {
             params: {
               _page: this.page,
@@ -116,7 +116,7 @@ export default {
   flex-direction: column;
 }
 .custom-card {
-  width: 60%;
+  width: 70%;
   height: auto;
   margin-bottom: 15px;
 }

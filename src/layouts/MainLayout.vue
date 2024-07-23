@@ -231,6 +231,23 @@
             Training and Seminar Applications
           </q-item-section>
         </q-item>
+
+
+        <q-item
+          clickable
+          v-ripple
+          @click="$router.push({ path: '/Appointment' })"
+        >
+          <q-item-section avatar>
+            <q-avatar rounded size="40px">
+              <img src="../assets/images/appointment2.png"
+            /></q-avatar>
+          </q-item-section>
+          <q-item-section class="text-weight-medium" style="font-size: 15px">
+            Appointments
+          </q-item-section>
+        </q-item>
+
       </q-list>
       <q-separator inset class="q-mt-sm"></q-separator>
     </q-drawer>

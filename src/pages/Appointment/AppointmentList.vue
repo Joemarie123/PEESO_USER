@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md">
-    <p class="title">MY JOB APPLICATIONS</p>
+    <p class="title">MY APPOINTMENT</p>
     <q-separator class="q-ma-md" inset />
     <div class="q-pa-lg" style="justify-content: center; flex-wrap: wrap">
       <q-list
@@ -16,7 +16,7 @@
             </q-avatar>
           </q-item-section>
 
-          <q-item-section @click="$router.push({ path: '/JobDetails' })">
+          <q-item-section @click="$router.push({ path: '/AppointmentDetails' })">
             <q-item-label lines="1">{{ job.employerName }}</q-item-label>
             <q-item-label caption lines="2">
               <span class="text-weight-bold">{{ job.JobTitle }}</span>
@@ -26,7 +26,7 @@
             </q-item-label>
           </q-item-section>
 
-          <q-item-section side top>{{job.DatePosted}} </q-item-section>
+          <q-item-section side top>{{ job.DatePosted }} </q-item-section>
         </q-item>
 
         <q-separator inset="item" />
