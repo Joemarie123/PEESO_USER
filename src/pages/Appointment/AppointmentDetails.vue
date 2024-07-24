@@ -6,14 +6,26 @@
           background-color: rgb(3, 69, 113);
           display: flex;
           flex-direction: column;
-          align-items: flex-start;
         "
         class="text-white"
       >
-        <q-btn flat style="text-align: left" class="" icon="arrow_back"></q-btn>
-        <p style="font-size: 22px; align-self: center">
-          Web Developer / UX Specialist
-        </p>
+        <div class="row">
+          <div class="col">
+            <q-btn
+              flat
+              style="text-align: left"
+              class=""
+              icon="arrow_back"
+              @click="$router.push({path: '/Appointment'})"
+            ></q-btn>
+          </div>
+          <div class="col-12">
+            <p style="font-size: 22px" class="text-center">
+              Web Developer / UX Specialist
+            </p>
+          </div>
+        </div>
+
         <!-- if done "APPLY FOR THIS JOB" , then it shall be changed to "APPLIED" -->
         <q-btn
           outline
@@ -24,125 +36,100 @@
           style="align-self: center"
         ></q-btn>
       </q-card-section>
-      <q-card-section class="">
-        <q-card flat>
-          <div class="row q-pa-md">
-            <div class="col-12 col-lg-3 col-md-6 col-sm-6">
-              <q-item>
-                <q-item-section avatar
-                  ><q-icon
-                    name="work"
-                    size="2em"
-                    style="color: rgb(3, 69, 113)"
-                  />
-                </q-item-section>
-                <q-item-section
-                  ><q-item-label caption>TYPE OF WORK</q-item-label>
-                  <q-item-label>PART TIME</q-item-label></q-item-section
-                >
-                <q-separator vertical />
-              </q-item>
-            </div>
-
-            <div class="col-12 col-lg-3 col-md-6 col-sm-6">
-              <q-item>
-                <q-item-section avatar
-                  ><q-icon
-                    name="php"
-                    size="2em"
-                    style="color: rgb(3, 69, 113)"
-                  />
-                </q-item-section>
-                <q-item-section
-                  ><q-item-label caption>SALARY</q-item-label>
-                  <q-item-label>PHP 10,000</q-item-label></q-item-section
-                >
-                <q-separator vertical />
-              </q-item>
-            </div>
-            <div class="col-12 col-lg-3 col-md-6 col-sm-6">
-              <q-item>
-                <q-item-section avatar
-                  ><q-icon
-                    name="watch"
-                    size="2em"
-                    style="color: rgb(3, 69, 113)"
-                  />
-                </q-item-section>
-                <q-item-section
-                  ><q-item-label caption>HOURS / WEEK</q-item-label>
-                  <q-item-label>40</q-item-label></q-item-section
-                >
-                <q-separator vertical />
-              </q-item>
-            </div>
-            <div class="col-12 col-lg-3 col-md-6 col-sm-6">
-              <q-item>
-                <q-item-section avatar
-                  ><q-icon
-                    name="event"
-                    size="2em"
-                    style="color: rgb(3, 69, 113)"
-                  />
-                </q-item-section>
-                <q-item-section
-                  ><q-item-label caption>DATE POSTED</q-item-label>
-                  <q-item-label>July 09, 2024</q-item-label></q-item-section
-                >
-                <q-separator vertical />
-              </q-item>
-            </div>
-          </div>
-        </q-card>
-      </q-card-section>
     </q-card>
   </div>
   <div class="row skill-card">
     <div class="col-12">
-      <q-item>
-        <q-item-section avatar>
-          <q-icon name="list" size="2em" class="colorText" />
-        </q-item-section>
-        <q-item-section class="">
-          <p
-            class="colorText"
-            style="font-size: 18px; margin-top: 15px; font-weight: 500"
-          >
-            APPOINTMENT DETAILS
+      <q-card bordered>
+        <q-item>
+          <q-item-section avatar>
+            <q-icon name="list" size="2em" class="colorText" />
+          </q-item-section>
+          <q-item-section class="">
+            <p
+              class="colorText"
+              style="font-size: 18px; margin-top: 15px; font-weight: 500"
+            >
+              APPOINTMENT DETAILS
+            </p>
+          </q-item-section>
+        </q-item>
+        <q-separator></q-separator>
+        <q-card-section class="">
+          <p>Appointment Title:</p>
+          <p>Appointment Date and Time:</p>
+          <p>Appointment Location:</p>
+          <p>Appointment Description:</p>
+        </q-card-section>
+        <q-card-section align="right" style="margin-top: -30px">
+          <p>
+            Status:
+            <q-btn disabled color="blue" outline size="small">Accepted</q-btn>
           </p>
-        </q-item-section>
-      </q-item>
-      <q-separator></q-separator>
-      <q-item-section class="q-pa-md">
-        <!-- <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Sit
-            amet commodo nulla facilisi nullam vehicula ipsum a. Et odio
-            pellentesque diam volutpat commodo sed egestas egestas fringilla. A
-            iaculis at erat pellentesque adipiscing. Ut venenatis tellus in
-            metus vulputate eu scelerisque felis imperdiet. Facilisi etiam
-            dignissim diam quis. Cras fermentum odio eu feugiat pretium nibh
-            ipsum consequat nisl. Integer feugiat scelerisque varius morbi enim
-            nunc faucibus a pellentesque. Eu augue ut lectus arcu bibendum at.
-            Lectus quam id leo in vitae turpis massa sed. Libero volutpat sed
-            cras ornare arcu. Dictum at tempor commodo ullamcorper a lacus
-            vestibulum. Scelerisque in dictum non consectetur a erat nam at.
-            Amet aliquam id diam maecenas ultricies mi.
-          </p> -->
-        <p>Appointment Title:</p>
-        <p>Appointment Date and Time:</p>
-        <p>Appointment Location:</p>
-        <p>Appointment Description:</p>
-      </q-item-section>
+        </q-card-section>
+        <q-card-section align="right" style="margin-top: -30px">
+          <q-btn color="green" class="">Accept</q-btn>
+          <q-btn
+            outline
+            color="warning"
+            class="q-ma-sm"
+            @click="reschedule = true"
+            >Re-schedule</q-btn
+          >
+          <q-btn color="red" @click="decline = true">Decline</q-btn>
+        </q-card-section>
+      </q-card>
     </div>
   </div>
+  <!-- Reschedule -->
+  <q-dialog v-model="reschedule">
+    <q-card>
+      <q-toolbar class="text-white" style="background-color: rgb(3, 69, 113)">
+        <q-toolbar-title>Reschedule Appointment</q-toolbar-title>
+
+        <q-btn flat round dense icon="close" v-close-popup />
+      </q-toolbar>
+
+      <q-card-section class="">
+        <p>Reason for Re-scheduling:</p>
+        <q-input v-model="text" filled autogrow />
+      </q-card-section>
+
+      <q-card-actions align="right" class="text-primary">
+        <q-btn color="green" label="Send" v-close-popup />
+        <q-btn color="red" label="Cancel" v-close-popup />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
+
+  <!-- Decline -->
+  <q-dialog v-model="decline">
+    <q-card>
+      <q-toolbar class="text-white" style="background-color: rgb(3, 69, 113)">
+        <q-toolbar-title>Decline Appointment</q-toolbar-title>
+
+        <q-btn flat round dense icon="close" v-close-popup />
+      </q-toolbar>
+
+      <q-card-section class="">
+        <p>Reason for Declining :</p>
+        <q-input v-model="text" filled autogrow />
+      </q-card-section>
+
+      <q-card-actions align="right" class="text-primary">
+        <q-btn color="green" label="Send" v-close-popup />
+        <q-btn color="red" label="Cancel" v-close-popup />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script>
 export default {
   data() {
     return {
+      reschedule: false,
+      decline: false,
       rows: [
         { name: "John Doe", age: 30, job: "Developer" },
         { name: "Jane Smith", age: 28, job: "Designer" },
