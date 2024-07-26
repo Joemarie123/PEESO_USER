@@ -65,7 +65,7 @@ export default {
 </script>
 <style scoped>
 .q-carousel {
-  width: 80%;
+  width: 90%;
   overflow: hidden;
   margin-top: 10px;
 }

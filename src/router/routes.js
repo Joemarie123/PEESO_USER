@@ -94,15 +94,32 @@ const routes = [
         component: () => import("pages/Appointment/AppointmentDetails.vue"),
       },
 
+      //
+
       // {
       //   path: "/ViewAllJobs",
       //   component: () => import("pages/ViewAllJobs.vue"),
       // },
     ],
   },
+
   {
     path: "/:catchAll(.*)*",
     component: () => import("pages/ErrorNotFound.vue"),
+  },
+  {
+    path: "/dashboard",
+    component: () => import("layouts/DashBoard.vue"),
+    children: [
+      {
+        path: "/login",
+        component: () => import("layouts/LoginPage.vue"),
+      },
+      {
+        path: "/register",
+        component: () => import("layouts/RegistrationPage.vue"),
+      },
+    ],
   },
 ];
 

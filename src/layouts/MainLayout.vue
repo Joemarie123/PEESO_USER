@@ -1,10 +1,10 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header elevated class="bg-white text-grey-10 ">
+    <q-header elevated class="toolbar bg-white text-grey-10">
       <q-toolbar>
         <!-- Left side: Logo and Drawer button -->
-        <q-btn flat round dense class="bg-blue-9" @click="toggleLeftDrawer">
-          <q-avatar size="35px">
+        <q-btn flat round dense class="bg-green-3" @click="toggleLeftDrawer">
+          <q-avatar size="40px">
             <img src="../assets/images/logo.png" alt="Logo" />
           </q-avatar>
         </q-btn>
@@ -16,6 +16,7 @@
           class="searchIn q-ml-md"
           placeholder="Search PEESO"
           rounded
+          color="green"
           style="width: 15%"
         >
           <template v-slot:prepend>
@@ -26,8 +27,12 @@
         <q-space></q-space>
 
         <!-- Middle section: Navigation buttons or Dropdown -->
-        <div class="q-pa-xs q-gutter-y-md" v-if="$q.screen.gt.xs">
-          <q-tabs v-model="tab" class="text-blue-9">
+        <div    style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              " v-if="$q.screen.gt.xs">
+          <q-tabs v-model="tab" class="text-green-9">
             <q-tab
               name="mails"
               icon="work_outline"
@@ -116,7 +121,9 @@
             round
             flat
             icon="notifications"
-            class="transparent-btn"
+
+            class="transparent-btn bg-green-9 text-white"
+            @click="$router.push({ path: '/Appointment' })"
           />
 
           <q-btn
@@ -124,15 +131,16 @@
             round
             dense
             style="position: relative"
-            class="transparent-btn"
+            class="transparent-btn  bg-green-9 text-white"
+            icon="person"
           >
-            <q-avatar rounded size="20px">
+            <!-- <q-avatar rounded size="25px">
               <img
                 src="https://cdn.quasar.dev/img/avatar3.jpg"
                 alt="User Avatar"
               />
-            </q-avatar>
-            <q-badge class="badge">
+            </q-avatar> -->
+            <q-badge class="badge bg-green-1">
               <q-icon name="arrow_drop_down" color="black" />
             </q-badge>
             <q-menu auto-close>
@@ -232,7 +240,6 @@
           </q-item-section>
         </q-item>
 
-
         <q-item
           clickable
           v-ripple
@@ -247,7 +254,6 @@
             Appointments
           </q-item-section>
         </q-item>
-
       </q-list>
       <q-separator inset class="q-mt-sm"></q-separator>
     </q-drawer>
@@ -288,6 +294,14 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.toolbar {
+  background: linear-gradient(
+    40deg,
+    #279f27,
+    #5fc331
+  ); /* Gradient from green to white */
+  color: white;
+}
 .searchIn .q-field__native {
   border-radius: 50px;
   height: 40px;

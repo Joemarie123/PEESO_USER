@@ -158,7 +158,7 @@ export default {
 
 <style scoped>
 .profile-card {
-  max-width: 70%;
+  max-width: 80%;
   margin: auto;
   margin-top: 2%;
   border-radius: 8px;
@@ -167,7 +167,7 @@ export default {
 }
 
 .skill-card {
-  max-width: 70%;
+  max-width: 80%;
   margin: auto;
   margin-top: 2%;
   border-radius: 5px;

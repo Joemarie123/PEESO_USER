@@ -61,7 +61,7 @@ export default {
 
       try {
         const response = await axios.get(
-          `https://run.mocky.io/v3/af973021-9b93-43a6-9e0e-5af07697c986`,
+          `https://marj28.github.io/job-listing-api/announcement.json`,
           {
             params: {
               _page: this.page,
@@ -97,7 +97,6 @@ export default {
 
 <style scoped>
 .q-page {
-  display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;

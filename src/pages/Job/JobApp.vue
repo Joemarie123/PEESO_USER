@@ -1,8 +1,10 @@
 <template>
-  <div class="q-pa-md">
-    <p class="title">MY JOB APPLICATIONS</p>
+  <div class="job-card ">
+    <q-card class="">
+
+    <p class="title text-white" >MY JOB APPLICATIONS</p>
     <q-separator class="q-ma-md" inset />
-    <div class="q-pa-lg" style="justify-content: center; flex-wrap: wrap">
+    <div class="" style="justify-content: center; flex-wrap: wrap">
       <q-list
         class="rounded-borders"
         style="max-width: 100%"
@@ -32,6 +34,7 @@
         <q-separator inset="item" />
       </q-list>
     </div>
+    </q-card>
   </div>
 </template>
 <script>
@@ -54,7 +57,7 @@ export default {
 
       try {
         const response = await axios.get(
-          `https://run.mocky.io/v3/c03b79dd-a13b-4194-beae-8d5959b01322`,
+          `https://marj28.github.io/job-listing-api/jobs.json`,
           {
             params: {
               _page: this.page,
@@ -85,6 +88,15 @@ export default {
 .title {
   font-size: 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  padding: 15px 10px 5px 10px;
+  padding: 10px 10px 10px 10px;
+  background-color: #035f03 ;
+}
+.job-card {
+  max-width: 80%;
+  margin: auto;
+  margin-top: 2%;
+  border-radius: 5px;
+  overflow: hidden;
+
 }
 </style>

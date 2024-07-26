@@ -1,35 +1,37 @@
 <template>
-  <div class="q-pa-md">
+  <div class="scholar-card">
     <p class="title">MY SCHOLARSHIP APPLICATIONS</p>
     <q-separator class="q-ma-md" inset />
-    <div class="q-pa-lg" style="justify-content: center; flex-wrap: wrap">
+    <div class="" style="justify-content: center; flex-wrap: wrap">
       <q-list
         class="rounded-borders"
-        style="max-width: 90%"
+        style="max-width: 100%"
         v-for="job in scholarship"
         :key="job.id"
       >
         <q-item clickable v-ripple>
           <q-item-section avatar>
             <q-avatar>
-              <img :src="job.avatar" alt="Profile Picture" />
+              <img :src="job.Image" alt="Profile Picture" />
             </q-avatar>
           </q-item-section>
 
-          <q-item-section  @click="$router.push({path: '/ScholarshipDetails'})">
-            <q-item-label lines="1">{{ job.scholarSponsor }}</q-item-label>
+          <q-item-section
+            @click="$router.push({ path: '/ScholarshipDetails' })"
+          >
+            <q-item-label lines="1">{{ job.ScholarSponsor }}</q-item-label>
             <q-item-label caption lines="2">
               <span class="text-weight-bold">{{ job.ScholarTitle }}</span>
             </q-item-label>
             <q-item-label caption lines="3">
-              <span class="">{{ job.scholarDesc }}</span>
+              <span class="">{{ job.ScholarDesc }}</span>
             </q-item-label>
           </q-item-section>
 
-          <q-item-section side top>{{job.DatePosted}} </q-item-section>
+          <q-item-section side top>{{ job.DatePosted }} </q-item-section>
         </q-item>
 
-      <q-separator inset="item" />
+        <q-separator inset="item" />
       </q-list>
     </div>
   </div>
@@ -54,7 +56,7 @@ export default {
 
       try {
         const response = await axios.get(
-          `https://run.mocky.io/v3/7d64c7cf-f4c2-4410-9570-24cc47e458a2`,
+          `https://marj28.github.io/job-listing-api/scholarship.json`,
           {
             params: {
               _page: this.page,
@@ -85,6 +87,15 @@ export default {
 .title {
   font-size: 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  padding: 15px 10px 5px 10px;
+   padding: 10px 10px 10px 10px;
+  background-color: rgb(3, 69, 113);
+  color: white;
+}
+.scholar-card {
+  max-width: 80%;
+  margin: auto;
+  margin-top: 2%;
+  border-radius: 5px;
+  overflow: hidden;
 }
 </style>

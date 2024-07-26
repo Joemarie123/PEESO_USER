@@ -6,27 +6,40 @@
           <img src="https://cdn.quasar.dev/img/avatar2.jpg" />
         </q-avatar>
       </div>
-      <div class="profile-details">
-        <h2 class="title" style="margin-bottom: -10px;"><b>John Doe </b></h2>
+      <div class="profile-details" style="">
+        <h2 class="title" style="margin-bottom: -10px"><b>John Doe </b></h2>
         <p class="title">Web Development, JavaScript, CSS, HTML</p>
-        <br>
-        <br>
-        <p style="margin-bottom: -10px; margin-top: 20px; font-weight: 500;">SALARY</p>
+        <br />
+        <br />
+        <p style="margin-bottom: -10px; margin-top: 20px; font-weight: 500">
+          SALARY
+        </p>
         <p>P 10,000 / month</p>
-        <p style="margin-bottom: -10px; margin-top: -2px; font-weight: 500">EDUCATION</p>
+        <p style="margin-bottom: -10px; margin-top: -2px; font-weight: 500">
+          EDUCATION
+        </p>
         <p>College Level</p>
-        <p style="margin-bottom: -10px; margin-top: -2px; font-weight: 500">SKILLS</p>
+        <p style="margin-bottom: -10px; margin-top: -2px; font-weight: 500">
+          SKILLS
+        </p>
         <p>Programming , Technical</p>
       </div>
       <div>
-         <q-btn outline rounded color="green" label="Edit Profile" icon="edit"  @click="$router.push({ path: '/Profile' })"/>
+        <q-btn
+          outline
+          rounded
+          color="warning"
+          label="Edit Profile"
+          icon="edit"
+          @click="$router.push({ path: '/Profile' })"
+        />
       </div>
     </div>
   </div>
   <div class="row skill-card">
     <div class="col-12 col-sm-6 col-md-6 col-lg-6">
       <q-card class="q-ma-sm">
-        <q-card-section style="background-color: rgb(3, 69, 113); color: white"
+        <q-card-section style="background-color: #3b8132; color: white"
           >BOOKED MARK JOB POSTS</q-card-section
         >
         <q-separator />
@@ -44,7 +57,7 @@
     </div>
     <div class="col-12 col-sm-6 col-md-6 col-lg-6">
       <q-card class="q-ma-sm">
-        <q-card-section style="background-color: rgb(3, 69, 113); color: white"
+        <q-card-section style="background-color: #276621; color: white"
           >EMPLOYERS</q-card-section
         >
         <q-separator />
@@ -146,7 +159,7 @@ export default {
 
 <style scoped>
 .profile-card {
-  max-width: 70%;
+  max-width: 80%;
   margin: auto;
   margin-top: 2%;
   border-radius: 8px;
@@ -155,7 +168,7 @@ export default {
 }
 
 .skill-card {
-  max-width: 70%;
+  max-width: 80%;
   margin: auto;
   margin-top: 2%;
   border-radius: 5px;
@@ -165,7 +178,7 @@ export default {
 .profile-container {
   display: flex;
   align-items: center;
-  background: linear-gradient(to bottom, rgb(3, 69, 113) 50%, #ffffff 50%);
+  background: linear-gradient(to bottom, #035f03, 50%, #ffffff 50%);
   padding: 20px;
 }
 

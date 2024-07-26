@@ -1,8 +1,8 @@
 <template>
-  <div class="q-pa-md">
+  <div class="training-card">
     <p class="title">MY TRAINING AND SEMINAR APPLICATIONS</p>
     <q-separator class="q-ma-md" inset />
-    <div class="q-pa-lg" style="justify-content: center; flex-wrap: wrap">
+    <div class="" style="justify-content: center; flex-wrap: wrap">
       <q-list
         class="rounded-borders"
         style="max-width: 100%"
@@ -54,7 +54,7 @@ export default {
 
       try {
         const response = await axios.get(
-          `https://run.mocky.io/v3/7d64c7cf-f4c2-4410-9570-24cc47e458a2`,
+          `https://marj28.github.io/job-listing-api/scholarship.json`,
           {
             params: {
               _page: this.page,
@@ -85,6 +85,16 @@ export default {
 .title {
   font-size: 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  padding: 15px 10px 5px 10px;
+   padding: 10px 10px 10px 10px;
+  background-color: rgb(3, 69, 113);
+  color: white;
+}
+.training-card {
+  max-width: 80%;
+  margin: auto;
+  margin-top: 2%;
+  border-radius: 5px;
+  overflow: hidden;
+
 }
 </style>

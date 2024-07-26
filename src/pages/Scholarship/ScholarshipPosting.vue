@@ -1,6 +1,7 @@
 <template>
-  <q-page class="q-pa-md q-mt-md">
-    <p class="title" style="text-align: left;">SCHOLARSHIP AVAILABLE</p>
+  <q-page class="">
+    <div class="scrollable-container ">
+    <p class="title q-mt-md" style="text-align: center;">SCHOLARSHIP AVAILABLE</p>
     <div class="row" style="display: flex; flex-wrap: wrap">
       <div
         class="col-12 q-gutter-md"
@@ -12,7 +13,7 @@
         "
       >
         <q-card
-          v-for="job in jobs"
+          v-for="job in scholarship"
           :key="job.id"
           class="q-mb-md custom-card"
           style="width: 60%; height: auto; margin-bottom: auto"
@@ -20,12 +21,12 @@
           <q-item>
             <q-item-section avatar>
               <q-avatar>
-                <img :src="job.avatar" alt="Profile Picture" />
+                <img :src="job.Image" alt="Profile Picture" />
               </q-avatar>
             </q-item-section>
 
             <q-item-section>
-              <q-item-label>{{ job.employerName }}</q-item-label>
+              <q-item-label>{{ job.ScholarSponsor }}</q-item-label>
               <q-spacer></q-spacer>
                 <q-spacer></q-spacer>
               <q-item-label caption>{{ job.DatePosted }}</q-item-label>
@@ -45,13 +46,14 @@
 
           <q-item-section>
             <q-item-label class="q-pa-sm q-ml-sm">
-              {{ job.JobDesc }}
+              {{ job.ScholarDesc }}
             </q-item-label>
           </q-item-section>
 
           <img src="https://cdn.quasar.dev/img/parallax2.jpg" />
         </q-card>
       </div>
+    </div>
     </div>
   </q-page>
 </template>
@@ -63,7 +65,7 @@ export default {
   name: "UserProfileCardList",
   data() {
     return {
-      jobs: [], // This should be initialized here, not users
+      scholarship: [], // This should be initialized here, not users
       page: 1,
       limit: 10, // Number of records per request
       hasMore: true, // To check if more data is available
@@ -77,7 +79,7 @@ export default {
 
       try {
         const response = await axios.get(
-          `https://run.mocky.io/v3/c03b79dd-a13b-4194-beae-8d5959b01322`,
+          `https://marj28.github.io/job-listing-api/scholarship.json`,
           {
             params: {
               _page: this.page,
@@ -87,9 +89,9 @@ export default {
         );
         console.log("Response Data:", response.data); // Log the response data
         // Extract the jobs array from the response
-        const newJobs = response.data.jobs;
+        const newJobs = response.data.scholarship;
 
-        this.jobs = this.jobs.concat(newJobs); // Append new jobs to the existing list
+        this.scholarship = this.scholarship.concat(newJobs); // Append new jobs to the existing list
         this.page++;
         this.hasMore = newJobs.length === this.limit;
       } catch (error) {
@@ -117,5 +119,25 @@ export default {
   font-size: 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   padding: 15px 10px 5px 10px;
+}
+.scrollable-container {
+  max-height: 93vh;
+  overflow-y: auto;
+  /* Custom scrollbar */
+  scrollbar-width: none; /* For Firefox */
+}
+
+/* Custom scrollbar for WebKit browsers */
+.scrollable-container::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
 }
 </style>

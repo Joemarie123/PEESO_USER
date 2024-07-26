@@ -80,7 +80,7 @@ export default {
 
       try {
         const response = await axios.get(
-          `https://run.mocky.io/v3/c03b79dd-a13b-4194-beae-8d5959b01322`,
+          `https://marj28.github.io/job-listing-api/jobs.json`,
           {
             params: {
               _page: this.page,
