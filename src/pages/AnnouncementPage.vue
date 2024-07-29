@@ -13,9 +13,6 @@
           align-items: center;
         "
       >
-        <div class="text-h6 q-pa-md" style="margin-left: -30%">
-          Announcement
-        </div>
         <q-card
           v-for="user in announcement"
           :key="user.id"

@@ -7,7 +7,7 @@
           label="Add"
           @click="ReferenceDialog = true"
           class="q-mb-sm q-ml-sm"
-          style="background-color: green; color: white"
+           style="background-color: #06372C; color: white;"
         ></q-btn>
       </div>
       <q-table
@@ -43,7 +43,7 @@
     transition-hide="scale"
   >
     <q-card class="" style="width: 500px">
-      <q-toolbar style="background-color: #0275d8; color: white">
+      <q-toolbar   style="background-color: #06372C; color: white;">
         <q-toolbar-title>ADD REFERENCE DETAILS</q-toolbar-title>
         <q-btn icon="close" flat round dense @click="resetFieldsReference" />
       </q-toolbar>
@@ -90,7 +90,7 @@
         />
         <q-btn
           label="Add Update"
-          color="primary"
+           style="background-color: #06372C; color: white;"
           size="md"
           v-close-popup
           @click="addreference()"
@@ -311,3 +311,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+.q-input{
+  color: green;
+}
+
+</style>

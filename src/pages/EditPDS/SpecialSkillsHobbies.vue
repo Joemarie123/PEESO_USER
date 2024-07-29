@@ -7,7 +7,7 @@
           label="Add"
           @click="SkillDialog = true"
           class="q-mb-sm q-ml-sm"
-          style="background-color: green; color: white"
+         style="background-color: #06372C; color: white;"
         ></q-btn>
       </div>
       <q-table
@@ -43,7 +43,7 @@
     transition-hide="scale"
   >
     <q-card class="" style="width: 500px">
-      <q-toolbar style="background-color: #0275d8; color: white">
+      <q-toolbar style="background-color: #06372C; color: white;">
         <q-toolbar-title>ADD SKILLS</q-toolbar-title>
         <q-btn
           icon="close"
@@ -79,7 +79,7 @@
         />
         <q-btn
           label="Add Update"
-          color="primary"
+         style="background-color: #06372C; color: white;"
           size="md"
           v-close-popup
           @click="saveskill()"

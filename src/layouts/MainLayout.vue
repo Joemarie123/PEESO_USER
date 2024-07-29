@@ -27,12 +27,11 @@
         <q-space></q-space>
 
         <!-- Middle section: Navigation buttons or Dropdown -->
-        <div    style="
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              " v-if="$q.screen.gt.xs">
-          <q-tabs v-model="tab" class="text-green-9">
+        <div
+          style="display: flex; justify-content: center; align-items: center"
+          v-if="$q.screen.gt.xs"
+        >
+          <q-tabs v-model="tab" style="color: #06372c">
             <q-tab
               name="mails"
               icon="work_outline"
@@ -121,8 +120,8 @@
             round
             flat
             icon="notifications"
-
-            class="transparent-btn bg-green-9 text-white"
+            style="background-color: #06372c"
+            class="transparent-btn text-white"
             @click="$router.push({ path: '/Appointment' })"
           />
 
@@ -130,8 +129,8 @@
             flat
             round
             dense
-            style="position: relative"
-            class="transparent-btn  bg-green-9 text-white"
+            style="position: relative; background-color: #06372c"
+            class="transparent-btn text-white"
             icon="person"
           >
             <!-- <q-avatar rounded size="25px">
@@ -179,7 +178,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above>
+    <q-drawer v-model="leftDrawerOpen" show-if-above :breakpoint="1000">
       <q-list class="q-gutter-sm">
         <q-item
           clickable

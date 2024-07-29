@@ -160,9 +160,9 @@
           <q-btn
             label="Add"
             @click="secondDialog = true"
-            dense
+
             class="q-mb-sm q-ml-sm"
-            style="background-color: green; color: white"
+            style="background-color: #06372C; color: white"
           ></q-btn>
         </div>
 
@@ -183,7 +183,7 @@
           transition-hide="scale"
         >
           <q-card class="" style="width: 500px">
-            <q-toolbar style="background-color: #0275d8; color: white">
+            <q-toolbar style="background-color: #06372C; color: white">
               <q-toolbar-title>ADD CHILDREN</q-toolbar-title>
               <q-btn icon="close" flat round dense v-close-popup />
             </q-toolbar>
@@ -219,7 +219,7 @@
               />
               <q-btn
                 label="Add Update"
-                color="primary"
+                 style="background-color: #06372C; color: white;"
                 size="md"
                 @click="saveservice()"
               />
@@ -231,8 +231,8 @@
   </div>
   <div class="q-pa-sm q-ma-sm">
     <q-btn
-      color="green"
-      class="full-width"
+      style="background-color: #06372C;"
+      class="full-width text-white"
       label="Save Changes"
       @click="onSave"
     />

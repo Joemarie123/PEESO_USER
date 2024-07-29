@@ -390,7 +390,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center; /* Center horizontally */
-  background: linear-gradient(to bottom, rgb(3, 69, 113) 50%, #ffffff 50%);
+  background: linear-gradient(to bottom, #06372C 50%, #ffffff 50%);
   padding: 20px;
   height: 100%; /* Ensure the container fills vertical space */
 }

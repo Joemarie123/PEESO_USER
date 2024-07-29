@@ -187,7 +187,7 @@
           <div class="row justify-center">
             <div class="col-md-12 col-xs-12 q-ma-md">
               <q-btn
-                color="green"
+               style="background-color: #06372C; color: white;"
                 class="full-width"
                 label="Save Changes"
                 @click="onSave"

@@ -1,11 +1,12 @@
 <template>
   <div>
     <div class="row">
-      <div class="scrollable-container col-10 col-md-10 col-sm-12 col-xs-12">
+      <div class="scrollable-container col-10">
         <story-list></story-list>
         <job-posting></job-posting>
       </div>
-      <div class="scrollable-container col-2 col-md-2">
+      <div class="scrollable-container  col-2">
+        <q-card class="q-pa-sm text-h6 q-ma-md text-white" style="background-color: #06372C;">Announcement</q-card>
         <announcement-page></announcement-page>
       </div>
     </div>

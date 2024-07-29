@@ -86,7 +86,7 @@ export default {
   font-size: 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
    padding: 10px 10px 10px 10px;
-  background-color: rgb(3, 69, 113);
+  background-color: #06372C;
   color: white;
 }
 .training-card {

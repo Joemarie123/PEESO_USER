@@ -511,7 +511,7 @@
     </q-card>
   </div>
   <div class="q-pa-sm q-ma-sm">
-    <q-btn color="green" class="full-width" @click="onSave" label="Save Changes" />
+    <q-btn style="background-color: #06372C;" class="full-width text-white" @click="onSave" label="Save Changes" />
   </div>
 </template>
 <script>

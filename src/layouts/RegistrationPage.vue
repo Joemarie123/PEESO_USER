@@ -1,5 +1,5 @@
 <template>
-  <q-layout>
+  <q-page>
     <!-- Main Content -->
     <div class="row page flex-center">
       <q-dialog v-model="showResendDialog">
@@ -19,30 +19,103 @@
         </q-card>
       </q-dialog>
 
-      <q-dialog v-model="showOtpForm" persistent>
-        <q-card style="max-width: 500px">
-          <q-card-section>
-            <div class="text-h6">Please check you email</div>
-          </q-card-section>
+      <q-dialog v-model="showOtpForm" persistent style="margin-top: -50px">
+        <q-card style="max-width: 390px; height: 475px; border-radius: 15px">
+          <div style="margin-top: -35px">
+            <q-card-section>
+              <!--    {{ combinedOtp }} -->
+            </q-card-section>
+            <q-card-section>
+              <div class="text-center">
+                <q-avatar
+                  square=""
+                  size="90px"
+                  class="hoverimage q-mx-lg q-my-md"
+                >
+                  <img :src="imageUrl_1" alt="Upload" />
+                </q-avatar>
+              </div>
+              <div class="text-center">
+                <p class="text-h5">Please check your email</p>
+                <p class="text-muted" style="margin-top: -12px">
+                  We've sent a code to
+                  <span
+                    ><b>{{ txtemail }}</b></span
+                  >
+                </p>
+              </div>
+              <!--   {{ txt_otp_verification }} -->
+              <div class="q-mt-md text-center" style="margin-top: 25px">
+                <input
+                  ref="otp1"
+                  class="otp-letter-input"
+                  @update:model-value="handleInput('otp1', $event, 'otp2')"
+                  v-model="otp1"
+                  maxlength="1"
+                />
+                <input
+                  ref="otp2"
+                  class="otp-letter-input"
+                  @update:model-value="handleInput('otp2', $event, 'otp3')"
+                  v-model="otp2"
+                  maxlength="1"
+                />
+                <input
+                  ref="otp3"
+                  class="otp-letter-input"
+                  @update:model-value="handleInput('otp3', $event, 'otp4')"
+                  v-model="otp3"
+                  maxlength="1"
+                />
+                <input
+                  ref="otp4"
+                  class="otp-letter-input"
+                  v-model="otp4"
+                  @update:model-value="handleInput('otp4', $event, 'otp5')"
+                  maxlength="1"
+                />
+                <input
+                  ref="otp5"
+                  @update:model-value="handleInput('otp5', $event, 'otp6')"
+                  class="otp-letter-input"
+                  v-model="otp5"
+                  maxlength="1"
+                />
+                <input
+                  ref="otp6"
+                  class="otp-letter-input"
+                  v-model="otp6"
+                  maxlength="1"
+                />
+              </div>
+              <div class="text-center q-mt-md">
+                <p class="text-muted">
+                  Didn't get the code?
 
-          <q-card-section>
-            <q-input v-model="txt_otp_verification" label="OTP" />
-          </q-card-section>
+                  <button class="resendcolor" @click="resendCode">
+                    Click to resend.
+                  </button>
+                </p>
+              </div>
 
-          <q-card-actions align="right">
-            <q-btn flat label="Cancel" color="primary" v-close-popup />
-            <q-btn
-              flat
-              label="Verify"
-              @click="Click_Verify_OTP()"
-              color="primary"
-            />
-          </q-card-actions>
-
-          <q-card-section>
-            <div>{{ formattedTime }}</div>
-          </q-card-section>
+              <q-card-actions class="q-mt-md q-px-lg justify-end">
+                <q-btn
+                  label="Verify"
+                  class="custom_input_button"
+                  @click="Click_Verify_OTP"
+                />
+              </q-card-actions>
+              <div class="text-center" style="font-size: 20px">
+                {{ formattedTime }}
+              </div>
+            </q-card-section>
+          </div>
         </q-card>
+        <q-card-section style="margin-top: -488px; margin-left: -10px"
+          ><button class="button_close" @click="showOtpForm = false">
+            <b>X</b>
+          </button></q-card-section
+        >
       </q-dialog>
 
       <div
@@ -74,8 +147,8 @@
                   <p>Please Enter Information Details</p>
                 </q-card-section>
               </div>
-
-              <!-- <div class="col-3" style="margin-top: -50px">
+<!--
+              <div class="col-3" style="margin-top: -50px">
                 <q-avatar
                   size="70px"
                   class="q-ml-sm hoverimage"
@@ -83,7 +156,7 @@
                 >
                   <img :src="imageUrl" alt="Upload" />
                 </q-avatar>
-                <p style=""><b>Upload Profile</b></p>
+                <p style="margin-left: -10px"><b>Upload Company Profile</b></p>
                 <input
                   type="file"
                   ref="fileInput"
@@ -108,7 +181,7 @@
                 </div>
               </div> -->
 
-              <div class="row q-pt-sm"  >
+              <div class="row" style="margin-top: 0px">
                 <div class="col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
                   <div class="custom-input-container">
                     <input
@@ -156,8 +229,9 @@
                       class="custom-input"
                       placeholder="dsds Name"
                     >
-                      <option value="" disabled selected>Suffex</option>
+                      <option disabled selected>Suffix</option>
                       <!-- Add your options here -->
+                      <option value="1">N/A</option>
                       <option value="1">Jr.</option>
                       <option value="2">Sr.</option>
                       <option value="2">III</option>
@@ -243,33 +317,11 @@
                 SIGN UP
               </button>
             </div>
-            <div
-              class="q-pa-md"
-              style="
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              "
-            >
-              <p style="font-size: medium; text-align: center">
-                Already have an account?
-                <span>
-                  <q-btn
-                    @click="goToPage('/login')"
-                    class="signup"
-                    flat
-                    rounded
-                    color="green"
-                    >Log in</q-btn
-                  >
-                </span>
-              </p>
-            </div>
           </q-card-section>
         </q-card>
       </div>
     </div>
-  </q-layout>
+  </q-page>
 </template>
 
 <script>
@@ -282,7 +334,15 @@ import { useLoginCheck } from "src/stores/SignUp_Store";
 export default defineComponent({
   data() {
     return {
+      otp1: "",
+      otp2: "",
+      otp3: "",
+      otp4: "",
+      otp5: "",
+      otp6: "",
+
       imageUrl: "/upload.jpg",
+      imageUrl_1: "/message.jpg",
       txtCompanyName: "",
       txtlastname: "",
       txtfirstname: "",
@@ -294,7 +354,7 @@ export default defineComponent({
       txtpassword: "",
       txtconfirmpassword: "",
 
-      txt_otp_verification: "",
+      /*   txt_otp_verification: "", */
       showOtpForm: false,
 
       startNumber: 0,
@@ -307,9 +367,9 @@ export default defineComponent({
       totalVacancies: 1500, // Replace with actual data
 
       check_me: [],
-
+      file: null,
       IpaVerifyOTp: [],
-
+      /*  Company_Image: null, */
       timer: null,
       timeLeft: 120, // 2 minutes in seconds
       timeExceeded: false,
@@ -329,32 +389,99 @@ export default defineComponent({
           timeout: "2000",
         });
       },
+
+      DuplicateLogin() {
+        $q.notify({
+          icon: "star_half",
+          color: "red",
+          message: "Duplicate Login",
+          position: "center",
+          timeout: "2000",
+        });
+      },
+
+      DuplicateEmail() {
+        $q.notify({
+          icon: "star_half",
+          color: "red",
+          message: "Duplicate Email",
+          position: "center",
+          timeout: "2000",
+        });
+      },
+
+      Invalid_Email() {
+        $q.notify({
+          icon: "star_half",
+          color: "red",
+          message: "Invalid Email",
+          position: "center",
+          timeout: "2000",
+        });
+      },
+
+      Duplicate_Email_LOGIN() {
+        $q.notify({
+          icon: "star_half",
+          color: "red",
+          message: "Duplicate Email And UserName",
+          position: "center",
+          timeout: "2000",
+        });
+      },
     };
   },
 
   computed: {
-    // formattedTime() {
-    //   const minutes = Math.floor(this.timeLeft / 60);
-    //   const seconds = this.timeLeft % 60;
-    //   return ${minutes}:${seconds < 10 ? "0" : ""}${seconds};
-    // },
+    txt_otp_verification: {
+      get() {
+        return (
+          this.otp1 + this.otp2 + this.otp3 + this.otp4 + this.otp5 + this.otp6
+        );
+      },
+      set(value) {
+        this.otp1 = value[0] || "";
+        this.otp2 = value[1] || "";
+        this.otp3 = value[2] || "";
+        this.otp4 = value[3] || "";
+        this.otp5 = value[4] || "";
+        this.otp6 = value[5] || "";
+      },
+    },
+
+    formattedTime() {
+      const minutes = Math.floor(this.timeLeft / 60);
+      const seconds = this.timeLeft % 60;
+      return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    },
   },
 
   methods: {
-      goToPage(page) {
-      this.$router.push(page);
+    handleInput(currentRef, value, nextRef) {
+      /*   console.log("df"); */
+      // Focus on the next input if the current one has a value
+      if (value.length == 1) {
+        this.$nextTick(() => {
+          const nextInput = this.$refs[nextRef];
+          if (nextInput) {
+            nextInput.focus();
+          }
+        });
+      }
     },
+
     triggerFileUpload() {
       this.$refs.fileInput.click();
     },
     handleFileUpload(event) {
       const file = event.target.files[0];
       if (file) {
+        this.file = file; // bind the file object to the data property
         const reader = new FileReader();
         reader.onload = (e) => {
-          this.imageUrl = e.target.result;
+          this.imageUrl = e.target.result; // set the image URL to the loaded file
         };
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(file); // read the file as a data URL
       }
     },
 
@@ -382,6 +509,29 @@ export default defineComponent({
       }, 1000);
     },
 
+    async SignUp_Save_To_Database() {
+      console.log("Its ME");
+      const store = useLoginCheck();
+      let data = new FormData();
+      data.append("Company_name", this.txtCompanyName);
+      data.append("LastName", this.txtlastname);
+      data.append("FirstName", this.txtfirstname);
+      data.append("MiddleName", this.txtmiddlename);
+      data.append("Suffix", this.txtfuffix);
+      data.append("Email", this.txtemail);
+      data.append("Login", this.txtlogin);
+      data.append("Password", this.txtpassword);
+      data.append("ContactNo", this.txtcontact);
+
+      if (this.file) {
+        data.append("file", this.file);
+      }
+
+      store.SaveToDatabase(data).then((res) => {
+        this.$router.push("/login");
+      });
+    },
+
     Click_Verify_OTP() {
       // Compare entered OTP with predefined OTP
 
@@ -390,18 +540,20 @@ export default defineComponent({
         this.showResendDialog = true;
       } else {
         if (this.txt_otp_verification == this.IpaVerifyOTp.otp) {
+          this.SignUp_Save_To_Database();
           console.log("Correct");
-          this.$q.notify({
+          /* this.$q.notify({
             color: "positive",
             position: "top",
             message: "OTP Verified Successfully!",
-          });
+          }); */
+
           /*   this.showOtpForm = false; */
         } else {
           console.log("Wrong");
           this.$q.notify({
             color: "negative",
-            position: "top",
+            position: "center",
             message: "Invalid OTP. Please try again.",
           });
 
@@ -417,38 +569,44 @@ export default defineComponent({
       const store = useLoginCheck();
       let data = new FormData();
 
-      data.append("Email", this.txtemail);
+      data.append("email", this.txtemail);
       store.VerifyOtp(data).then((res) => {
         this.IpaVerifyOTp = store.OtpVerify;
         console.log("Kini Verify OTP:", this.IpaVerifyOTp.otp);
-        this.showOtpForm = true;
-        this.startOtpProcess();
-        this.showResendDialog = false;
-        this.txt_otp_verification = "";
+
+        if (this.IpaVerifyOTp.sent == true) {
+          this.showOtpForm = true;
+          this.startOtpProcess();
+          this.showResendDialog = false;
+          this.txt_otp_verification = "";
+        } else {
+          this.Invalid_Email();
+        }
       });
     },
 
     async CheckmeLogin() {
       const store = useLoginCheck();
       let data = new FormData();
-      data.append("Company_name", this.txtCompanyName);
+      // data.append("Company_name", this.txtCompanyName);
       data.append("LastName", this.txtlastname);
       data.append("FirstName", this.txtfirstname);
       data.append("MiddleName", this.txtmiddlename);
       data.append("Suffix", this.txtfuffix);
       data.append("Email", this.txtemail);
-      data.append("Login", this.txtlogin);
+      data.append("login", this.txtlogin);
 
       store.LoginChecking(data).then((res) => {
         console.log("Response from LoginChecking:", res);
 
         if (res == 1) {
-          /*   this.showOtpForm = true; */
+          this.DuplicateLogin();
+        } else if (res == 2) {
+          this.DuplicateEmail();
+        } else if (res == 3) {
+          this.Duplicate_Email_LOGIN();
+        } else if (res == 4) {
           this.VerifyOtp();
-        } else {
-          this.VerifyOtp();
-
-          /*  this.showDuplicateEmail(); */
         }
       });
     },
@@ -509,6 +667,57 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.resendcolor {
+  color: rgb(8, 77, 180);
+  border-color: #ffffff00;
+  font-size: 16px;
+  background-color: #ffffff00; /* Background color of the button */
+  cursor: pointer;
+}
+
+.resendcolor:active {
+  color: rgb(8, 77, 180);
+  border-color: #ffffff00;
+  font-size: 15px;
+  background-color: #ffffff00; /* Background color of the button */
+  cursor: pointer;
+}
+
+.button_close {
+  width: 40px; /* Adjust the size as needed */
+  height: 40px; /* Ensure height matches width for a perfect circle */
+  border-radius: 50%; /* This makes the button circular */
+  background-color: #e7111fcb; /* Background color of the button */
+  color: white; /* Text color */
+  border: none; /* Remove default border */
+  display: flex; /* Center text horizontally and vertically */
+  align-items: center; /* Center text vertically */
+  justify-content: center; /* Center text horizontally */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 16px; /* Adjust font size as needed */
+}
+
+.button_close:hover {
+  background-color: #0c0c0ce3; /* Darker color on hover */
+}
+
+.iconcolor {
+  background: linear-gradient(40deg, #279f27, #5fc331);
+}
+
+.otp-letter-input {
+  max-width: 11%;
+  height: 90px;
+  margin-left: 10px;
+  border: 1px solid #198754;
+
+  border-radius: 10px;
+  color: #198754;
+  font-size: 40px;
+  text-align: center;
+  font-weight: bold;
+}
+
 .hoverimage:hover {
   cursor: pointer;
 }

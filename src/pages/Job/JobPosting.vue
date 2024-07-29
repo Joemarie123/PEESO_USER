@@ -30,18 +30,24 @@
               <q-item-label>{{ job.employerName }} </q-item-label>
               <q-item-label caption
                 >{{ job.DatePosted }}
-                <q-badge outline color="primary" label="Part Time"
+                <q-badge outline  label="Part Time" style="color:#06372C ;"
               /></q-item-label>
             </q-item-section>
 
             <q-item-section class="justify-end"
-              ><div class="text-right">
-                <p
+              ><div class="text-right" style="margin-top: -10px">
+                <q-badge
+                  color="warning"
+                  label="See More.."
+                  @click="$router.push({ path: '/JobDetails' })"
+                >
+                </q-badge>
+                <!-- <p
                   class="text-blue"
                   @click="$router.push({ path: '/JobDetails' })"
                 >
                   See More
-                </p>
+                </p> -->
               </div></q-item-section
             >
           </q-item>
@@ -116,7 +122,7 @@ export default {
   flex-direction: column;
 }
 .custom-card {
-  width: 70%;
+  width: 80%;
   height: auto;
   margin-bottom: 15px;
 }

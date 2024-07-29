@@ -39,7 +39,7 @@
   <div class="row skill-card">
     <div class="col-12 col-sm-6 col-md-6 col-lg-6">
       <q-card class="q-ma-sm">
-        <q-card-section style="background-color: #3b8132; color: white"
+        <q-card-section style="background-color: #06372C; color: white"
           >BOOKED MARK JOB POSTS</q-card-section
         >
         <q-separator />
@@ -57,7 +57,7 @@
     </div>
     <div class="col-12 col-sm-6 col-md-6 col-lg-6">
       <q-card class="q-ma-sm">
-        <q-card-section style="background-color: #276621; color: white"
+        <q-card-section style="background-color: #06372C; color: white"
           >EMPLOYERS</q-card-section
         >
         <q-separator />
@@ -178,7 +178,7 @@ export default {
 .profile-container {
   display: flex;
   align-items: center;
-  background: linear-gradient(to bottom, #035f03, 50%, #ffffff 50%);
+  background: linear-gradient(to bottom, #06372C, 50%, #ffffff 50%);
   padding: 20px;
 }
 
