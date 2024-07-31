@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh lpR fFf" class="backgroundcolor">
-    <q-header class="page flex-center" justify="center">
+    <q-header class="page">
       <q-toolbar class="text-black">
         <q-toolbar-title class="hidememobile" style="font-weight: bold">
           <span style="color: #3eb13c"> #WEARE</span>
@@ -14,7 +14,7 @@
           label="Menu"
           icon="menu"
         >
-          <q-item clickable @click="scroll('HomePage')">
+          <q-item clickable @click="$router.push({path: '/Home'})">
             <q-btn class="custom-hover" flat>Home</q-btn></q-item
           >
           <q-item clickable @click="scroll('WhatisPeeso')">
@@ -33,7 +33,7 @@
 
         <!-- Regular buttons for larger screens -->
         <div v-else>
-          <q-btn flat class="custom-hover" @click="scroll('HomePage')"
+          <q-btn flat class="custom-hover" @click="$router.push({path: '/Home'})"
             >Home</q-btn
           >
           <q-btn flat class="custom-hover" @click="scroll('WhatisPeeso')"
@@ -55,9 +55,9 @@
     </q-header>
 
     <q-page-container>
-      <q-page>
+
         <router-view />
-      </q-page>
+
     </q-page-container>
   </q-layout>
 </template>
@@ -86,13 +86,13 @@ export default {
 
 <style scoped>
 .page {
-  margin-right: auto;
-  margin-left: 200px;
+  align-items: center;
+  text-align: center;
   margin-top: 20px;
   background-color: rgba(252, 250, 250, 0.943);
 }
 
-@media only screen and (max-width: 1048px) {
+/* @media only screen and (max-width: 1048px) {
   .page {
     margin-right: auto;
     margin-left: 120px;
@@ -134,9 +134,6 @@ export default {
 .transparent-color {
   background-color: rgba(0, 0, 0, 0.5);
 }
-.backgroundcolor {
-  background-color: rgba(252, 250, 250, 0.943);
-}
 
 .flex-center {
   display: flex;
@@ -145,9 +142,7 @@ export default {
 }
 
 @media only screen and (max-width: 375px) {
-  /*  .fontnibai {
-    font-size: 9px;
-  } */
+
 
   .hidememobile {
     display: none;
@@ -160,7 +155,7 @@ export default {
     background-color: rgba(252, 250, 250, 0.943);
   }
 }
-
+*/
 .q-toolbar.bg-black {
   background-color: rgba(250, 250, 250, 0);
 }
@@ -182,4 +177,8 @@ export default {
   color: white;
   border-radius: 18px;
 }
+.backgroundcolor {
+  background-color: rgba(252, 250, 250, 0.943);
+}
+
 </style>

@@ -12,7 +12,7 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
   },
   actions: {
     async LoginChecking(payload) {
-      console.log("im here")
+      console.log("im here");
       // `http://10.0.1.26:82/HRPORTAL/login.php`
       let res = await axios.post(
         `http://10.0.1.26:82/peesoportal/registration/client/logincheck.php`,
@@ -42,6 +42,17 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
       ) {
         return 4;
       }
+      console.log("res.data", res.data)
+    },
+
+    async Login_Store(payload) {
+      // `http://10.0.1.26:82/HRPORTAL/login.php`
+      let res = await axios.post(
+        `http://10.0.1.26:82/peesoportal/login/client/login.php`,
+        payload
+      );
+      this.LogIn = res.data;
+      console.log("LOG IN Store", res.data);
     },
 
     async VerifyOtp(payload) {

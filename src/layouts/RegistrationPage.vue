@@ -147,7 +147,7 @@
                   <p>Please Enter Information Details</p>
                 </q-card-section>
               </div>
-<!--
+              <!--
               <div class="col-3" style="margin-top: -50px">
                 <q-avatar
                   size="70px"
@@ -523,10 +523,6 @@ export default defineComponent({
       data.append("Password", this.txtpassword);
       data.append("ContactNo", this.txtcontact);
 
-      if (this.file) {
-        data.append("file", this.file);
-      }
-
       store.SaveToDatabase(data).then((res) => {
         this.$router.push("/login");
       });
@@ -593,6 +589,7 @@ export default defineComponent({
       data.append("FirstName", this.txtfirstname);
       data.append("MiddleName", this.txtmiddlename);
       data.append("Suffix", this.txtfuffix);
+      data.append("ContactNo", this.txtcontact);
       data.append("Email", this.txtemail);
       data.append("login", this.txtlogin);
 

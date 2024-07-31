@@ -119,6 +119,10 @@ const routes = [
         path: "/register",
         component: () => import("layouts/RegistrationPage.vue"),
       },
+      {
+        path: "/Home",
+        component: ()=> import ("pages/Dashboard/HomePage.vue")
+      }
     ],
   },
 ];
