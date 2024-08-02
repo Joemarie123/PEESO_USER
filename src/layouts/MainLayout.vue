@@ -50,64 +50,44 @@
           </q-tabs>
         </div>
 
-        <!-- <div class="q-pa-md q-gutter-md" v-if="$q.screen.gt.xs">
-          <q-btn
-            flat
-            round
-            dense
-            icon="work_outline"
-            @click="$router.push({ path: '/' })"
-          />
-          <q-btn
-            flat
-            round
-            dense
-            icon="school"
-            @click="$router.push({ path: '/ScholarshipPosting' })"
-          />
-          <q-btn
-            flat
-            round
-            dense
-            icon="co_present"
-            @click="$router.push({ path: '/TrainingPosting' })"
-          />
-        </div> -->
+        <!-- Menu -->
 
         <div v-else>
           <q-btn dense round flat icon="menu" @click="toggleMiddle" />
           <q-menu
             v-model="dropdownOpen"
-            anchor="top right"
-            self="top left"
-            no-padding
+            anchor="bottom right"
+            self="top right"
+            no-corner
           >
-            <q-list>
-              <q-item clickable @click="$router.push({ path: '/' })">
-                <q-item-section avatar>
-                  <q-icon name="work_outline" />
-                </q-item-section>
-                <q-item-section>Home</q-item-section>
-              </q-item>
-              <q-item
-                clickable
-                @click="$router.push({ path: '/ScholarshipPosting' })"
-              >
-                <q-item-section avatar>
-                  <q-icon name="school" />
-                </q-item-section>
-                <q-item-section>Scholarship Posting</q-item-section>
-              </q-item>
-              <q-item
-                clickable
-                @click="$router.push({ path: '/TrainingPosting' })"
-              >
-                <q-item-section avatar>
-                  <q-icon name="co_present" />
-                </q-item-section>
-                <q-item-section>Training Posting</q-item-section>
-              </q-item>
-            </q-list>
+            <q-card class="dropdown-card" flat>
+              <q-list>
+                <q-item clickable @click="$router.push({ path: '/' })">
+                  <q-item-section avatar>
+                    <q-icon name="work_outline" />
+                  </q-item-section>
+                  <q-item-section>Home</q-item-section>
+                </q-item>
+                <q-item
+                  clickable
+                  @click="$router.push({ path: '/ScholarshipPosting' })"
+                >
+                  <q-item-section avatar>
+                    <q-icon name="school" />
+                  </q-item-section>
+                  <q-item-section>Scholarship Posting</q-item-section>
+                </q-item>
+                <q-item
+                  clickable
+                  @click="$router.push({ path: '/TrainingPosting' })"
+                >
+                  <q-item-section avatar>
+                    <q-icon name="co_present" />
+                  </q-item-section>
+                  <q-item-section>Training Posting</q-item-section>
+                </q-item>
+              </q-list>
+            </q-card>
           </q-menu>
         </div>
 
@@ -146,7 +126,17 @@
               <q-list dense>
                 <q-item class="GL__menu-link-signed-in">
                   <q-item-section>
-                    <div>Signed in as <strong>Go</strong></div>
+                    <div>
+                      Signed in as
+                      <strong
+                        ><span
+                          v-if="userinfo.data && userinfo.data.length > 0"
+                          style="font-size: 16px; font-weight: bold"
+                        >
+                          {{ userinfo.data[0].Firstname }}
+                        </span></strong
+                      >
+                    </div>
                   </q-item-section>
                 </q-item>
 
@@ -168,7 +158,11 @@
                   <q-item-section>Settings</q-item-section>
                 </q-item>
                 <q-separator></q-separator>
-                <q-item clickable class="GL__menu-link">
+                <q-item
+                  clickable
+                  class="GL__menu-link"
+                  @click="$router.push({ path: '/login' })"
+                >
                   <q-item-section>Sign out</q-item-section>
                 </q-item>
               </q-list>
@@ -178,7 +172,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above :breakpoint="1000">
+    <q-drawer v-model="leftDrawerOpen" show-if-above :breakpoint="1100">
       <q-list class="q-gutter-sm">
         <q-item
           clickable
@@ -192,7 +186,14 @@
             </q-avatar>
           </q-item-section>
           <q-item-section class="text-weight-medium">
-            <b>Name Ni. Go </b>
+            <b
+              ><span
+                v-if="userinfo.data && userinfo.data.length > 0"
+                style="font-size: 16px; font-weight: bold"
+              >
+                {{ userinfo.data[0].Firstname }} {{ userinfo.data[0].Surname }}
+              </span>
+            </b>
           </q-item-section>
         </q-item>
 
@@ -253,6 +254,22 @@
             Appointments
           </q-item-section>
         </q-item>
+
+        <q-item
+          clickable
+          v-ripple
+          @click="$router.push({ path: '/Announce' })"
+          v-if="!$q.screen.gt.sm"
+        >
+          <q-item-section avatar>
+            <q-avatar rounded size="40px">
+              <img src="../assets/images/announce.png"
+            /></q-avatar>
+          </q-item-section>
+          <q-item-section class="text-weight-medium" style="font-size: 15px">
+            Announcement
+          </q-item-section>
+        </q-item>
       </q-list>
       <q-separator inset class="q-mt-sm"></q-separator>
     </q-drawer>
@@ -265,13 +282,29 @@
 
 <script>
 import { defineComponent, ref } from "vue";
+import { useLoginCheck } from "src/stores/SignUp_Store";
 
 export default defineComponent({
   name: "MainLayout",
   data() {
     return {
       tab: "mails",
+      retrievedLogin: "",
+      userinfo: [],
     };
+  },
+
+  created() {
+    this.retrievedLogin = localStorage.getItem("Login");
+    console.log("Retrieved Login:", this.retrievedLogin); // Check the retrieved login
+
+    const store = useLoginCheck();
+    let data = new FormData();
+    data.append("LoginID", this.retrievedLogin);
+
+    store.RetrievedData_function(data).then((res) => {
+      this.userinfo = store.RetrievedData;
+    });
   },
   setup() {
     const leftDrawerOpen = ref(false);
@@ -342,5 +375,19 @@ export default defineComponent({
   height: 18px;
   font-size: 10px;
   color: black;
+}
+
+.dropdown-card {
+  width: 200px; /* Adjust width as needed */
+  border-radius: 8px; /* Match this with the parent card's border-radius if necessary */
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2); /* Optional: adds a subtle shadow for elevation */
+}
+
+.q-menu {
+  padding: 0; /* Removes padding around the menu */
+}
+
+.q-list {
+  padding: 0; /* Removes padding inside the list */
 }
 </style>

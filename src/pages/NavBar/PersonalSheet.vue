@@ -1,240 +1,240 @@
 <template>
   <div class="scrollable-container">
-  <div class="profile-card">
-    <div class="row profile-container">
-      <div class="profile-avatar">
-        <q-avatar class="avatar">
-          <img src="https://cdn.quasar.dev/img/avatar2.jpg" />
-        </q-avatar>
-      </div>
-      <div class="col-12" style="text-align: center">
-        <p style="font-weight: 500; margin-bottom: -2px">Name Ni. Go</p>
-        <p>Web Development, JavaScript, CSS, HTML</p>
+    <div class="profile-card">
+      <div class="row profile-container">
+        <div class="profile-avatar">
+          <q-avatar class="avatar">
+            <img src="https://cdn.quasar.dev/img/avatar2.jpg" />
+          </q-avatar>
+        </div>
+        <div class="col-12" style="text-align: center">
+          <p style="font-weight: 500; margin-bottom: -2px">
+            {{ userinfo.data[0].Firstname }} {{ userinfo.data[0].Surname }}
+          </p>
+          <p>Web Development, JavaScript, CSS, HTML</p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="q-pa-md profile-card">
-    <!-- <p class="title">PERSONAL DATA SHEET</p> -->
-    <!-- <q-separator class="q-ma-md" /> -->
-    <div class="row">
-      <div class="col-md-2 col-sm-12 col-xs-12">
-        <q-select
-          dense=""
-          v-if="$q.screen.lt.md"
-          filled
-          v-model="activeButton"
-          :options="[
-            {
-              label: 'PERSONAL INFORMATION',
-              value: 'PERSONAL INFORMATION',
-            },
-            { label: 'FAMILY BACKGROUND', value: 'FAMILY BACKGROUND' },
-            {
-              label: 'EDUCATIONAL BACKGROUND',
-              value: 'EDUCATIONAL BACKGROUND',
-            },
-            {
-              label: 'CIVIL SERVICE ELIGIBILITY',
-              value: 'CIVIL SERVICE ELIGIBILITY',
-            },
-            { label: 'WORK EXPERIENCE', value: 'WORK EXPERIENCE' },
-            { label: 'VOLUNTARY WORK', value: 'VOLUNTARY WORK' },
-            { label: 'L&D INTERVENTIONS', value: 'L&D INTERVENTIONS' },
-            {
-              label: 'SPECIAL SKILLS & HOBBIES',
-              value: 'SPECIAL SKILLS & HOBBIES',
-            },
-            { label: 'NON-ACADEMIC', value: 'NON-ACADEMIC' },
-            {
-              label: 'MEMBERSHIP ASSOCIATION',
-              value: 'MEMBERSHIP ASSOCIATION',
-            },
-            { label: 'OTHER INFORMATIONS', value: 'OTHER INFORMATIONS' },
-            { label: 'REFERENCES', value: 'REFERENCES' },
-          ]"
-          style="width: 100%; margin-bottom: 20px"
-          @update:model-value="handleSelectionChange"
-        />
-        <template v-else>
-          <q-btn
-            flat
-            rounded
-            align="left"
-            v-ripple
-            class=""
-            :class="{
-              'active-button': activeButton === 'PERSONAL INFORMATION',
-            }"
-            style="width: 95%; margin-bottom: -10px"
-            @click="personalinf()"
-            >PERSONAL INFORMATION
-          </q-btn>
-
-          <q-separator class="q-mt-md" inset></q-separator>
-
-          <q-btn
-            flat
-            rounded
-            align="left"
-            class="q-mt-xs"
-            :class="{
-              'active-button': activeButton === 'FAMILY BACKGROUND',
-            }"
-            style="width: 95%; margin-bottom: -10px"
-            @click="familyback()"
-            >FAMILY BACKGROUND
-          </q-btn>
-          <q-separator class="q-mt-md" inset></q-separator>
-          <q-btn
-            flat
-            rounded
-            align="left"
-            class="q-mt-xs"
-            :class="{
-              'active-button': activeButton === 'EDUCATIONAL BACKGROUND',
-            }"
-            style="width: 95%; margin-bottom: -10px"
-            @click="educationalback()"
-            >EDUCATIONAL BACKGROUND
-          </q-btn>
-          <q-separator class="q-mt-md" inset></q-separator>
-          <q-btn
-            flat
-            rounded
-            align="left"
-            class="q-mt-xs"
-            :class="{
-              'active-button': activeButton === 'CIVIL SERVICE ELIGIBILITY',
-            }"
-            style="width: 95%; margin-bottom: -10px"
-            @click="civilserv()"
-            >CIVIL SERVICE ELIGIBILITY
-          </q-btn>
-          <q-separator class="q-mt-md" inset></q-separator>
-          <q-btn
-            flat
-            rounded
-            align="left"
-            class="q-mt-xs"
-            :class="{ 'active-button': activeButton === 'WORK EXPERIENCE' }"
-            style="width: 95%; margin-bottom: -10px"
-            @click="workexp()"
-            >WORK EXPERIENCE
-          </q-btn>
-          <q-separator class="q-mt-md" inset></q-separator>
-          <q-btn
-            flat
-            rounded
-            align="left"
-            class="q-mt-xs"
-            :class="{ 'active-button': activeButton === 'VOLUNTARY WORK' }"
-            style="width: 95%; margin-bottom: -10px"
-            @click="volunwork()"
-            >VOLUNTARY WORK
-          </q-btn>
-          <q-separator class="q-mt-md" inset></q-separator>
-          <q-btn
-            flat
-            rounded
-            align="left"
-            class="q-mt-xs"
-            :class="{
-              'active-button': activeButton === 'L&D INTERVENTIONS',
-            }"
-            style="width: 95%; margin-bottom: -10px"
-            @click="learnint()"
-            >L&D INTERVENTIONS
-          </q-btn>
-          <q-separator class="q-mt-md" inset></q-separator>
-           <q-btn
-                flat
-                rounded
-                align="left"
-                class="q-mt-xs"
-                :class="{
-                  'active-button': activeButton === 'SPECIAL SKILLS & HOBBIES',
-                }"
-                style="width: 95%; margin-bottom: -10px"
-                @click="specialskills()"
-                >SPECIAL SKILLS & HOBBIES
-              </q-btn>
-              <q-separator class="q-mt-md" inset></q-separator>
-              <q-btn
-                flat
-                rounded
-                align="left"
-                class="q-mt-xs"
-                :class="{ 'active-button': activeButton === 'NON-ACADEMIC' }"
-                style="width: 95%; margin-bottom: -10px"
-                @click="nonacademic()"
-                >NON-ACADEMIC
-              </q-btn>
-              <q-separator class="q-mt-md" inset></q-separator>
-              <q-btn
-                flat
-                rounded
-                align="left"
-                class="q-mt-xs"
-                :class="{
-                  'active-button': activeButton === 'MEMBERSHIP ASSOCIATION',
-                }"
-                style="width: 95%; margin-bottom: -10px"
-                @click="memberass()"
-                >MEMBERSHIP ASSOCIATION
-              </q-btn>
-              <q-separator class="q-mt-md" inset></q-separator>
+    <div class="q-pa-md profile-card">
+      <!-- <p class="title">PERSONAL DATA SHEET</p> -->
+      <!-- <q-separator class="q-ma-md" /> -->
+      <div class="row">
+        <div class="col-md-2 col-sm-12 col-xs-12">
+          <q-select
+            dense=""
+            v-if="$q.screen.lt.md"
+            filled
+            v-model="activeButton"
+            :options="[
+              {
+                label: 'PERSONAL INFORMATION',
+                value: 'PERSONAL INFORMATION',
+              },
+              { label: 'FAMILY BACKGROUND', value: 'FAMILY BACKGROUND' },
+              {
+                label: 'EDUCATIONAL BACKGROUND',
+                value: 'EDUCATIONAL BACKGROUND',
+              },
+              {
+                label: 'CIVIL SERVICE ELIGIBILITY',
+                value: 'CIVIL SERVICE ELIGIBILITY',
+              },
+              { label: 'WORK EXPERIENCE', value: 'WORK EXPERIENCE' },
+              { label: 'VOLUNTARY WORK', value: 'VOLUNTARY WORK' },
+              { label: 'L&D INTERVENTIONS', value: 'L&D INTERVENTIONS' },
+              {
+                label: 'SPECIAL SKILLS & HOBBIES',
+                value: 'SPECIAL SKILLS & HOBBIES',
+              },
+              { label: 'NON-ACADEMIC', value: 'NON-ACADEMIC' },
+              {
+                label: 'MEMBERSHIP ASSOCIATION',
+                value: 'MEMBERSHIP ASSOCIATION',
+              },
+              { label: 'OTHER INFORMATIONS', value: 'OTHER INFORMATIONS' },
+              { label: 'REFERENCES', value: 'REFERENCES' },
+            ]"
+            style="width: 100%; margin-bottom: 20px"
+            @update:model-value="handleSelectionChange"
+          />
+          <template v-else>
             <q-btn
-                flat
-                rounded
-                align="left"
-                class="q-mt-xs"
-                :class="{
-                  'active-button': activeButton === 'OTHER INFORMATIONS',
-                }"
-                style="width: 95%; margin-bottom: -10px"
-                @click="otherinf()"
-                >OTHER INFORMATION
-              </q-btn>
-              <q-separator class="q-mt-md" inset></q-separator>
-              <q-btn
-                flat
-                rounded
-                align="left"
-                class="q-mt-xs"
-                :class="{ 'active-button': activeButton === 'REFERENCES' }"
-                style="width: 95%; margin-bottom: -10px"
-                @click="reference()"
-                >REFERENCES
-              </q-btn>
-        </template>
-      </div>
+              flat
+              rounded
+              align="left"
+              v-ripple
+              class=""
+              :class="{
+                'active-button': activeButton === 'PERSONAL INFORMATION',
+              }"
+              style="width: 95%; margin-bottom: -10px"
+              @click="personalinf()"
+              >PERSONAL INFORMATION
+            </q-btn>
 
-      <div class="col-md-10 col-sm-12">
-        <q-card
-          flat
-          bordered
-          class="  "
-          style="height: auto; margin-top: -0px; width: 100%"
-        >
-          <PersonalInf v-if="activeButton === 'PERSONAL INFORMATION'" />
-          <FamilyBack v-if="activeButton === 'FAMILY BACKGROUND'" />
-          <EducationalBack v-if="activeButton === 'EDUCATIONAL BACKGROUND'" />
-          <WorkExp v-if="activeButton === 'WORK EXPERIENCE'" />
-          <CivilServ v-if="activeButton === 'CIVIL SERVICE ELIGIBILITY'" />
-          <VolunWork v-if="activeButton === 'VOLUNTARY WORK'" />
-          <LearnInt v-if="activeButton === 'L&D INTERVENTIONS'" />
-            <SpecialSkills
-                v-if="activeButton === 'SPECIAL SKILLS & HOBBIES'"
-              />
-              <NonAcademic v-if="activeButton === 'NON-ACADEMIC'" />
-              <MemberAss v-if="activeButton === 'MEMBERSHIP ASSOCIATION'" />
-          <OtherInf v-if="activeButton === 'OTHER INFORMATIONS'" />
-              <ReferencePage v-if="activeButton === 'REFERENCES'" />
-        </q-card>
+            <q-separator class="q-mt-md" inset></q-separator>
+
+            <q-btn
+              flat
+              rounded
+              align="left"
+              class="q-mt-xs"
+              :class="{
+                'active-button': activeButton === 'FAMILY BACKGROUND',
+              }"
+              style="width: 95%; margin-bottom: -10px"
+              @click="familyback()"
+              >FAMILY BACKGROUND
+            </q-btn>
+            <q-separator class="q-mt-md" inset></q-separator>
+            <q-btn
+              flat
+              rounded
+              align="left"
+              class="q-mt-xs"
+              :class="{
+                'active-button': activeButton === 'EDUCATIONAL BACKGROUND',
+              }"
+              style="width: 95%; margin-bottom: -10px"
+              @click="educationalback()"
+              >EDUCATIONAL BACKGROUND
+            </q-btn>
+            <q-separator class="q-mt-md" inset></q-separator>
+            <q-btn
+              flat
+              rounded
+              align="left"
+              class="q-mt-xs"
+              :class="{
+                'active-button': activeButton === 'CIVIL SERVICE ELIGIBILITY',
+              }"
+              style="width: 95%; margin-bottom: -10px"
+              @click="civilserv()"
+              >CIVIL SERVICE ELIGIBILITY
+            </q-btn>
+            <q-separator class="q-mt-md" inset></q-separator>
+            <q-btn
+              flat
+              rounded
+              align="left"
+              class="q-mt-xs"
+              :class="{ 'active-button': activeButton === 'WORK EXPERIENCE' }"
+              style="width: 95%; margin-bottom: -10px"
+              @click="workexp()"
+              >WORK EXPERIENCE
+            </q-btn>
+            <q-separator class="q-mt-md" inset></q-separator>
+            <q-btn
+              flat
+              rounded
+              align="left"
+              class="q-mt-xs"
+              :class="{ 'active-button': activeButton === 'VOLUNTARY WORK' }"
+              style="width: 95%; margin-bottom: -10px"
+              @click="volunwork()"
+              >VOLUNTARY WORK
+            </q-btn>
+            <q-separator class="q-mt-md" inset></q-separator>
+            <q-btn
+              flat
+              rounded
+              align="left"
+              class="q-mt-xs"
+              :class="{
+                'active-button': activeButton === 'L&D INTERVENTIONS',
+              }"
+              style="width: 95%; margin-bottom: -10px"
+              @click="learnint()"
+              >L&D INTERVENTIONS
+            </q-btn>
+            <q-separator class="q-mt-md" inset></q-separator>
+            <q-btn
+              flat
+              rounded
+              align="left"
+              class="q-mt-xs"
+              :class="{
+                'active-button': activeButton === 'SPECIAL SKILLS & HOBBIES',
+              }"
+              style="width: 95%; margin-bottom: -10px"
+              @click="specialskills()"
+              >SPECIAL SKILLS & HOBBIES
+            </q-btn>
+            <q-separator class="q-mt-md" inset></q-separator>
+            <q-btn
+              flat
+              rounded
+              align="left"
+              class="q-mt-xs"
+              :class="{ 'active-button': activeButton === 'NON-ACADEMIC' }"
+              style="width: 95%; margin-bottom: -10px"
+              @click="nonacademic()"
+              >NON-ACADEMIC
+            </q-btn>
+            <q-separator class="q-mt-md" inset></q-separator>
+            <q-btn
+              flat
+              rounded
+              align="left"
+              class="q-mt-xs"
+              :class="{
+                'active-button': activeButton === 'MEMBERSHIP ASSOCIATION',
+              }"
+              style="width: 95%; margin-bottom: -10px"
+              @click="memberass()"
+              >MEMBERSHIP ASSOCIATION
+            </q-btn>
+            <q-separator class="q-mt-md" inset></q-separator>
+            <q-btn
+              flat
+              rounded
+              align="left"
+              class="q-mt-xs"
+              :class="{
+                'active-button': activeButton === 'OTHER INFORMATIONS',
+              }"
+              style="width: 95%; margin-bottom: -10px"
+              @click="otherinf()"
+              >OTHER INFORMATION
+            </q-btn>
+            <q-separator class="q-mt-md" inset></q-separator>
+            <q-btn
+              flat
+              rounded
+              align="left"
+              class="q-mt-xs"
+              :class="{ 'active-button': activeButton === 'REFERENCES' }"
+              style="width: 95%; margin-bottom: -10px"
+              @click="reference()"
+              >REFERENCES
+            </q-btn>
+          </template>
+        </div>
+
+        <div class="col-md-10 col-sm-12">
+          <q-card
+            flat
+            bordered
+            class="  "
+            style="height: auto; margin-top: -0px; width: 100%"
+          >
+            <PersonalInf v-if="activeButton === 'PERSONAL INFORMATION'" />
+            <FamilyBack v-if="activeButton === 'FAMILY BACKGROUND'" />
+            <EducationalBack v-if="activeButton === 'EDUCATIONAL BACKGROUND'" />
+            <WorkExp v-if="activeButton === 'WORK EXPERIENCE'" />
+            <CivilServ v-if="activeButton === 'CIVIL SERVICE ELIGIBILITY'" />
+            <VolunWork v-if="activeButton === 'VOLUNTARY WORK'" />
+            <LearnInt v-if="activeButton === 'L&D INTERVENTIONS'" />
+            <SpecialSkills v-if="activeButton === 'SPECIAL SKILLS & HOBBIES'" />
+            <NonAcademic v-if="activeButton === 'NON-ACADEMIC'" />
+            <MemberAss v-if="activeButton === 'MEMBERSHIP ASSOCIATION'" />
+            <OtherInf v-if="activeButton === 'OTHER INFORMATIONS'" />
+            <ReferencePage v-if="activeButton === 'REFERENCES'" />
+          </q-card>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -247,15 +247,17 @@ import CivilServ from "../PersonalDateSheet/CivilServ.vue";
 import WorkExp from "../PersonalDateSheet/WorkExp.vue";
 import VolunWork from "../PersonalDateSheet/VolunWork.vue";
 import LearnInt from "../PersonalDateSheet/LearnInt.vue";
- import SpecialSkills from "../PersonalDateSheet/SpecialSkills.vue";
- import NonAcademic from "../PersonalDateSheet/NonAcademic.vue";
- import MemberAss from "../PersonalDateSheet/MemberAss.vue";
- import OtherInf from "../PersonalDateSheet/OtherInf.vue";
- import ReferencePage from "../PersonalDateSheet/ReferencePage.vue";
-
+import SpecialSkills from "../PersonalDateSheet/SpecialSkills.vue";
+import NonAcademic from "../PersonalDateSheet/NonAcademic.vue";
+import MemberAss from "../PersonalDateSheet/MemberAss.vue";
+import OtherInf from "../PersonalDateSheet/OtherInf.vue";
+import ReferencePage from "../PersonalDateSheet/ReferencePage.vue";
+import { useLoginCheck } from "src/stores/SignUp_Store";
 export default {
   data() {
     return {
+      retrievedLogin: "",
+      userinfo: [],
       activeButton: "PERSONAL INFORMATION",
 
       dataTable: [
@@ -290,6 +292,19 @@ export default {
       extension: ["Jr.", "Sr.", "III"],
       ReferenceDialog: false,
     };
+  },
+
+  created() {
+    this.retrievedLogin = localStorage.getItem("Login");
+    console.log("Retrieved Login:", this.retrievedLogin); // Check the retrieved login
+
+    const store = useLoginCheck();
+    let data = new FormData();
+    data.append("LoginID", this.retrievedLogin);
+
+    store.RetrievedData_function(data).then((res) => {
+      this.userinfo = store.RetrievedData;
+    });
   },
 
   methods: {
@@ -390,7 +405,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center; /* Center horizontally */
-  background: linear-gradient(to bottom, #06372C 50%, #ffffff 50%);
+  background: linear-gradient(to bottom, #06372c 50%, #ffffff 50%);
   padding: 20px;
   height: 100%; /* Ensure the container fills vertical space */
 }

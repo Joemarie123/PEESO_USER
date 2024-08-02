@@ -7,7 +7,7 @@
           <img
             data-aos="fade-in"
             data-aos-duration="3000"
-            src="/Peesopic.png"
+            src="/Peesopic.jpg"
             alt="Logo"
             class="imagebackground"
           />
@@ -60,7 +60,7 @@
             <div>
               <img
                 class="imagebackground"
-                src="public/TagumLogo.png"
+                src="public/TagumLogo.jpg"
                 alt="Tagum City"
                 style="height: 14%; width: 14%"
               />
@@ -229,7 +229,7 @@ export default {
           localStorage.setItem("Login", this.LoginPage.LoginID);
           this.showLoading();
           setTimeout(() => {
-            this.$router.push("/DashBoard");
+            this.$router.push("/");
             this.hideLoading();
           }, 3000); // 3-second delay
         }

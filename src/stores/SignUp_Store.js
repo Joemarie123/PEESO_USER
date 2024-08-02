@@ -6,6 +6,7 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
     Check_Login: "",
     OtpVerify: [],
     SaveData: [],
+    RetrievedData: [],
   }),
   getters: {
     // doubleCount: (state) => state.counter * 2,
@@ -42,7 +43,7 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
       ) {
         return 4;
       }
-      console.log("res.data", res.data)
+      console.log("res.data", res.data);
     },
 
     async Login_Store(payload) {
@@ -73,6 +74,16 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
       );
       this.SaveData = res.data;
       console.log("Store Databse Save", res.data);
+    },
+
+    async RetrievedData_function(payload) {
+      // `http://10.0.1.26:82/HRPORTAL/login.php`
+      let res = await axios.post(
+        `http://10.0.1.26:82/peesoportal/dashboard/client/getuserinfo.php`,
+        payload
+      );
+      this.RetrievedData = res.data;
+      console.log("Retrieved Data", res.data);
     },
   },
   persist: true,

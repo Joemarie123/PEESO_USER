@@ -1,13 +1,17 @@
 <template>
   <div>
     <div class="row">
-      <div class="scrollable-container col-10">
+      <div class="scrollable-container col-9 col-md-9 col-sm-12 col-xs-12">
         <story-list></story-list>
         <job-posting></job-posting>
       </div>
-      <div class="scrollable-container  col-2">
-        <q-card class="q-pa-sm text-h6 q-ma-md text-white" style="background-color: #06372C;">Announcement</q-card>
-        <announcement-page></announcement-page>
+      <div class="scrollable-container col-3 col-md-3 col-sm-3" v-if="$q.screen.gt.xs">
+        <!-- <q-card
+          class="q-pa-sm text-h6 q-ma-md text-white "
+          style="background-color: #06372c; margin-top: 25px"
+          >Announcement</q-card
+        > -->
+        <announcement-page style="margin-top: 25px"></announcement-page>
       </div>
     </div>
   </div>
@@ -27,6 +31,11 @@ export default {
 };
 </script>
 <style scoped>
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
 .scrollable-container {
   max-height: 93vh;
   overflow-y: auto;

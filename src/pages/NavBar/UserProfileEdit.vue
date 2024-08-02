@@ -7,7 +7,13 @@
         </q-avatar>
       </div>
       <div class="col-12" style="text-align: center">
-        <p style="font-weight: 500; margin-bottom: -2px">Name Ni. Go</p>
+        <p style="font-weight: 500; margin-bottom: -2px">
+          <span
+           
+          >
+            {{ userinfo.data[0].Firstname }}  {{ userinfo.data[0].Surname }}
+          </span>
+        </p>
         <p>Web Development, JavaScript, CSS, HTML</p>
       </div>
       <!-- <div class="profile-details">
@@ -58,15 +64,15 @@
           </p>
           <p>
             Gender <br />
-            <b>Female</b>
+            <b>{{ userinfo.data[0].Sex }}</b>
           </p>
           <p>
             Email Address <br />
-            <b>ugmaNlng@gmail.com</b>
+            <b>{{ userinfo.data[0].Email }}</b>
           </p>
           <p>
             Mailing Address <br />
-            <b>Purok. Malinawon</b>
+            <b>{{ userinfo.data[0].Address }}</b>
           </p>
         </q-card-section>
       </q-card>
@@ -75,9 +81,12 @@
 </template>
 
 <script>
+import { useLoginCheck } from "src/stores/SignUp_Store";
 export default {
   data() {
     return {
+      retrievedLogin: "",
+      userinfo: [],
       rows: [
         { name: "John Doe", age: 30, job: "Developer" },
         { name: "Jane Smith", age: 28, job: "Designer" },
@@ -143,6 +152,18 @@ export default {
       },
     };
   },
+  created() {
+    this.retrievedLogin = localStorage.getItem("Login");
+    console.log("Retrieved Login:", this.retrievedLogin); // Check the retrieved login
+
+    const store = useLoginCheck();
+    let data = new FormData();
+    data.append("LoginID", this.retrievedLogin);
+
+    store.RetrievedData_function(data).then((res) => {
+      this.userinfo = store.RetrievedData;
+    });
+  },
   computed: {
     limitedRows() {
       // Limit the rows to the number set in pagination rowsPerPage
@@ -178,7 +199,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center; /* Center horizontally */
-  background: linear-gradient(to bottom, #06372C 50%, #ffffff 50%);
+  background: linear-gradient(to bottom, #06372c 50%, #ffffff 50%);
   padding: 20px;
   height: 100%; /* Ensure the container fills vertical space */
 }

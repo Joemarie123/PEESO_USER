@@ -94,6 +94,11 @@ const routes = [
         component: () => import("pages/Appointment/AppointmentDetails.vue"),
       },
 
+      {
+        path: "/Announce",
+        component: () => import("pages/AnnouncementPage.vue")
+      }
+
       //
 
       // {
