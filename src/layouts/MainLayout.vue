@@ -24,7 +24,7 @@
           </template>
         </q-input>
 
-        <q-space></q-space>
+       
 
         <!-- Middle section: Navigation buttons or Dropdown -->
         <div

@@ -102,7 +102,7 @@ export default {
   overflow: hidden;
 }
 .card{
-  max-width: ;
+  /* max-width: ; */
 }
 </style>
 

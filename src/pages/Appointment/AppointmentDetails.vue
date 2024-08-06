@@ -2,11 +2,7 @@
   <div class="profile-card">
     <q-card>
       <q-card-section
-        style="
-          background-color: rgb(3, 69, 113);
-          display: flex;
-          flex-direction: column;
-        "
+        style="background-color: #06372c; display: flex; flex-direction: column"
         class="text-white"
       >
         <div class="row">
@@ -16,7 +12,7 @@
               style="text-align: left"
               class=""
               icon="arrow_back"
-              @click="$router.push({path: '/Appointment'})"
+              @click="$router.push({ path: '/Appointment' })"
             ></q-btn>
           </div>
           <div class="col-12">
@@ -30,7 +26,7 @@
         <q-btn
           outline
           rounded
-          color="green"
+          color="warning"
           label="Applied"
           @click="$router.push({ path: '/apply' })"
           style="align-self: center"
@@ -62,6 +58,7 @@
           <p>Appointment Description:</p>
         </q-card-section>
         <q-card-section align="right" style="margin-top: -30px">
+          <!-- Status will be according to the job posting and if there isnt update from applicant(Closed, Canceled, or Ended) -->
           <p>
             Status:
             <q-btn disabled color="blue" outline size="small">Accepted</q-btn>

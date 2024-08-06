@@ -78,7 +78,7 @@ export default {
       } else if (window.innerWidth < 1500) {
         imagesPerSlide.value = 5;
       } else {
-        imagesPerSlide.value = 5;
+        imagesPerSlide.value = 6;
       }
     };
 
@@ -103,8 +103,8 @@ export default {
 .q-carousel {
   overflow: hidden;
   margin-top: 10px;
-  height: 250px;
-  width: 90%;
+  height: 200px;
+  width: 80%;
 }
 
 .q-carousel-slide {
@@ -115,7 +115,7 @@ export default {
 }
 
 .my-story-img {
-  height: 250px;
+  height: 200px;
   object-fit: cover;
   border-radius: 3%;
   cursor: pointer;

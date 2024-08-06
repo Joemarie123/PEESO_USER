@@ -3,17 +3,28 @@
     <q-card>
       <q-card-section
         style="
-          background-color: rgb(3, 69, 113);
+          background-color: #06372c;
           display: flex;
           flex-direction: column;
-          align-items: flex-start;
         "
         class="text-white"
       >
-        <q-btn flat style="text-align: left" class="" icon="arrow_back" ></q-btn>
-        <p style="font-size: 22px; align-self: center">
-          Web Developer / UX Specialist
-        </p>
+        <div class="row">
+          <div class="col">
+            <q-btn
+              flat
+              style="text-align: left"
+              class=""
+              icon="arrow_back"
+            ></q-btn>
+          </div>
+          <div class="col-12">
+            <p style="font-size: 22px" class="text-center">
+              Web Developer / UX Specialist
+            </p>
+          </div>
+        </div>
+
         <!-- if done "APPLY FOR THIS JOB" , then it shall be changed to "APPLIED" -->
         <q-btn
           class="bg-green"
@@ -131,6 +142,9 @@
             Amet aliquam id diam maecenas ultricies mi.
           </p></q-item-section
         >
+        <q-item-section class="q-pa-sm">
+          <p class="text-bold">Open Until: </p>
+        </q-item-section>
       </q-card>
     </div>
     <div class="col-12 col-sm-4 col-md-4 col-lg-4">
