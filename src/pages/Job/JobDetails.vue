@@ -43,7 +43,7 @@
                   ><q-icon
                     name="work"
                     size="2em"
-                    style="color: rgb(3, 69, 113)"
+                    style="color: #06372c"
                   />
                 </q-item-section>
                 <q-item-section
@@ -60,7 +60,7 @@
                   ><q-icon
                     name="php"
                     size="2em"
-                    style="color: rgb(3, 69, 113)"
+                    style="color: #06372c"
                   />
                 </q-item-section>
                 <q-item-section
@@ -76,7 +76,7 @@
                   ><q-icon
                     name="watch"
                     size="2em"
-                    style="color: rgb(3, 69, 113)"
+                    style="color:#06372c"
                   />
                 </q-item-section>
                 <q-item-section
@@ -92,7 +92,7 @@
                   ><q-icon
                     name="event"
                     size="2em"
-                    style="color: rgb(3, 69, 113)"
+                    style="color: #06372c"
                   />
                 </q-item-section>
                 <q-item-section
@@ -273,6 +273,6 @@ export default {
 }
 
 .colorText {
-  color: rgb(3, 69, 113);
+  color: #06372c;
 }
 </style>

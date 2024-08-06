@@ -3,15 +3,29 @@
     <q-card>
       <q-card-section
         style="
-          background-color: rgb(3, 69, 113);
+          background-color: #06372c;
           display: flex;
           flex-direction: column;
-          align-items: flex-start;
         "
         class="text-white"
       >
-        <q-btn flat style="text-align: left" class="" icon="arrow_back" @click="$router.push({path: '/JobDetails'})"></q-btn>
-        <p style="font-size: 22px; align-self: center">Web Developer / UX Specialist</p>
+        <div class="row">
+          <div class="col">
+            <q-btn
+              flat
+              style="text-align: left"
+              class=""
+              icon="arrow_back"
+              @click="$router.push({ path: '/JobDetails' })"
+            ></q-btn>
+          </div>
+          <div class="col-12">
+            <p style="font-size: 22px;text-align: center">
+              Web Developer / UX Specialist
+            </p>
+          </div>
+        </div>
+
         <!-- <q-btn class="bg-green" rounded label="Apply For This Job"></q-btn> -->
       </q-card-section>
       <!-- <q-card-section class="">
@@ -248,6 +262,6 @@ export default {
 }
 
 .colorText {
-  color: rgb(3, 69, 113);
+  color: #06372c;
 }
 </style>

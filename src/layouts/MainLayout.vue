@@ -24,8 +24,7 @@
           </template>
         </q-input>
 
-       
-
+        <q-space />
         <!-- Middle section: Navigation buttons or Dropdown -->
         <div
           style="display: flex; justify-content: center; align-items: center"
@@ -240,6 +239,7 @@
           </q-item-section>
         </q-item>
 
+        
         <q-item
           clickable
           v-ripple

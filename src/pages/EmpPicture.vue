@@ -1,9 +1,9 @@
 <template>
   <div>
-  <div
-    class="q-pa-md"
-    style="display: flex; justify-content: center; flex-wrap: wrap; "
-  >
+    <div
+      class="q-pa-md"
+      style="display: flex; justify-content: center; flex-wrap: wrap;"
+    >
       <q-carousel
         v-model="slide"
         swipeable
@@ -13,8 +13,7 @@
         padding
         transition-prev="slide-right"
         transition-next="slide-left"
-           class="q-mb-md "
-        style=""
+        class="q-mb-md"
       >
         <q-carousel-slide
           v-for="(imageGroup, index) in computedImages"
@@ -28,11 +27,31 @@
             :src="src"
             class="my-story-img"
             style="margin: 3px"
+            @click="openImage(src, idx + index * imagesPerSlide)"
           />
         </q-carousel-slide>
       </q-carousel>
     </div>
-    </div>
+
+    <!-- Dialog for showing the selected image in full-screen -->
+    <q-dialog v-model="dialogVisible" persistent>
+      <q-carousel
+        v-model="selectedImageIndex"
+        control-color="amber"
+        arrows
+        infinite
+        animated
+      >
+        <q-carousel-slide
+          v-for="(src, index) in images"
+          :key="index"
+          :name="index"
+        >
+          <q-img :src="src" class="full-screen-image" />
+        </q-carousel-slide>
+      </q-carousel>
+    </q-dialog>
+  </div>
 </template>
 
 <script>
@@ -41,6 +60,8 @@ import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 export default {
   setup() {
     const slide = ref(0);
+    const dialogVisible = ref(false);
+    const selectedImageIndex = ref(0);
     const images = [
       "https://cdn.quasar.dev/img/mountains.jpg",
       "https://cdn.quasar.dev/img/parallax1.jpg",
@@ -68,10 +89,10 @@ export default {
 
     const updateImagesPerSlide = () => {
       if (window.innerWidth < 300) {
-        imagesPerSlide.value = 1;
+        imagesPerSlide.value = 2;
       } else if (window.innerWidth < 600) {
         imagesPerSlide.value = 2;
-      }else if (window.innerWidth < 900) {
+      } else if (window.innerWidth < 900) {
         imagesPerSlide.value = 3;
       } else if (window.innerWidth < 1300) {
         imagesPerSlide.value = 4;
@@ -80,6 +101,11 @@ export default {
       } else {
         imagesPerSlide.value = 6;
       }
+    };
+
+    const openImage = (src, index) => {
+      selectedImageIndex.value = index;
+      dialogVisible.value = true;
     };
 
     onMounted(() => {
@@ -94,6 +120,9 @@ export default {
     return {
       slide,
       computedImages,
+      dialogVisible,
+      selectedImageIndex,
+      openImage,
     };
   },
 };
@@ -104,7 +133,7 @@ export default {
   overflow: hidden;
   margin-top: 10px;
   height: 200px;
-  width: 80%;
+  width: 90%;
 }
 
 .q-carousel-slide {
@@ -119,5 +148,11 @@ export default {
   object-fit: cover;
   border-radius: 3%;
   cursor: pointer;
+}
+
+.full-screen-image {
+  height: 100vh;
+  object-fit: contain;
+  background-color: black;
 }
 </style>

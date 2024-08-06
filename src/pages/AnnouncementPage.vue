@@ -1,6 +1,6 @@
 <template>
-  <div class="announce-card">
-    <q-card class="card">
+  <div class="announce-card ">
+    <q-card class="card ">
       <p class="title text-white">ANNOUNCEMENT</p>
       <q-separator class="q-ma-md" inset />
       <div>
@@ -95,7 +95,7 @@ export default {
   background-color: #06372c;
 }
 .announce-card {
-  max-width: 80%;
+  max-width: 95%;
   margin: auto;
   margin-top: 2%;
   border-radius: 5px;
