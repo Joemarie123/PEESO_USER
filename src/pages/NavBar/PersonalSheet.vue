@@ -9,7 +9,7 @@
         </div>
         <div class="col-12" style="text-align: center">
           <p style="font-weight: 500; margin-bottom: -2px">
-            {{ userinfo.data[0].Firstname }} {{ userinfo.data[0].Surname }}
+            {{ userinfo.data[0].Firstname}} {{ userinfo.data[0].Surname }}
           </p>
           <p>Web Development, JavaScript, CSS, HTML</p>
         </div>
@@ -239,7 +239,7 @@
 </template>
 
 <script scoped>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import PersonalInf from "../PersonalDateSheet/PersonalInf.vue";
 import FamilyBack from "../PersonalDateSheet/FamilyBack.vue";
 import EducationalBack from "../PersonalDateSheet/EducationalBack.vue";
@@ -257,7 +257,7 @@ export default {
   data() {
     return {
       retrievedLogin: "",
-      userinfo: [],
+      // userinfo: [],
       activeButton: "PERSONAL INFORMATION",
 
       dataTable: [
@@ -294,18 +294,43 @@ export default {
     };
   },
 
-  created() {
-    this.retrievedLogin = localStorage.getItem("Login");
-    console.log("Retrieved Login:", this.retrievedLogin); // Check the retrieved login
-
+ setup() {
+    const retrievedLogin = ref(null); // Corrected spelling
+    const userinfo = ref(null);
     const store = useLoginCheck();
-    let data = new FormData();
-    data.append("LoginID", this.retrievedLogin);
 
-    store.RetrievedData_function(data).then((res) => {
-      this.userinfo = store.RetrievedData;
-    });
+
+      retrievedLogin.value = localStorage.getItem("Login");
+      console.log("Retrieved Login:", retrievedLogin.value); // Check the retrieved login
+
+      let data = new FormData();
+      data.append("LoginID", retrievedLogin.value);
+
+      store.RetrievedData_function(data).then((res) => {
+        userinfo.value = store.RetrievedData;
+        console.log("userinfo:", userinfo.value);
+      });
+
+
+    return {
+     userinfo,
+     store
+    };
   },
+
+  // created() {
+  //   this.retrievedLogin = localStorage.getItem("Login");
+  //   console.log("Retrieved Login:", this.retrievedLogin); // Check the retrieved login
+
+  //   const store = useLoginCheck();
+  //   let data = new FormData();
+  //   data.append("LoginID", this.retrievedLogin);
+
+  //   store.RetrievedData_function(data).then((res) => {
+  //     this.userinfo = store.RetrievedData;
+  //     console.log("userinfo:", this.userinfo);
+  //   });
+  // },
 
   methods: {
     handleSelectionChange(selectedOption) {

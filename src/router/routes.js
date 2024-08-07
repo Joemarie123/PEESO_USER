@@ -97,6 +97,13 @@ const routes = [
       {
         path: "/Announce",
         component: () => import("pages/AnnouncementPage.vue")
+      },
+
+
+
+      {
+        path: "/CompanyProfile",
+        component: () => import("pages/CompanyProfile.vue")
       }
 
       //

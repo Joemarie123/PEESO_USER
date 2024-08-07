@@ -27,11 +27,13 @@
             </q-item-section>
 
             <q-item-section>
-              <q-item-label>{{ job.employerName }} </q-item-label>
+              <q-item-label @click="$router.push({ path: '/CompanyProfile' })"
+                >{{ job.employerName }}
+              </q-item-label>
               <q-item-label caption
                 >{{ job.DatePosted }}
 
-                <q-badge outline  label="Part Time" style="color:#06372C ;"
+                <q-badge outline label="Part Time" style="color: #06372c"
               /></q-item-label>
               <!-- <q-item-label caption>
                 Valid Until: {{ job.DatePosted }}

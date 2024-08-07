@@ -20,7 +20,7 @@
           </div>
           <div class="col-12">
             <p style="font-size: 22px" class="text-center">
-              Web Developer / UX Specialist
+              
             </p>
           </div>
         </div>

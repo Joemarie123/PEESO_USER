@@ -9,7 +9,7 @@
       <div class="col-12" style="text-align: center">
         <p style="font-weight: 500; margin-bottom: -2px">
           <span
-           
+
           >
             {{ userinfo.data[0].Firstname }}  {{ userinfo.data[0].Surname }}
           </span>
@@ -70,9 +70,24 @@
             Email Address <br />
             <b>{{ userinfo.data[0].Email }}</b>
           </p>
+           <!-- <p>
+            User Name <br />
+            <b>{{ userinfo.data[0].username }}</b>
+          </p> -->
           <p>
             Mailing Address <br />
             <b>{{ userinfo.data[0].Address }}</b>
+          </p>
+        </q-card-section>
+        <q-card-section>
+          <p style="font-weight: 500; font-size: 16px">Login Information</p>
+           <p>
+            Username <br />
+            <b>25</b>
+          </p>
+          <p>
+            Password <br />
+            
           </p>
         </q-card-section>
       </q-card>

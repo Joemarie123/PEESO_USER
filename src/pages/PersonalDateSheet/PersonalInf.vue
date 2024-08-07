@@ -20,10 +20,10 @@
             <p class="" style="font-weight: 600">EMPLOYEE'S NAME</p>
             <div class="row">
               <div class="col-3 col-sm-6 col-xs-12 col-md-3">
-                <p class="name">{{ userinfo.data[0].Firstname }}</p>
+                <p class="name">{{ userinfo.Firstname }}</p>
                 <p class="nameLabel">Firstname</p>
               </div>
-              <div class="col-3 col-sm-6 col-xs-12 col-md-3">
+              <!-- <div class="col-3 col-sm-6 col-xs-12 col-md-3">
                 <p class="name">{{ userinfo.data[0].Surname }}</p>
                 <p class="nameLabel">Lastname</p>
               </div>
@@ -34,7 +34,7 @@
               <div class="col-3 col-sm-6 col-xs-12 col-md-3">
                 <p class="name">{{ userinfo.data[0].Suffix }}</p>
                 <p class="nameLabel">Name Extension</p>
-              </div>
+              </div> -->
             </div>
           </q-card>
         </div>
