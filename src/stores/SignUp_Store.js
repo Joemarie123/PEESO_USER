@@ -7,6 +7,7 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
     OtpVerify: [],
     SaveData: [],
     RetrievedData: [],
+    RetreivedJobPosting: [],
   }),
   getters: {
     // doubleCount: (state) => state.counter * 2,
@@ -85,6 +86,15 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
       this.RetrievedData = res.data;
       console.log("Retrieved Data", res.data);
     },
+
+
+    async Retrieve_JobPosting() {
+      let res = await axios.get(
+        `http://10.0.1.26:82/peesoportal/jobs/client/getjobs.php`
+      );
+      this.RetreivedJobPosting = res.data;
+      console.log("Retrieved Job Data", res.data);
+    }
   },
   persist: true,
 });

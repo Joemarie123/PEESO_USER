@@ -14,7 +14,7 @@
         "
       >
         <q-card
-          v-for="job in jobs"
+          v-for="job in userinfo"
           :key="job.id"
           class="q-mb-md custom-card"
           style=""
@@ -28,13 +28,15 @@
 
             <q-item-section>
               <q-item-label @click="$router.push({ path: '/CompanyProfile' })"
-                >{{ job.employerName }}
+                >{{ job.company_name }}
               </q-item-label>
               <q-item-label caption
-                >{{ job.DatePosted }}
+                >{{ job.DateTo }}
 
-                <q-badge outline label="Part Time" style="color: #06372c"
-              /></q-item-label>
+                <q-badge outline label="" style="color: #06372c">{{
+                  job.Type
+                }}</q-badge></q-item-label
+              >
               <!-- <q-item-label caption>
                 Valid Until: {{ job.DatePosted }}
               </q-item-label> -->
@@ -45,7 +47,7 @@
                 <q-badge
                   color="warning"
                   label="See More.."
-                  @click="$router.push({ path: '/JobDetails' })"
+                  @click="SeeMore()"
                 >
                 </q-badge>
                 <!-- <p
@@ -60,11 +62,11 @@
 
           <q-item-section>
             <q-item-label class="q-pa-sm q-ml-sm">
-              {{ job.JobDesc }}
+              {{ job.Description }}
             </q-item-label>
           </q-item-section>
 
-          <img :src="job.avatar" />
+          <img :src="job.pic" />
         </q-card>
       </div>
     </div>
@@ -73,6 +75,7 @@
 
 <script>
 import axios from "axios";
+import { useLoginCheck } from "src/stores/SignUp_Store";
 
 export default {
   name: "UserProfileCardList",
@@ -83,6 +86,9 @@ export default {
       limit: 10, // Number of records per request
       hasMore: true, // To check if more data is available
       loading: false, // To prevent multiple simultaneous requests
+
+      userinfo: [],
+      hjh:"hjjh"
     };
   },
   methods: {
@@ -113,9 +119,22 @@ export default {
         this.loading = false;
       }
     },
+
+    SeeMore() {
+    //  this.hjh = localStorage.getItem("CompanyName");
+      localStorage.setItem("CompanyName", this.userinfo[0]);
+    },
   },
   created() {
     this.loadMoreUsers();
+
+    const store = useLoginCheck();
+    let data = new FormData();
+
+    store.Retrieve_JobPosting(data).then((res) => {
+      this.userinfo = store.RetreivedJobPosting.data;
+      console.log("userinfo", this.userinfo);
+    });
   },
 };
 </script>

@@ -20,7 +20,7 @@
           </div>
           <div class="col-12">
             <p style="font-size: 22px" class="text-center">
-              
+
             </p>
           </div>
         </div>
@@ -173,6 +173,9 @@
 </template>
 
 <script>
+import axios from "axios";
+import { useLoginCheck } from "src/stores/SignUp_Store";
+
 export default {
   data() {
     return {
@@ -240,6 +243,9 @@ export default {
         rowsPerPage: 5, // This controls how many rows are shown per page; set to the number you want to show
       },
     };
+  },
+  created(){
+    
   },
   computed: {
     limitedRows() {
