@@ -8,6 +8,8 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
     SaveData: [],
     RetrievedData: [],
     RetreivedJobPosting: [],
+    job: null,
+    jobs: [],
   }),
   getters: {
     // doubleCount: (state) => state.counter * 2,
@@ -87,14 +89,25 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
       console.log("Retrieved Data", res.data);
     },
 
-
     async Retrieve_JobPosting() {
       let res = await axios.get(
         `http://10.0.1.26:82/peesoportal/jobs/client/getjobs.php`
       );
       this.RetreivedJobPosting = res.data;
       console.log("Retrieved Job Data", res.data);
-    }
+    },
+
+    async FetchJobDetails(id) {
+      let res = await axios.get(
+        `http://10.0.1.26:82/peesoportal/jobs/client/getjobs.php`
+      );
+      if (res.data && typeof res.data === "object" && res.data.ID === id) {
+        this.RetreivedJobDetails = res.data;
+      } else {
+        console.error("Job Not Found or Unexpected Response Format");
+      }
+      console.log("Retrieved Job Data", this.RetreivedJobDetails);
+    },
   },
   persist: true,
 });

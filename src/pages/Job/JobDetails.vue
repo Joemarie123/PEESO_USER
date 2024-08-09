@@ -2,11 +2,7 @@
   <div class="profile-card">
     <q-card>
       <q-card-section
-        style="
-          background-color: #06372c;
-          display: flex;
-          flex-direction: column;
-        "
+        style="background-color: #06372c; display: flex; flex-direction: column"
         class="text-white"
       >
         <div class="row">
@@ -19,9 +15,7 @@
             ></q-btn>
           </div>
           <div class="col-12">
-            <p style="font-size: 22px" class="text-center">
-
-            </p>
+            <p style="font-size: 22px" class="text-center"></p>
           </div>
         </div>
 
@@ -40,15 +34,11 @@
             <div class="col-12 col-lg-3 col-md-6 col-sm-6">
               <q-item>
                 <q-item-section avatar
-                  ><q-icon
-                    name="work"
-                    size="2em"
-                    style="color: #06372c"
-                  />
+                  ><q-icon name="work" size="2em" style="color: #06372c" />
                 </q-item-section>
                 <q-item-section
                   ><q-item-label caption>TYPE OF WORK</q-item-label>
-                  <q-item-label>PART TIME</q-item-label></q-item-section
+                  <q-item-label>{{ job.Type }}</q-item-label></q-item-section
                 >
                 <q-separator vertical />
               </q-item>
@@ -57,11 +47,7 @@
             <div class="col-12 col-lg-3 col-md-6 col-sm-6">
               <q-item>
                 <q-item-section avatar
-                  ><q-icon
-                    name="php"
-                    size="2em"
-                    style="color: #06372c"
-                  />
+                  ><q-icon name="php" size="2em" style="color: #06372c" />
                 </q-item-section>
                 <q-item-section
                   ><q-item-label caption>SALARY</q-item-label>
@@ -73,11 +59,7 @@
             <div class="col-12 col-lg-3 col-md-6 col-sm-6">
               <q-item>
                 <q-item-section avatar
-                  ><q-icon
-                    name="watch"
-                    size="2em"
-                    style="color:#06372c"
-                  />
+                  ><q-icon name="watch" size="2em" style="color: #06372c" />
                 </q-item-section>
                 <q-item-section
                   ><q-item-label caption>HOURS / WEEK</q-item-label>
@@ -89,11 +71,7 @@
             <div class="col-12 col-lg-3 col-md-6 col-sm-6">
               <q-item>
                 <q-item-section avatar
-                  ><q-icon
-                    name="event"
-                    size="2em"
-                    style="color: #06372c"
-                  />
+                  ><q-icon name="event" size="2em" style="color: #06372c" />
                 </q-item-section>
                 <q-item-section
                   ><q-item-label caption>DATE POSTED</q-item-label>
@@ -143,7 +121,7 @@
           </p></q-item-section
         >
         <q-item-section class="q-pa-sm">
-          <p class="text-bold">Open Until: </p>
+          <p class="text-bold">Open Until:</p>
         </q-item-section>
       </q-card>
     </div>
@@ -177,8 +155,10 @@ import axios from "axios";
 import { useLoginCheck } from "src/stores/SignUp_Store";
 
 export default {
+  name: "JobDetails",
   data() {
     return {
+      job: null,
       rows: [
         { name: "John Doe", age: 30, job: "Developer" },
         { name: "Jane Smith", age: 28, job: "Designer" },
@@ -244,8 +224,16 @@ export default {
       },
     };
   },
-  created(){
-    
+  created() {
+    const store = useLoginCheck();
+    let data = new FormData();
+
+    store.FetchJobDetails(this.$route.params.id);
+    this.job = store.job;
+
+    if (!this.job) {
+      console.error("Job not found");
+    }
   },
   computed: {
     limitedRows() {

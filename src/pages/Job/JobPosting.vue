@@ -14,7 +14,7 @@
         "
       >
         <q-card
-          v-for="job in userinfo"
+          v-for="job in jobposting"
           :key="job.id"
           class="q-mb-md custom-card"
           style=""
@@ -47,7 +47,7 @@
                 <q-badge
                   color="warning"
                   label="See More.."
-                  @click="SeeMore()"
+                   @click="viewJobDetails(job.id)"
                 >
                 </q-badge>
                 <!-- <p
@@ -78,7 +78,7 @@ import axios from "axios";
 import { useLoginCheck } from "src/stores/SignUp_Store";
 
 export default {
-  name: "UserProfileCardList",
+  name: "JobPosting",
   data() {
     return {
       jobs: [], // This should be initialized here, not users
@@ -87,11 +87,13 @@ export default {
       hasMore: true, // To check if more data is available
       loading: false, // To prevent multiple simultaneous requests
 
-      userinfo: [],
-      hjh:"hjjh"
+      jobposting: [],
     };
   },
   methods: {
+    viewJobDetails(id){
+      this.$router.push(`/JobDetails/${id}`)
+    },
     async loadMoreUsers() {
       if (this.loading) return;
       this.loading = true;
@@ -106,11 +108,11 @@ export default {
             },
           }
         );
-        console.log("Response Data:", response.data); // Log the response data
-        // Extract the jobs array from the response
+        console.log("Response Data:", response.data);
+
         const newJobs = response.data.jobs;
 
-        this.jobs = this.jobs.concat(newJobs); // Append new jobs to the existing list
+        this.jobs = this.jobs.concat(newJobs);
         this.page++;
         this.hasMore = newJobs.length === this.limit;
       } catch (error) {
@@ -118,11 +120,6 @@ export default {
       } finally {
         this.loading = false;
       }
-    },
-
-    SeeMore() {
-    //  this.hjh = localStorage.getItem("CompanyName");
-      localStorage.setItem("CompanyName", this.userinfo[0]);
     },
   },
   created() {
@@ -132,9 +129,11 @@ export default {
     let data = new FormData();
 
     store.Retrieve_JobPosting(data).then((res) => {
-      this.userinfo = store.RetreivedJobPosting.data;
-      console.log("userinfo", this.userinfo);
+      this.jobposting = store.RetreivedJobPosting.data;
+      console.log("Job Posting", this.jobposting);
     });
+
+
   },
 };
 </script>
