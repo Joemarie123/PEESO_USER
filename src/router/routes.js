@@ -18,6 +18,7 @@ const routes = [
       },
       {
         path: "/JobDetails/:id",
+        name: "JobDetails",
         component: () => import("pages/Job/JobDetails.vue"),
       },
       {
@@ -96,15 +97,13 @@ const routes = [
 
       {
         path: "/Announce",
-        component: () => import("pages/AnnouncementPage.vue")
+        component: () => import("pages/AnnouncementPage.vue"),
       },
-
-
 
       {
         path: "/CompanyProfile",
-        component: () => import("pages/CompanyProfile.vue")
-      }
+        component: () => import("pages/CompanyProfile.vue"),
+      },
 
       //
 
@@ -133,8 +132,8 @@ const routes = [
       },
       {
         path: "/Home",
-        component: ()=> import ("pages/Dashboard/HomePage.vue")
-      }
+        component: () => import("pages/Dashboard/HomePage.vue"),
+      },
     ],
   },
 ];

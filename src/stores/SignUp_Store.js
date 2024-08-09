@@ -97,7 +97,7 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
       console.log("Retrieved Job Data", res.data);
     },
 
-    async FetchJobDetails(id) {
+/*     async FetchJobDetails(id) {
       let res = await axios.get(
         `http://10.0.1.26:82/peesoportal/jobs/client/getjobs.php`
       );
@@ -107,7 +107,7 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
         console.error("Job Not Found or Unexpected Response Format");
       }
       console.log("Retrieved Job Data", this.RetreivedJobDetails);
-    },
+    }, */
   },
   persist: true,
 });

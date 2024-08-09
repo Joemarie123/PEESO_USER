@@ -12,6 +12,7 @@
               style="text-align: left"
               class=""
               icon="arrow_back"
+              @click="$router.push({path: '/'})"
             ></q-btn>
           </div>
           <div class="col-12">
@@ -38,8 +39,8 @@
                 </q-item-section>
                 <q-item-section
                   ><q-item-label caption>TYPE OF WORK</q-item-label>
-                  <q-item-label>{{ job.Type }}</q-item-label></q-item-section
-                >
+                  <q-item-label>{{ selected_Details.Type }}</q-item-label>
+                </q-item-section>
                 <q-separator vertical />
               </q-item>
             </div>
@@ -51,7 +52,7 @@
                 </q-item-section>
                 <q-item-section
                   ><q-item-label caption>SALARY</q-item-label>
-                  <q-item-label>PHP 10,000</q-item-label></q-item-section
+                  <q-item-label>{{selected_Details.Salary}}</q-item-label></q-item-section
                 >
                 <q-separator vertical />
               </q-item>
@@ -63,7 +64,7 @@
                 </q-item-section>
                 <q-item-section
                   ><q-item-label caption>HOURS / WEEK</q-item-label>
-                  <q-item-label>40</q-item-label></q-item-section
+                  <q-item-label>{{selected_Details.NumHours}}</q-item-label></q-item-section
                 >
                 <q-separator vertical />
               </q-item>
@@ -75,7 +76,7 @@
                 </q-item-section>
                 <q-item-section
                   ><q-item-label caption>DATE POSTED</q-item-label>
-                  <q-item-label>July 09, 2024</q-item-label></q-item-section
+                  <q-item-label>{{selected_Details.DateTo}}</q-item-label></q-item-section
                 >
                 <q-separator vertical />
               </q-item>
@@ -104,20 +105,7 @@
         <q-separator></q-separator>
         <q-item-section class="q-pa-md"
           ><p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Sit
-            amet commodo nulla facilisi nullam vehicula ipsum a. Et odio
-            pellentesque diam volutpat commodo sed egestas egestas fringilla. A
-            iaculis at erat pellentesque adipiscing. Ut venenatis tellus in
-            metus vulputate eu scelerisque felis imperdiet. Facilisi etiam
-            dignissim diam quis. Cras fermentum odio eu feugiat pretium nibh
-            ipsum consequat nisl. Integer feugiat scelerisque varius morbi enim
-            nunc faucibus a pellentesque. Eu augue ut lectus arcu bibendum at.
-            Lectus quam id leo in vitae turpis massa sed. Libero volutpat sed
-            cras ornare arcu. Dictum at tempor commodo ullamcorper a lacus
-            vestibulum. Scelerisque in dictum non consectetur a erat nam at.
-            Amet aliquam id diam maecenas ultricies mi.
+            {{ selected_Details.Description }}
           </p></q-item-section
         >
         <q-item-section class="q-pa-sm">
@@ -222,10 +210,26 @@ export default {
       pagination: {
         rowsPerPage: 5, // This controls how many rows are shown per page; set to the number you want to show
       },
+
+      jobposting_me: [],
+      selected_Details: [],
     };
   },
   created() {
-    const store = useLoginCheck();
+    const store1 = useLoginCheck();
+    let data1 = new FormData();
+
+    store1.Retrieve_JobPosting(data1).then((res) => {
+      this.jobposting_me = store1.RetreivedJobPosting.data;
+      console.log("Job Posting Details", this.jobposting_me);
+
+      const jobId = parseInt(this.$route.params.id, 10); // Convert ID to an integer
+      const filteredJobs = this.jobposting_me.filter((job) => job.ID == jobId);
+      this.selected_Details = filteredJobs.length > 0 ? filteredJobs[0] : null;
+      console.log("Selected Details:", this.selected_Details);
+    });
+
+    /*  const store = useLoginCheck();
     let data = new FormData();
 
     store.FetchJobDetails(this.$route.params.id);
@@ -233,7 +237,7 @@ export default {
 
     if (!this.job) {
       console.error("Job not found");
-    }
+    } */
   },
   computed: {
     limitedRows() {

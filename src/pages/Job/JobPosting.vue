@@ -47,7 +47,7 @@
                 <q-badge
                   color="warning"
                   label="See More.."
-                   @click="viewJobDetails(job.id)"
+                  @click="viewJobDetails(job)"
                 >
                 </q-badge>
                 <!-- <p
@@ -91,8 +91,13 @@ export default {
     };
   },
   methods: {
-    viewJobDetails(id){
-      this.$router.push(`/JobDetails/${id}`)
+    viewJobDetails(job) {
+
+      console.log("Job Post Clicked:", job);
+      this.$router.push({
+        name: "JobDetails",
+        params: { id: job.ID},
+      });
     },
     async loadMoreUsers() {
       if (this.loading) return;
@@ -132,8 +137,6 @@ export default {
       this.jobposting = store.RetreivedJobPosting.data;
       console.log("Job Posting", this.jobposting);
     });
-
-
   },
 };
 </script>
