@@ -8,6 +8,7 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
     SaveData: [],
     RetrievedData: [],
     RetreivedJobPosting: [],
+    AppliedJobs: [],
     job: null,
     jobs: [],
   }),
@@ -86,7 +87,7 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
         payload
       );
       this.RetrievedData = res.data;
-      console.log("Retrieved Data", res.data);
+      // console.log("Retrieved Data", res.data);
     },
 
     async Retrieve_JobPosting() {
@@ -95,6 +96,14 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
       );
       this.RetreivedJobPosting = res.data;
       console.log("Retrieved Job Data", res.data);
+    },
+
+    async ApplyJobs(payload) {
+      let res = await axios.post(
+        `http://10.0.1.26:82/peesoportal/jobs/client/applyjob.php`,payload
+      );
+      this.AppliedJobs = res.data;
+      console.log("Applied Jobs =>", res.data )
     },
 
 /*     async FetchJobDetails(id) {

@@ -12,11 +12,13 @@
               style="text-align: left"
               class=""
               icon="arrow_back"
-              @click="$router.push({path: '/'})"
+              @click="$router.push({ path: '/' })"
             ></q-btn>
           </div>
           <div class="col-12">
-            <p style="font-size: 22px" class="text-center"></p>
+            <p style="font-size: 22px" class="text-center">
+              {{ selected_Details.Title }}
+            </p>
           </div>
         </div>
 
@@ -25,7 +27,7 @@
           class="bg-green"
           rounded
           label="Apply For This Job"
-          @click="$router.push({ path: '/apply' })"
+          @click="Apply()"
           style="align-self: center"
         ></q-btn>
       </q-card-section>
@@ -41,7 +43,7 @@
                   ><q-item-label caption>TYPE OF WORK</q-item-label>
                   <q-item-label>{{ selected_Details.Type }}</q-item-label>
                 </q-item-section>
-                <q-separator vertical />
+                <q-separator vertical v-if="$q.screen.gt.xs" />
               </q-item>
             </div>
 
@@ -52,9 +54,11 @@
                 </q-item-section>
                 <q-item-section
                   ><q-item-label caption>SALARY</q-item-label>
-                  <q-item-label>{{selected_Details.Salary}}</q-item-label></q-item-section
+                  <q-item-label>{{
+                    selected_Details.Salary
+                  }}</q-item-label></q-item-section
                 >
-                <q-separator vertical />
+                <q-separator vertical v-if="$q.screen.gt.md" />
               </q-item>
             </div>
             <div class="col-12 col-lg-3 col-md-6 col-sm-6">
@@ -64,9 +68,11 @@
                 </q-item-section>
                 <q-item-section
                   ><q-item-label caption>HOURS / WEEK</q-item-label>
-                  <q-item-label>{{selected_Details.NumHours}}</q-item-label></q-item-section
+                  <q-item-label>{{
+                    selected_Details.NumHours
+                  }}</q-item-label></q-item-section
                 >
-                <q-separator vertical />
+                <q-separator vertical v-if="$q.screen.gt.xs" />
               </q-item>
             </div>
             <div class="col-12 col-lg-3 col-md-6 col-sm-6">
@@ -76,9 +82,11 @@
                 </q-item-section>
                 <q-item-section
                   ><q-item-label caption>DATE POSTED</q-item-label>
-                  <q-item-label>{{selected_Details.DateTo}}</q-item-label></q-item-section
+                  <q-item-label>{{
+                    selected_Details.DateTo
+                  }}</q-item-label></q-item-section
                 >
-                <q-separator vertical />
+                <q-separator vertical v-if="$q.screen.gt.md" />
               </q-item>
             </div>
           </div>
@@ -106,10 +114,16 @@
         <q-item-section class="q-pa-md"
           ><p>
             {{ selected_Details.Description }}
-          </p></q-item-section
-        >
+          </p>
+
+          <p><b>Number of Vacancy:</b> {{ selected_Details.VacantCount }}</p>
+          <p>{{ selected_Details.Course }}</p>
+          <p>{{ selected_Details.EducationLevel }}</p>
+          <p>{{ selected_Details.License }}</p>
+        </q-item-section>
+
         <q-item-section class="q-pa-sm">
-          <p class="text-bold">Open Until:</p>
+          <p class="text-bold">Open Until: {{ selected_Details.DateFrom }}</p>
         </q-item-section>
       </q-card>
     </div>
@@ -126,8 +140,11 @@
           </q-item-section>
         </q-item>
         <q-separator></q-separator>
-        <q-item-section class="q-pa-md"
-          ><p>Contact Person: <b>JomzTv</b></p>
+        <q-item-section class="q-pa-md">
+          <p>
+            Company Name: <b>{{ selected_Details.company_name }}</b>
+          </p>
+          <p>Contact Person: <b>JomzTv</b></p>
           <p>Total Job Posts: <b>1</b></p></q-item-section
         >
       </q-card>
@@ -147,73 +164,35 @@ export default {
   data() {
     return {
       job: null,
-      rows: [
-        { name: "John Doe", age: 30, job: "Developer" },
-        { name: "Jane Smith", age: 28, job: "Designer" },
-        { name: "Michael Johnson", age: 32, job: "Manager" },
-        { name: "Sarah Connor", age: 29, job: "Analyst" },
-        { name: "Chris Evans", age: 35, job: "Engineer" },
-        { name: "Emma Watson", age: 27, job: "Actress" },
-        { name: "Robert Downey", age: 45, job: "Actor" },
-        // Add more rows as needed
-      ],
-      rowEmployers: [
-        { name: "John Doe", age: 30, job: "Developer" },
-        { name: "Jane Smith", age: 28, job: "Designer" },
-        { name: "Michael Johnson", age: 32, job: "Manager" },
-        { name: "Sarah Connor", age: 29, job: "Analyst" },
-        { name: "Chris Evans", age: 35, job: "Engineer" },
-        { name: "Emma Watson", age: 27, job: "Actress" },
-        { name: "Robert Downey", age: 45, job: "Actor" },
-      ],
-      columnEmployer: [
-        {
-          name: "age",
-          label: "DATE HIRED",
-          field: "age",
-          sortable: true,
-          align: "left",
-        },
-        {
-          name: "job",
-          label: "BUSINESS NAME",
-          field: "job",
-          sortable: true,
-          align: "left",
-        },
-        {
-          name: "age",
-          label: "STATUS",
-          field: "age",
-          sortable: true,
-          align: "left",
-        },
-        {
-          name: "age",
-          label: "ACTION",
-          field: "age",
-          sortable: true,
-          align: "left",
-        },
-      ],
-      columns: [
-        {
-          name: "name",
-          label: "DATE",
-          field: "name",
-          sortable: true,
-          align: "left",
-        },
-        { name: "age", label: "JOB", field: "age", sortable: true },
-        { name: "job", label: "ACTIONS", field: "job", sortable: true },
-      ],
-      pagination: {
-        rowsPerPage: 5, // This controls how many rows are shown per page; set to the number you want to show
-      },
-
+      ApplyPage: [],
       jobposting_me: [],
       selected_Details: [],
+
+
+      retrievedLogin: "",
+      userinfo: [],
     };
+  },
+  methods: {
+    Apply() {
+      const store = useLoginCheck();
+      let data = new FormData();
+      data.append("JobID", this.selected_Details.ID);
+      data.append("ApplicantID", this.userinfo.data[0].PMID)
+
+       console.log("Apply Success", this.selected_Details.ID);
+        console.log("Apply Success", this.userinfo.data[0].PMID);
+
+      store
+        .ApplyJobs(data)
+        .then((res) => {
+          this.ApplyPage = store.AppliedJobs;
+          console.log("Apply Success", this.ApplyPage);
+        })
+        .catch((error) => {
+          console.log("Apply Error", error);
+        });
+    },
   },
   created() {
     const store1 = useLoginCheck();
@@ -229,15 +208,16 @@ export default {
       console.log("Selected Details:", this.selected_Details);
     });
 
-    /*  const store = useLoginCheck();
-    let data = new FormData();
 
-    store.FetchJobDetails(this.$route.params.id);
-    this.job = store.job;
+    this.retrievedLogin = localStorage.getItem("Login");
+     let data2 = new FormData();
+    data2.append("LoginID", this.retrievedLogin);
 
-    if (!this.job) {
-      console.error("Job not found");
-    } */
+    store1.RetrievedData_function(data2).then((res) => {
+      this.userinfo = store1.RetrievedData;
+      console.log("Ako ni ID,", this.userinfo)
+    });
+
   },
   computed: {
     limitedRows() {

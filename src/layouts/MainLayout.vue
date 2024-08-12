@@ -239,7 +239,7 @@
           </q-item-section>
         </q-item>
 
-        
+
         <q-item
           clickable
           v-ripple
@@ -304,6 +304,7 @@ export default defineComponent({
 
     store.RetrievedData_function(data).then((res) => {
       this.userinfo = store.RetrievedData;
+      console.log("Ako ni ID,", this.userinfo)
     });
   },
   setup() {

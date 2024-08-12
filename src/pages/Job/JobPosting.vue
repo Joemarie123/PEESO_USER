@@ -22,7 +22,7 @@
           <q-item>
             <q-item-section avatar>
               <q-avatar>
-                <img :src="job.avatar" alt="Profile Picture" />
+                <img :src="job.company_logo" alt="Profile Picture" />
               </q-avatar>
             </q-item-section>
 
@@ -149,7 +149,7 @@ export default {
   flex-direction: column;
 }
 .custom-card {
-  width: 80%;
+  width: 50%;
   height: auto;
   margin-bottom: 15px;
 }
