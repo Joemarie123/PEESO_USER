@@ -227,10 +227,17 @@ export default {
           this.WrongEmail();
         } else {
           localStorage.setItem("Login", this.LoginPage.LoginID);
+          let data = new FormData();
+          data.append("LoginID", this.LoginPage.LoginID);
+
+          store.RetrievedData_function(data).then((res) => {
+            // this.userinfo = store.RetrievedData;
+            console.log("Ako ni ID,", store.RetrievedData);
+          });
           this.showLoading();
           setTimeout(() => {
-            this.$router.push("/");
             this.hideLoading();
+            this.$router.push("/");
           }, 3000); // 3-second delay
         }
       }

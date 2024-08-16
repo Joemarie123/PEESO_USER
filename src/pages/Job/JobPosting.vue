@@ -66,7 +66,7 @@
             </q-item-label>
           </q-item-section>
 
-          <img :src="job.pic" />
+          <img :src="job.pic" class="job-image" />
         </q-card>
       </div>
     </div>
@@ -88,15 +88,15 @@ export default {
       loading: false, // To prevent multiple simultaneous requests
 
       jobposting: [],
+      userinfo: [],
     };
   },
   methods: {
     viewJobDetails(job) {
-
       console.log("Job Post Clicked:", job);
       this.$router.push({
         name: "JobDetails",
-        params: { id: job.ID},
+        params: { id: job.ID },
       });
     },
     async loadMoreUsers() {
@@ -131,12 +131,30 @@ export default {
     this.loadMoreUsers();
 
     const store = useLoginCheck();
+    this.userinfo = store.RetrievedData;
+    // while (this.userinfo.length == 0) {
+
+    // }
+    console.log("length",this.userinfo.length)
+    if (this.userinfo) {
+
+
+    console.log("USer", this.userinfo.data[0].PMID);
+
     let data = new FormData();
+    data.append("ApplicantID", this.userinfo.data[0].PMID);
 
     store.Retrieve_JobPosting(data).then((res) => {
       this.jobposting = store.RetreivedJobPosting.data;
       console.log("Job Posting", this.jobposting);
     });
+}else{
+  "none"
+}
+    // store2.RetrievedData_function(data).then((res) => {
+    //   this.userinfo = store.RetrievedData;
+    //   console.log("Ako ni ID,", this.userinfo)
+    // });
   },
 };
 </script>
@@ -149,8 +167,10 @@ export default {
   flex-direction: column;
 }
 .custom-card {
-  width: 50%;
+  width: 70%;
   height: auto;
   margin-bottom: 15px;
+}
+.job-image {
 }
 </style>

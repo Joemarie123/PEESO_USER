@@ -299,13 +299,13 @@ export default defineComponent({
     console.log("Retrieved Login:", this.retrievedLogin); // Check the retrieved login
 
     const store = useLoginCheck();
-    let data = new FormData();
-    data.append("LoginID", this.retrievedLogin);
+    // let data = new FormData();
+    // data.append("LoginID", this.retrievedLogin);
 
-    store.RetrievedData_function(data).then((res) => {
+    // store.RetrievedData_function(data).then((res) => {
       this.userinfo = store.RetrievedData;
       console.log("Ako ni ID,", this.userinfo)
-    });
+    // });
   },
   setup() {
     const leftDrawerOpen = ref(false);

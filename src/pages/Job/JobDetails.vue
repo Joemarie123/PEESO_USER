@@ -24,12 +24,19 @@
 
         <!-- if done "APPLY FOR THIS JOB" , then it shall be changed to "APPLIED" -->
         <q-btn
-          class="bg-green"
+          class=""
           rounded
-          label="Apply For This Job"
+          :label="
+            selected_Details.status === 'APPLIED'
+              ? 'Applied'
+              : 'Apply For This Job'
+          "
+          :color="selected_Details.status === 'APPLIED' ? 'orange' : 'green'"
+          :disable="selected_Details.status === 'APPLIED'"
           @click="Apply()"
           style="align-self: center"
         ></q-btn>
+        
       </q-card-section>
       <q-card-section class="">
         <q-card flat>
@@ -149,9 +156,26 @@
         >
       </q-card>
     </div>
-    <div class="col-12">
-      <q-card> </q-card>
-    </div>
+    <!-- Dialog Component -->
+    <q-dialog v-model="isDialogOpen">
+      <q-card>
+        <q-card-section
+          class="row items-center"
+          style="background-color: #06372c"
+        >
+          <q-icon name="check_circle" color="green" size="32px" />
+          <div class="text-h6 text-white q-ml-sm">Success</div>
+        </q-card-section>
+
+        <q-card-section>
+          You have applied to this job posting successfully.
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn flat label="OK" color="green" @click="isDialogOpen = false" />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 
@@ -163,12 +187,13 @@ export default {
   name: "JobDetails",
   data() {
     return {
+      isDialogOpen: false,
+      buttonClass: "bg-green",
       job: null,
       ApplyPage: [],
       jobposting_me: [],
       selected_Details: [],
-
-
+      isButtonDisabled: false,
       retrievedLogin: "",
       userinfo: [],
     };
@@ -178,16 +203,21 @@ export default {
       const store = useLoginCheck();
       let data = new FormData();
       data.append("JobID", this.selected_Details.ID);
-      data.append("ApplicantID", this.userinfo.data[0].PMID)
+      data.append("ApplicantID", this.userinfo.data[0].PMID);
 
-       console.log("Apply Success", this.selected_Details.ID);
-        console.log("Apply Success", this.userinfo.data[0].PMID);
+      console.log("Apply Success", this.selected_Details.ID);
+      console.log("Apply Success", this.userinfo.data[0].PMID);
 
       store
         .ApplyJobs(data)
         .then((res) => {
           this.ApplyPage = store.AppliedJobs;
           console.log("Apply Success", this.ApplyPage);
+
+          this.buttonClass = "bg-orange"; // Change the button style here
+          this.isButtonDisabled = true;
+          console.log("Apply Success", this.ApplyPage);
+          this.isDialogOpen = true;
         })
         .catch((error) => {
           console.log("Apply Error", error);
@@ -196,28 +226,26 @@ export default {
   },
   created() {
     const store1 = useLoginCheck();
-    let data1 = new FormData();
+    // let data1 = new FormData();
 
-    store1.Retrieve_JobPosting(data1).then((res) => {
-      this.jobposting_me = store1.RetreivedJobPosting.data;
-      console.log("Job Posting Details", this.jobposting_me);
+    // store1.Retrieve_JobPosting(data1).then((res) => {
+    this.jobposting_me = store1.RetreivedJobPosting.data;
+    console.log("Job Posting Details", this.jobposting_me);
 
-      const jobId = parseInt(this.$route.params.id, 10); // Convert ID to an integer
-      const filteredJobs = this.jobposting_me.filter((job) => job.ID == jobId);
-      this.selected_Details = filteredJobs.length > 0 ? filteredJobs[0] : null;
-      console.log("Selected Details:", this.selected_Details);
-    });
-
+    const jobId = parseInt(this.$route.params.id, 10); // Convert ID to an integer
+    const filteredJobs = this.jobposting_me.filter((job) => job.ID == jobId);
+    this.selected_Details = filteredJobs.length > 0 ? filteredJobs[0] : null;
+    console.log("Selected Details:", this.selected_Details);
+    // });
 
     this.retrievedLogin = localStorage.getItem("Login");
-     let data2 = new FormData();
+    let data2 = new FormData();
     data2.append("LoginID", this.retrievedLogin);
 
     store1.RetrievedData_function(data2).then((res) => {
       this.userinfo = store1.RetrievedData;
-      console.log("Ako ni ID,", this.userinfo)
+      console.log("Ako ni ID,", this.userinfo);
     });
-
   },
   computed: {
     limitedRows() {
