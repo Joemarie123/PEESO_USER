@@ -24,6 +24,9 @@
           </template>
         </q-input>
 
+
+
+
         <q-space />
         <!-- Middle section: Navigation buttons or Dropdown -->
         <div
@@ -46,6 +49,7 @@
               icon="movie"
               @click="$router.push({ path: '/TrainingPosting' })"
             />
+
           </q-tabs>
         </div>
 
@@ -85,12 +89,16 @@
                   </q-item-section>
                   <q-item-section>Training Posting</q-item-section>
                 </q-item>
+
+
               </q-list>
             </q-card>
           </q-menu>
         </div>
 
         <q-space v-if="$q.screen.gt.xs"></q-space>
+        
+
 
         <!-- Right side: Profile and Notifications -->
         <div class="q-pl-sm q-gutter-sm row items-center no-wrap">

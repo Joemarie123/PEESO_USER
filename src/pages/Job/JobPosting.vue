@@ -16,7 +16,7 @@
         <q-card
           v-for="job in jobposting"
           :key="job.id"
-          class="q-mb-md custom-card"
+          class="q-mb-md custom-card q-pt-sm "
           style=""
         >
           <q-item>
@@ -27,16 +27,18 @@
             </q-item-section>
 
             <q-item-section>
-              <q-item-label @click="$router.push({ path: '/CompanyProfile' })"
+              <q-item-label
+                @click="$router.push({ path: '/CompanyProfile' })"
+                class="text-bold"
                 >{{ job.company_name }}
               </q-item-label>
-              <q-item-label caption
-                >{{ job.DateTo }}
-
+              <q-item-label caption>
                 <q-badge outline label="" style="color: #06372c">{{
                   job.Type
-                }}</q-badge></q-item-label
-              >
+                }}</q-badge
+                ><q-icon name="fiber_manual_record" />
+                {{ job.DateTo }}
+              </q-item-label>
               <!-- <q-item-label caption>
                 Valid Until: {{ job.DatePosted }}
               </q-item-label> -->
@@ -61,7 +63,8 @@
           </q-item>
 
           <q-item-section>
-            <q-item-label class="q-pa-sm q-ml-sm">
+            <q-item-label class="q-pa-md q-ml-sm">
+              <p class="text-bold">{{ job.Title }}</p>
               {{ job.Description }}
             </q-item-label>
           </q-item-section>
@@ -81,6 +84,7 @@ export default {
   name: "JobPosting",
   data() {
     return {
+      scrollPosition: 0,
       jobs: [], // This should be initialized here, not users
       page: 1,
       limit: 10, // Number of records per request
@@ -127,34 +131,39 @@ export default {
       }
     },
   },
+  beforeRouteLeave(to, from, next) {
+    // Save the scroll position before leaving the page
+    this.scrollPosition = window.scrollY;
+    next();
+  },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      // Restore the scroll position when navigating back
+      vm.$nextTick(() => {
+        window.scrollTo(0, vm.scrollPosition);
+      });
+    });
+  },
   created() {
     this.loadMoreUsers();
 
     const store = useLoginCheck();
     this.userinfo = store.RetrievedData;
-    // while (this.userinfo.length == 0) {
 
-    // }
-    console.log("length",this.userinfo.length)
+    console.log("length", this.userinfo.length);
     if (this.userinfo) {
+      console.log("USer", this.userinfo.data[0].PMID);
 
+      let data = new FormData();
+      data.append("ApplicantID", this.userinfo.data[0].PMID);
 
-    console.log("USer", this.userinfo.data[0].PMID);
-
-    let data = new FormData();
-    data.append("ApplicantID", this.userinfo.data[0].PMID);
-
-    store.Retrieve_JobPosting(data).then((res) => {
-      this.jobposting = store.RetreivedJobPosting.data;
-      console.log("Job Posting", this.jobposting);
-    });
-}else{
-  "none"
-}
-    // store2.RetrievedData_function(data).then((res) => {
-    //   this.userinfo = store.RetrievedData;
-    //   console.log("Ako ni ID,", this.userinfo)
-    // });
+      store.Retrieve_JobPosting(data).then((res) => {
+        this.jobposting = store.RetreivedJobPosting.data;
+        console.log("Job Posting", this.jobposting);
+      });
+    } else {
+      ("none");
+    }
   },
 };
 </script>
@@ -172,5 +181,9 @@ export default {
   margin-bottom: 15px;
 }
 .job-image {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+  background-color: #06372c;
 }
 </style>

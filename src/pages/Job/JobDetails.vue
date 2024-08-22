@@ -12,7 +12,7 @@
               style="text-align: left"
               class=""
               icon="arrow_back"
-              @click="$router.push({ path: '/' })"
+               @click="$router.go(-1)"
             ></q-btn>
           </div>
           <div class="col-12">
@@ -36,7 +36,7 @@
           @click="Apply()"
           style="align-self: center"
         ></q-btn>
-        
+
       </q-card-section>
       <q-card-section class="">
         <q-card flat>
@@ -214,6 +214,7 @@ export default {
           this.ApplyPage = store.AppliedJobs;
           console.log("Apply Success", this.ApplyPage);
 
+          this.selected_Details.status = 'APPLIED';
           this.buttonClass = "bg-orange"; // Change the button style here
           this.isButtonDisabled = true;
           console.log("Apply Success", this.ApplyPage);

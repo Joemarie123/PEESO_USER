@@ -145,7 +145,7 @@ export default {
 
 .my-story-img {
   height: 200px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 3%;
   cursor: pointer;
 }

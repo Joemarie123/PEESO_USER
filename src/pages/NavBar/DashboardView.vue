@@ -3,7 +3,7 @@
     <div class="row">
       <div class="scrollable-container col-10 col-md-10 col-sm-12 col-xs-12">
         <story-list></story-list>
-        <div style="display: flex; justify-content: center; flex-wrap: wrap">
+        <div style="display: flex; justify-content: center; ">
           <job-posting class="sizes"></job-posting>
         </div>
       </div>
