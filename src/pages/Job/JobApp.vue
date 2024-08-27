@@ -8,7 +8,7 @@
       <q-list
         class="rounded-borders"
         style="max-width: 100%"
-        v-for="job in jobs"
+        v-for="job in jobapp"
         :key="job.id"
       >
         <q-item clickable v-ripple>
@@ -39,7 +39,7 @@
 </template>
 <script>
 import axios from "axios";
-
+import { useLoginCheck } from "src/stores/SignUp_Store";
 export default {
   data() {
     return {
@@ -48,6 +48,8 @@ export default {
       limit: 10, // Number of records per request
       hasMore: true, // To check if more data is available
       loading: false, // To prevent multiple simultaneous requests
+      jobapp: [],
+        userinfo: [],
     };
   },
   methods: {
@@ -81,6 +83,24 @@ export default {
   },
   created() {
     this.loadMoreUsers();
+
+     const store = useLoginCheck();
+    this.userinfo = store.RetrievedData;
+
+    console.log("length", this.userinfo.length);
+    if (this.userinfo) {
+      console.log("USer", this.userinfo.data[0].PMID);
+
+      let data = new FormData();
+      data.append("ApplicantID", this.userinfo.data[0].PMID);
+
+      store.JobApplications(data).then((res) => {
+        this.jobapp = store.MyJobApp;
+        console.log("Job Applications", this.jobapp);
+      });
+    } else {
+      ("none");
+    }
   },
 };
 </script>

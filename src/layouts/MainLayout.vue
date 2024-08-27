@@ -37,7 +37,7 @@
             <q-tab
               name="mails"
               icon="work_outline"
-              @click="$router.push({ path: '/' })"
+              @click="$router.push({ path: '/Main' })"
             />
             <q-tab
               name="alarms"
@@ -97,7 +97,7 @@
         </div>
 
         <q-space v-if="$q.screen.gt.xs"></q-space>
-        
+
 
 
         <!-- Right side: Profile and Notifications -->
@@ -168,7 +168,7 @@
                 <q-item
                   clickable
                   class="GL__menu-link"
-                  @click="$router.push({ path: '/login' })"
+                  @click="$router.push({ path: '/' })"
                 >
                   <q-item-section>Sign out</q-item-section>
                 </q-item>

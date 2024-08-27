@@ -237,7 +237,7 @@ export default {
           this.showLoading();
           setTimeout(() => {
             this.hideLoading();
-            this.$router.push("/");
+            this.$router.push("/Main");
           }, 3000); // 3-second delay
         }
       }

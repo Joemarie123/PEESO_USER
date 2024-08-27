@@ -6,7 +6,7 @@ const routes = [
   // },
 
   {
-    path: "/",
+    path: "/Main",
     component: () => import("layouts/MainLayout.vue"),
     children: [
       { path: "", component: () => import("pages/NavBar/DashboardView.vue") },
@@ -91,7 +91,8 @@ const routes = [
         component: () => import("pages/Appointment/AppointmentList.vue"),
       },
       {
-        path: "/AppointmentDetails",
+        path: "/AppointmentDetails/:id",
+        name: "AppointmentDetails",
         component: () => import("pages/Appointment/AppointmentDetails.vue"),
       },
 
@@ -123,7 +124,7 @@ const routes = [
     component: () => import("layouts/DashBoard.vue"),
     children: [
       {
-        path: "/login",
+        path: "/",
         component: () => import("layouts/LoginPage.vue"),
       },
       {

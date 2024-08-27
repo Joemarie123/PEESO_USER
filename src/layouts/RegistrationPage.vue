@@ -524,7 +524,7 @@ export default defineComponent({
       data.append("ContactNo", this.txtcontact);
 
       store.SaveToDatabase(data).then((res) => {
-        this.$router.push("/login");
+        this.$router.push("/");
       });
     },
 

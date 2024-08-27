@@ -17,20 +17,20 @@
           </div>
           <div class="col-12">
             <p style="font-size: 22px" class="text-center">
-              Web Developer / UX Specialist
+              {{ selected_Details.title }}
             </p>
           </div>
         </div>
 
         <!-- if done "APPLY FOR THIS JOB" , then it shall be changed to "APPLIED" -->
-        <q-btn
+        <!-- <q-btn
           outline
           rounded
           color="warning"
           label="Applied"
           @click="$router.push({ path: '/apply' })"
           style="align-self: center"
-        ></q-btn>
+        ></q-btn> -->
       </q-card-section>
     </q-card>
   </div>
@@ -52,20 +52,27 @@
         </q-item>
         <q-separator></q-separator>
         <q-card-section class="">
-          <p>Appointment Title:</p>
-          <p>Appointment Date and Time:</p>
+          <p>Appointment Title: <b>{{ selected_Details.title }}</b></p>
+          <p class="">
+            Appointment Date and Time:
+            <b
+              >{{ selected_Details.Appointment_date }} ||
+              {{ selected_Details.Appointment_time }}
+            </b>
+          </p>
           <p>Appointment Location:</p>
-          <p>Appointment Description:</p>
+          <p>Appointment Description: <b>{{ selected_Details.Desc }}</b></p>
         </q-card-section>
-        <q-card-section align="right" style="margin-top: -30px">
+        <q-card-section align="right" style="margin-top: -30px" >
           <!-- Status will be according to the job posting and if there isnt update from applicant(Closed, Canceled, or Ended) -->
           <p>
             Status:
-            <q-btn disabled color="blue" outline size="small">Accepted</q-btn>
+            <q-btn disabled color="blue" outline size="small">{{ selected_Details.Status }}</q-btn>
           </p>
         </q-card-section>
         <q-card-section align="right" style="margin-top: -30px">
-          <q-btn color="green" class="">Accept</q-btn>
+
+          <q-btn color="green" class="" @click="Accept()">Accept</q-btn>
           <q-btn
             outline
             color="warning"
@@ -81,7 +88,7 @@
   <!-- Reschedule -->
   <q-dialog v-model="reschedule">
     <q-card>
-      <q-toolbar class="text-white" style="background-color: rgb(3, 69, 113)">
+      <q-toolbar class="text-white" style="background-color: #06372c">
         <q-toolbar-title>Reschedule Appointment</q-toolbar-title>
 
         <q-btn flat round dense icon="close" v-close-popup />
@@ -102,7 +109,7 @@
   <!-- Decline -->
   <q-dialog v-model="decline">
     <q-card>
-      <q-toolbar class="text-white" style="background-color: rgb(3, 69, 113)">
+      <q-toolbar class="text-white" style="background-color: #06372c">
         <q-toolbar-title>Decline Appointment</q-toolbar-title>
 
         <q-btn flat round dense icon="close" v-close-popup />
@@ -122,11 +129,15 @@
 </template>
 
 <script>
+import { useLoginCheck } from "src/stores/SignUp_Store";
 export default {
   data() {
     return {
       reschedule: false,
       decline: false,
+      appDtls: [],
+      selected_Details: [],
+      appointment: [],
       rows: [
         { name: "John Doe", age: 30, job: "Developer" },
         { name: "Jane Smith", age: 28, job: "Designer" },
@@ -192,6 +203,21 @@ export default {
       },
     };
   },
+  methods: {
+
+  },
+  created() {
+    const store = useLoginCheck();
+    this.appDtls = store.Appointments;
+    console.log("Appointment Details: ", this.appDtls);
+
+    const jobId = parseInt(this.$route.params.id, 10); // Convert ID to an integer
+    const filteredJobs = this.appDtls.filter(
+      (appointment) => appointment.ID == jobId
+    );
+    this.selected_Details = filteredJobs.length > 0 ? filteredJobs[0] : null;
+    console.log("Selected Details:", this.selected_Details);
+  },
   computed: {
     limitedRows() {
       // Limit the rows to the number set in pagination rowsPerPage
@@ -224,6 +250,6 @@ export default {
 }
 
 .colorText {
-  color: rgb(3, 69, 113);
+  color: #06372c;
 }
 </style>

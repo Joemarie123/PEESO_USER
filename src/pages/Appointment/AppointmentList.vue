@@ -6,24 +6,27 @@
       <q-list
         class="rounded-borders"
         style="max-width: 100%"
-        v-for="job in jobs"
-        :key="job.id"
+        v-for="appointment in appointments"
+        :key="appointment.id"
+
       >
         <q-item clickable v-ripple>
           <q-item-section avatar>
             <q-avatar>
-              <img :src="job.avatar" alt="Profile Picture" />
+              <img :src="appointment.pic" alt="Profile Picture" />
             </q-avatar>
           </q-item-section>
 
-          <q-item-section @click="$router.push({ path: '/AppointmentDetails' })">
-            <q-item-label lines="1">{{ job.employerName }}</q-item-label>
+          <q-item-section
+            @click="viewAppointmentDtls(appointment)"
+          >
+            <q-item-label lines="1">{{ appointment.employerName }}</q-item-label>
             <q-item-label caption lines="2">
-              <span class="text-weight-bold">{{ job.JobTitle }}</span>
+              <span class="text-weight-bold">{{ appointment.title }}</span>
             </q-item-label>
           </q-item-section>
 
-          <q-item-section side top>{{ job.DatePosted }} </q-item-section>
+          <q-item-section side top>{{ appointment.DatePosted }} </q-item-section>
         </q-item>
 
         <q-separator inset="item" />
@@ -33,11 +36,13 @@
 </template>
 <script>
 import axios from "axios";
+import { useLoginCheck } from "src/stores/SignUp_Store";
 
 export default {
   data() {
     return {
       jobs: [], // This should be initialized here, not users
+      appointments: [],
       page: 1,
       limit: 10, // Number of records per request
       hasMore: true, // To check if more data is available
@@ -45,6 +50,13 @@ export default {
     };
   },
   methods: {
+    viewAppointmentDtls(appointment) {
+      console.log("Appointment: ", appointment);
+       this.$router.push({
+        name: "AppointmentDetails",
+        params: { id: appointment.ID },
+      });
+    },
     async loadMoreUsers() {
       if (this.loading) return;
       this.loading = true;
@@ -59,7 +71,7 @@ export default {
             },
           }
         );
-        console.log("Response Data:", response.data); // Log the response data
+        // console.log("Response Data:", response.data); // Log the response data
         // Extract the jobs array from the response
         const newJobs = response.data.jobs;
 
@@ -75,6 +87,19 @@ export default {
   },
   created() {
     this.loadMoreUsers();
+
+    const store = useLoginCheck();
+    this.userinfo = store.RetrievedData;
+
+    if (this.userinfo) {
+       let data = new FormData();
+      data.append("ApplicantID", this.userinfo.data[0].PMID);
+
+      store.AppointmentDtls(data).then((res) => {
+        this.appointments = store.Appointments;
+        console.log("Appointments", this.appointments);
+      });
+    }
   },
 };
 </script>
@@ -83,7 +108,7 @@ export default {
   font-size: 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   padding: 10px 10px 10px 10px;
-  background-color: #06372C;
+  background-color: #06372c;
   color: white;
 }
 .appointment-card {
