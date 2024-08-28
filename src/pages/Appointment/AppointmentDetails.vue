@@ -52,7 +52,9 @@
         </q-item>
         <q-separator></q-separator>
         <q-card-section class="">
-          <p>Appointment Title: <b>{{ selected_Details.title }}</b></p>
+          <p>
+            Appointment Title: <b>{{ selected_Details.title }}</b>
+          </p>
           <p class="">
             Appointment Date and Time:
             <b
@@ -61,17 +63,27 @@
             </b>
           </p>
           <p>Appointment Location:</p>
-          <p>Appointment Description: <b>{{ selected_Details.Desc }}</b></p>
-        </q-card-section>
-        <q-card-section align="right" style="margin-top: -30px" >
-          <!-- Status will be according to the job posting and if there isnt update from applicant(Closed, Canceled, or Ended) -->
           <p>
-            Status:
-            <q-btn disabled color="blue" outline size="small">{{ selected_Details.Status }}</q-btn>
+            Appointment Description: <b>{{ selected_Details.Desc }}</b>
           </p>
         </q-card-section>
-        <q-card-section align="right" style="margin-top: -30px">
-
+        <q-card-section
+          align="right"
+          style="margin-top: -30px"
+          v-show="
+            selected_Details.Status !== '' || selected_Details.Status !== null
+          "
+        >
+          <!-- Status will be according to the job posting and if there isnt update from applicant(Closed, Canceled, or Ended) -->
+          <p>
+            Status: <b> {{ selected_Details.Status }}</b>
+          </p>
+        </q-card-section>
+        <q-card-section
+          align="right"
+          style="margin-top: -30px"
+          v-if="selected_Details.Status === ''"
+        >
           <q-btn color="green" class="" @click="Accept()">Accept</q-btn>
           <q-btn
             outline
@@ -203,9 +215,7 @@ export default {
       },
     };
   },
-  methods: {
-
-  },
+  methods: {},
   created() {
     const store = useLoginCheck();
     this.appDtls = store.Appointments;

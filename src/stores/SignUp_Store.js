@@ -122,7 +122,7 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
 
     async JobApplications(payload) {
        let res = await axios.post(
-         `http://10.0.1.26:82/peesoportal/appointment/client/appliedjobs.php`,
+         `http://10.0.1.26:82/peesoportal/jobs/client/appliedjobs.php`,
          payload
        );
        this.MyJobApp = res.data;

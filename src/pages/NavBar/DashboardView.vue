@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="row">
-      <div class="scrollable-container col-10 col-md-10 col-sm-12 col-xs-12">
+      <div class="scrollable-container col-9 col-md-9 col-sm-12 col-xs-12">
         <story-list></story-list>
         <div style="display: flex; justify-content: center; ">
           <job-posting class="sizes"></job-posting>
         </div>
       </div>
       <div
-        class="scrollable-container col-2 col-md-2 col-sm-2"
+        class="scrollable-container col-3 col-md-3 col-sm-3"
         v-if="$q.screen.gt.xs"
       >
         <!-- <q-card
@@ -16,7 +16,7 @@
           style="background-color: #06372c; margin-top: 25px"
           >Announcement</q-card
         > -->
-        <announcement-page style="margin-top: 25px"></announcement-page>
+        <announcement-page style="margin-top: 25px; margin-right: 5%;"></announcement-page>
       </div>
     </div>
   </div>

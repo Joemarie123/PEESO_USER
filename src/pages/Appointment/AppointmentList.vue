@@ -8,25 +8,30 @@
         style="max-width: 100%"
         v-for="appointment in appointments"
         :key="appointment.id"
-
       >
         <q-item clickable v-ripple>
           <q-item-section avatar>
             <q-avatar>
-              <img :src="appointment.pic" alt="Profile Picture" />
+              <img :src="appointment.Company_logo" alt="Profile Picture" />
             </q-avatar>
           </q-item-section>
 
-          <q-item-section
-            @click="viewAppointmentDtls(appointment)"
-          >
-            <q-item-label lines="1">{{ appointment.employerName }}</q-item-label>
+          <q-item-section @click="viewAppointmentDtls(appointment)">
+            <q-item-label lines="1">{{
+              appointment.company_name
+            }}</q-item-label>
             <q-item-label caption lines="2">
               <span class="text-weight-bold">{{ appointment.title }}</span>
             </q-item-label>
+            <q-item-label>
+
+            </q-item-label>
           </q-item-section>
 
-          <q-item-section side top>{{ appointment.DatePosted }} </q-item-section>
+          <q-item-section side top
+            ><span><b>{{ appointment.Appointment_date }} at
+            {{ appointment.Appointment_time }}</b></span>
+          </q-item-section>
         </q-item>
 
         <q-separator inset="item" />
@@ -52,7 +57,7 @@ export default {
   methods: {
     viewAppointmentDtls(appointment) {
       console.log("Appointment: ", appointment);
-       this.$router.push({
+      this.$router.push({
         name: "AppointmentDetails",
         params: { id: appointment.ID },
       });
@@ -92,7 +97,7 @@ export default {
     this.userinfo = store.RetrievedData;
 
     if (this.userinfo) {
-       let data = new FormData();
+      let data = new FormData();
       data.append("ApplicantID", this.userinfo.data[0].PMID);
 
       store.AppointmentDtls(data).then((res) => {

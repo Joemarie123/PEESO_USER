@@ -14,17 +14,17 @@
         <q-item clickable v-ripple>
           <q-item-section avatar>
             <q-avatar>
-              <img :src="job.avatar" alt="Profile Picture" />
+              <img :src="job.company_logo" alt="Profile Picture" />
             </q-avatar>
           </q-item-section>
 
-          <q-item-section @click="$router.push({ path: '/JobDetails' })">
-            <q-item-label lines="1">{{ job.employerName }}</q-item-label>
+          <q-item-section @click="viewMyJobApp(job)">
+            <q-item-label lines="1">{{ job.Title }}</q-item-label>
             <q-item-label caption lines="2">
-              <span class="text-weight-bold">{{ job.JobTitle }}</span>
+              <span class="text-weight-bold">{{ job.company_name }}</span>
             </q-item-label>
             <q-item-label caption lines="3">
-              <span class="">{{ job.JobDesc }}</span>
+              <span class="">{{ job.Description }}</span>
             </q-item-label>
           </q-item-section>
 
@@ -53,6 +53,13 @@ export default {
     };
   },
   methods: {
+    viewMyJobApp(job) {
+      console.log("My Job Application Clicked:", job);
+      this.$router.push({
+        name: "JobDetails",
+        params: { id: job.ID },
+      });
+    },
     async loadMoreUsers() {
       if (this.loading) return;
       this.loading = true;
@@ -95,7 +102,7 @@ export default {
       data.append("ApplicantID", this.userinfo.data[0].PMID);
 
       store.JobApplications(data).then((res) => {
-        this.jobapp = store.MyJobApp;
+        this.jobapp = store.MyJobApp.data;
         console.log("Job Applications", this.jobapp);
       });
     } else {

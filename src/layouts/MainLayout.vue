@@ -50,8 +50,11 @@
               @click="$router.push({ path: '/TrainingPosting' })"
             />
 
+
           </q-tabs>
+
         </div>
+
 
         <!-- Menu -->
 
@@ -97,6 +100,7 @@
         </div>
 
         <q-space v-if="$q.screen.gt.xs"></q-space>
+        
 
 
 

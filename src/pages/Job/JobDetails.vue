@@ -12,7 +12,7 @@
               style="text-align: left"
               class=""
               icon="arrow_back"
-               @click="$router.go(-1)"
+              @click="$router.go(-1)"
             ></q-btn>
           </div>
           <div class="col-12">
@@ -29,14 +29,39 @@
           :label="
             selected_Details.status === 'APPLIED'
               ? 'Applied'
+              : selected_Details.status === 'ACCEPTED'
+              ? 'Accepted'
+              : selected_Details.status === 'HIRED'
+              ? 'Hired'
+              : selected_Details.status === 'DECLINED'
+              ? 'Declined'
               : 'Apply For This Job'
           "
-          :color="selected_Details.status === 'APPLIED' ? 'orange' : 'green'"
-          :disable="selected_Details.status === 'APPLIED'"
+          :color="
+            ['APPLIED', 'ACCEPTED', 'HIRED', 'DECLINED'].includes(
+              selected_Details.status
+            )
+              ? 'orange'
+              : 'green'
+          "
+          :disable="
+            ['APPLIED', 'ACCEPTED', 'HIRED', 'DECLINED'].includes(
+              selected_Details.status
+            )
+          "
           @click="Apply()"
           style="align-self: center"
         ></q-btn>
-
+        <div
+          class="col-12"
+          v-show="
+            selected_Details.status != '' && selected_Details.status != null
+          "
+        >
+          <p style="font-size: 15px; color: orange" class="text-center q-mt-md">
+            Date Applied: {{ selected_Details.date_applied }}
+          </p>
+        </div>
       </q-card-section>
       <q-card-section class="">
         <q-card flat>
@@ -93,7 +118,6 @@
                     selected_Details.DateTo
                   }}</q-item-label></q-item-section
                 >
-                <q-separator vertical v-if="$q.screen.gt.md" />
               </q-item>
             </div>
           </div>
@@ -118,19 +142,25 @@
           </q-item-section>
         </q-item>
         <q-separator></q-separator>
-        <q-item-section class="q-pa-md"
-          ><p>
-            {{ selected_Details.Description }}
+        <q-item-section class="q-pa-md">
+          <p><b>Job Title: </b>{{ selected_Details.Title }}</p>
+          <p>
+            <b>Job Description: </b> <br />
+            <span class="text-justify">{{ selected_Details.Description }}</span>
           </p>
+          <p><b>Educational Level: </b>{{ selected_Details.EducationLevel }}</p>
+          <p><b>Course: </b>{{ selected_Details.Course }}</p>
+          <p>
+            <b>Years of Experience: </b>{{ selected_Details.WorkExperience }}
+          </p>
+          <p><b>License: </b>{{ selected_Details.License }}</p>
+          <p><b>Place of Work: </b>{{ selected_Details.WorkPlace }}</p>
 
           <p><b>Number of Vacancy:</b> {{ selected_Details.VacantCount }}</p>
-          <p>{{ selected_Details.Course }}</p>
-          <p>{{ selected_Details.EducationLevel }}</p>
-          <p>{{ selected_Details.License }}</p>
         </q-item-section>
 
         <q-item-section class="q-pa-sm">
-          <p class="text-bold">Open Until: {{ selected_Details.DateFrom }}</p>
+          <p><b>Open Until:</b> {{ selected_Details.DateFrom }}</p>
         </q-item-section>
       </q-card>
     </div>
@@ -150,9 +180,7 @@
         <q-item-section class="q-pa-md">
           <p>
             Company Name: <b>{{ selected_Details.company_name }}</b>
-          </p>
-          <p>Contact Person: <b>JomzTv</b></p>
-          <p>Total Job Posts: <b>1</b></p></q-item-section
+          </p></q-item-section
         >
       </q-card>
     </div>
@@ -214,7 +242,7 @@ export default {
           this.ApplyPage = store.AppliedJobs;
           console.log("Apply Success", this.ApplyPage);
 
-          this.selected_Details.status = 'APPLIED';
+          this.selected_Details.status = "APPLIED";
           this.buttonClass = "bg-orange"; // Change the button style here
           this.isButtonDisabled = true;
           console.log("Apply Success", this.ApplyPage);
@@ -235,6 +263,7 @@ export default {
 
     const jobId = parseInt(this.$route.params.id, 10); // Convert ID to an integer
     const filteredJobs = this.jobposting_me.filter((job) => job.ID == jobId);
+    console.log("Filtered Jobs:", filteredJobs);
     this.selected_Details = filteredJobs.length > 0 ? filteredJobs[0] : null;
     console.log("Selected Details:", this.selected_Details);
     // });
