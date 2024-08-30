@@ -29,8 +29,8 @@
           </q-item-section>
 
           <q-item-section side top
-            ><span><b>{{ appointment.Appointment_date }} at
-            {{ appointment.Appointment_time }}</b></span>
+            ><span><b>{{ formatDate(appointment.Appointment_date) }} /
+            {{ formatTime(appointment.Appointment_time) }}</b></span>
           </q-item-section>
         </q-item>
 
@@ -55,6 +55,17 @@ export default {
     };
   },
   methods: {
+    formatDate(date) {
+      return new Date(date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
+    },
+    formatTime(time) {
+      return new Date('1970-01-01T' + time + 'Z')
+        .toLocaleTimeString('en-US', { hour12: true, hour: 'numeric', minute: 'numeric' });
+    },
     viewAppointmentDtls(appointment) {
       console.log("Appointment: ", appointment);
       this.$router.push({

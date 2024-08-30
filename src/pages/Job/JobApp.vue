@@ -14,7 +14,7 @@
         <q-item clickable v-ripple>
           <q-item-section avatar>
             <q-avatar>
-              <img :src="job.company_logo" alt="Profile Picture" />
+              <img :src="job.pic" alt="Profile Picture" />
             </q-avatar>
           </q-item-section>
 

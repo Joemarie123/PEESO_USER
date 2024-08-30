@@ -14,7 +14,7 @@
           filled
           dense
           class="searchIn q-ml-md"
-          placeholder="Search PEESO"
+          placeholder="Search CPESCDO"
           rounded
           style="width: 15%"
         >

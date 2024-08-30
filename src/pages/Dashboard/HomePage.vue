@@ -23,7 +23,7 @@
               </p>
             </div>
             <h3 data-aos="fade-up" data-aos-duration="1500" class="CPEESO">
-              <span style="">CPEESO</span> <br />
+              <span style="">CPESCDO</span> <br />
             </h3>
             <h4 data-aos="fade-up" data-aos-duration="1500" class="tagumcity">
               TAGUM CITY

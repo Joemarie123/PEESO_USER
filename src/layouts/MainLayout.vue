@@ -14,18 +14,17 @@
           filled
           dense
           class="searchIn q-ml-md"
-          placeholder="Search PEESO"
+          placeholder="Search PESCDO"
           rounded
+          v-model="MySearch"
           color="green"
           style="width: 15%"
+           debounce="300" 
         >
           <template v-slot:prepend>
             <q-icon name="search" />
           </template>
         </q-input>
-
-
-
 
         <q-space />
         <!-- Middle section: Navigation buttons or Dropdown -->
@@ -49,12 +48,8 @@
               icon="movie"
               @click="$router.push({ path: '/TrainingPosting' })"
             />
-
-
           </q-tabs>
-
         </div>
-
 
         <!-- Menu -->
 
@@ -68,7 +63,7 @@
           >
             <q-card class="dropdown-card" flat>
               <q-list>
-                <q-item clickable @click="$router.push({ path: '/' })">
+                <q-item clickable @click="$router.push({ path: '/Main' })">
                   <q-item-section avatar>
                     <q-icon name="work_outline" />
                   </q-item-section>
@@ -92,17 +87,12 @@
                   </q-item-section>
                   <q-item-section>Training Posting</q-item-section>
                 </q-item>
-
-
               </q-list>
             </q-card>
           </q-menu>
         </div>
 
         <q-space v-if="$q.screen.gt.xs"></q-space>
-        
-
-
 
         <!-- Right side: Profile and Notifications -->
         <div class="q-pl-sm q-gutter-sm row items-center no-wrap">
@@ -251,7 +241,6 @@
           </q-item-section>
         </q-item>
 
-
         <q-item
           clickable
           v-ripple
@@ -303,7 +292,30 @@ export default defineComponent({
       tab: "mails",
       retrievedLogin: "",
       userinfo: [],
+      MySearch: "",
     };
+  },
+
+  methods: {
+    searchJobs() {
+      if (this.userinfo && this.userinfo.data.length > 0) {
+        let data = new FormData();
+        data.append("ApplicantID", this.userinfo.data[0].PMID);
+        data.append("Query", this.MySearch);
+
+        const store = useLoginCheck();
+        store.Retrieve_JobPosting(data).then((res) => {
+          this.jobposting = store.RetreivedJobPosting.data;
+          console.log("Job Posting", this.jobposting);
+        }).catch(error => {
+          console.error("API Error:", error);
+        });
+      }
+    }
+  },
+
+  watch: {
+    MySearch: 'searchJobs', // Call searchJobs whenever MySearch changes
   },
 
   created() {
@@ -315,9 +327,16 @@ export default defineComponent({
     // data.append("LoginID", this.retrievedLogin);
 
     // store.RetrievedData_function(data).then((res) => {
-      this.userinfo = store.RetrievedData;
-      console.log("Ako ni ID,", this.userinfo)
+    this.userinfo = store.RetrievedData;
+    console.log("Ako ni ID,", this.userinfo);
     // });
+
+    console.log("User info length:", this.userinfo.length);
+    if (this.userinfo && this.userinfo.data.length > 0) {
+      this.searchJobs(); // Initial job search
+    } else {
+      console.log("No user info found");
+    }
   },
   setup() {
     const leftDrawerOpen = ref(false);

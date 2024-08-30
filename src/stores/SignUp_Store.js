@@ -14,6 +14,7 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
     Appointments: [],
     MyJobApp: [],
     appointment: null,
+    AppSchedule: [],
   }),
   getters: {
     // doubleCount: (state) => state.counter * 2,
@@ -121,12 +122,21 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
     },
 
     async JobApplications(payload) {
-       let res = await axios.post(
-         `http://10.0.1.26:82/peesoportal/jobs/client/appliedjobs.php`,
-         payload
-       );
-       this.MyJobApp = res.data;
-       console.log("My Job Applications =>", res.data);
+      let res = await axios.post(
+        `http://10.0.1.26:82/peesoportal/jobs/client/appliedjobs.php`,
+        payload
+      );
+      this.MyJobApp = res.data;
+      console.log("My Job Applications =>", res.data);
+    },
+
+    async AppointmentSched(payload) {
+      let res = await axios.post(
+        `http://10.0.1.26:82/peesoportal/appointment/client/setappointment.php`,
+        payload
+      );
+      this.AppSchedule = res.data;
+      console.log("Schedule =>", res.data);
     },
 
     /*     async FetchJobDetails(id) {

@@ -58,8 +58,8 @@
           <p class="">
             Appointment Date and Time:
             <b
-              >{{ selected_Details.Appointment_date }} ||
-              {{ selected_Details.Appointment_time }}
+              >{{ formatDate(selected_Details.Appointment_date) }} /
+              {{ formatTime(selected_Details.Appointment_time) }}
             </b>
           </p>
           <p>Appointment Location:</p>
@@ -82,9 +82,11 @@
         <q-card-section
           align="right"
           style="margin-top: -30px"
-          v-if="selected_Details.Status === ''"
+          v-if="selected_Details.Status != 'CONFIRM'"
         >
-          <q-btn color="green" class="" @click="Accept()">Accept</q-btn>
+          <q-btn color="green" class="" v-model="AcceptBtn" @click="Accept()"
+            >Accept</q-btn
+          >
           <q-btn
             outline
             color="warning"
@@ -150,72 +152,57 @@ export default {
       appDtls: [],
       selected_Details: [],
       appointment: [],
-      rows: [
-        { name: "John Doe", age: 30, job: "Developer" },
-        { name: "Jane Smith", age: 28, job: "Designer" },
-        { name: "Michael Johnson", age: 32, job: "Manager" },
-        { name: "Sarah Connor", age: 29, job: "Analyst" },
-        { name: "Chris Evans", age: 35, job: "Engineer" },
-        { name: "Emma Watson", age: 27, job: "Actress" },
-        { name: "Robert Downey", age: 45, job: "Actor" },
-        // Add more rows as needed
-      ],
-      rowEmployers: [
-        { name: "John Doe", age: 30, job: "Developer" },
-        { name: "Jane Smith", age: 28, job: "Designer" },
-        { name: "Michael Johnson", age: 32, job: "Manager" },
-        { name: "Sarah Connor", age: 29, job: "Analyst" },
-        { name: "Chris Evans", age: 35, job: "Engineer" },
-        { name: "Emma Watson", age: 27, job: "Actress" },
-        { name: "Robert Downey", age: 45, job: "Actor" },
-      ],
-      columnEmployer: [
-        {
-          name: "age",
-          label: "DATE HIRED",
-          field: "age",
-          sortable: true,
-          align: "left",
-        },
-        {
-          name: "job",
-          label: "BUSINESS NAME",
-          field: "job",
-          sortable: true,
-          align: "left",
-        },
-        {
-          name: "age",
-          label: "STATUS",
-          field: "age",
-          sortable: true,
-          align: "left",
-        },
-        {
-          name: "age",
-          label: "ACTION",
-          field: "age",
-          sortable: true,
-          align: "left",
-        },
-      ],
-      columns: [
-        {
-          name: "name",
-          label: "DATE",
-          field: "name",
-          sortable: true,
-          align: "left",
-        },
-        { name: "age", label: "JOB", field: "age", sortable: true },
-        { name: "job", label: "ACTIONS", field: "job", sortable: true },
-      ],
+      Schedule: [],
+
       pagination: {
         rowsPerPage: 5, // This controls how many rows are shown per page; set to the number you want to show
       },
     };
   },
-  methods: {},
+  methods: {
+    Accept() {
+      const store = useLoginCheck();
+      let data = new FormData();
+      data.append("AppointmentID", this.selected_Details.ID);
+      data.append("action", "CONFIRM");
+      data.append("Appointment_date", this.selected_Details.Appointment_date);
+      data.append("Appointment_time", this.selected_Details.Appointment_time);
+      data.append("status", "CONFIRM");
+      data.append("remarks", "");
+      console.log("Appointment ID =>", this.selected_Details.ID);
+
+      store.AppointmentSched(data).then((res) => {
+        this.Schedule = store.AppSchedule;
+        console.log("Accept Success =>", this.Schedule);
+        this.userinfo = store.RetrievedData;
+
+        if (this.userinfo) {
+          let data = new FormData();
+          data.append("ApplicantID", this.userinfo.data[0].PMID);
+
+          store.AppointmentDtls(data).then((res) => {
+            this.appointments = store.Appointments;
+            console.log("Appointments", this.appointments);
+          });
+        }
+      });
+    },
+
+    formatDate(date) {
+      return new Date(date).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    },
+    formatTime(time) {
+      return new Date("1970-01-01T" + time + "Z").toLocaleTimeString("en-US", {
+        hour12: true,
+        hour: "numeric",
+        minute: "numeric",
+      });
+    },
+  },
   created() {
     const store = useLoginCheck();
     this.appDtls = store.Appointments;

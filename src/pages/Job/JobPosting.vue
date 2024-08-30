@@ -165,6 +165,19 @@ export default {
       ("none");
     }
   },
+  computed: {
+    // Create a computed property to reactively fetch the job postings from the store
+    jobPostingsFromStore() {
+      const store = useLoginCheck();
+      return store.RetreivedJobPosting.data;
+    },
+  },
+  watch: {
+    // Watch for changes in the computed property and update the local jobposting data
+    jobPostingsFromStore(newData) {
+      this.jobposting = newData;
+    },
+  },
 };
 </script>
 
@@ -176,7 +189,7 @@ export default {
   flex-direction: column;
 }
 .custom-card {
-  width: 70%;
+  width: 80%;
   height: auto;
   margin-bottom: 15px;
 }
