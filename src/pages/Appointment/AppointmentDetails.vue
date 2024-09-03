@@ -82,7 +82,10 @@
         <q-card-section
           align="right"
           style="margin-top: -30px"
-          v-if="selected_Details.Status != 'CONFIRM'"
+          v-if="
+            selected_Details.Status !== 'CONFIRM' &&
+            selected_Details.Status !== 'RESCHEDULE'
+          "
         >
           <q-btn color="green" class="" v-model="AcceptBtn" @click="Accept()"
             >Accept</q-btn
@@ -101,20 +104,40 @@
   </div>
   <!-- Reschedule -->
   <q-dialog v-model="reschedule">
-    <q-card>
+    <q-card style="width: 700px; max-width: 80vw">
       <q-toolbar class="text-white" style="background-color: #06372c">
         <q-toolbar-title>Reschedule Appointment</q-toolbar-title>
 
         <q-btn flat round dense icon="close" v-close-popup />
       </q-toolbar>
 
-      <q-card-section class="">
-        <p>Reason for Re-scheduling:</p>
-        <q-input v-model="text" filled autogrow />
+      <q-card-section>
+        <div class="row">
+          <div class="col-12">
+            <p>Reason for Re-scheduling:</p>
+            <q-input v-model="text" filled autogrow />
+          </div>
+          <div class="col-12 q-mt-sm">
+            Date Preferred:
+            <div class="row q-col-gutter-lg text-center">
+              <div class="col-6">
+                <q-date v-model="date" mask="YYYY-MM-DD" color="green" dense />
+              </div>
+              <div class="col-6">
+                <q-time v-model="time" mask="HH:mm" dense />
+              </div>
+            </div>
+          </div>
+        </div>
       </q-card-section>
 
       <q-card-actions align="right" class="text-primary">
-        <q-btn color="green" label="Send" v-close-popup />
+        <q-btn
+          color="green"
+          @click="RescheduleClick()"
+          label="Send"
+          v-close-popup
+        />
         <q-btn color="red" label="Cancel" v-close-popup />
       </q-card-actions>
     </q-card>
@@ -144,6 +167,8 @@
 
 <script>
 import { useLoginCheck } from "src/stores/SignUp_Store";
+import { ref, computed } from "vue";
+import { useQuasar } from "quasar";
 export default {
   data() {
     return {
@@ -183,6 +208,49 @@ export default {
           store.AppointmentDtls(data).then((res) => {
             this.appointments = store.Appointments;
             console.log("Appointments", this.appointments);
+            const jobId = parseInt(this.$route.params.id, 10);
+            const filteredJobs = this.appointments.filter(
+              (appointment) => appointment.ID == jobId
+            );
+            this.selected_Details =
+              filteredJobs.length > 0 ? filteredJobs[0] : null;
+            console.log("Selected Details:", this.selected_Details);
+          });
+        }
+      });
+    },
+    //RESCHEDULE APPOINTMENT
+    RescheduleClick() {
+      const store = useLoginCheck();
+      let data = new FormData();
+
+      data.append("AppointmentID", this.selected_Details.ID);
+      data.append("action", "RESCHEDULE");
+      data.append("Appointment_date", this.date);
+      data.append("Appointment_time", this.time);
+      data.append("status", "RESCHEDULE");
+      data.append("remarks", "");
+      console.log("Appointment ID =>", this.selected_Details.ID);
+
+      store.AppointmentSched(data).then((res) => {
+        this.Schedule = store.AppSchedule;
+        console.log("Accept Success =>", this.Schedule);
+        this.userinfo = store.RetrievedData;
+
+        if (this.userinfo) {
+          let data = new FormData();
+          data.append("ApplicantID", this.userinfo.data[0].PMID);
+
+          store.AppointmentDtls(data).then((res) => {
+            this.appointments = store.Appointments;
+            console.log("Appointments", this.appointments);
+            const jobId = parseInt(this.$route.params.id, 10);
+            const filteredJobs = this.appointments.filter(
+              (appointment) => appointment.ID == jobId
+            );
+            this.selected_Details =
+              filteredJobs.length > 0 ? filteredJobs[0] : null;
+            console.log("Selected Details:", this.selected_Details);
           });
         }
       });
@@ -203,6 +271,7 @@ export default {
       });
     },
   },
+
   created() {
     const store = useLoginCheck();
     this.appDtls = store.Appointments;
@@ -224,6 +293,56 @@ export default {
       // Limit the rows to the number set in pagination rowsPerPage
       return this.rowEmployers.slice(0, this.pagination.rowsPerPage);
     },
+    // appointmentstore(){
+    //   const store = useLoginCheck();
+    //   return  store.Appointments
+    // }
+  },
+  // watch:{
+  //   appointmentstore(newData){
+  //     const jobId = parseInt(this.$route.params.id, 10);
+  //      this.selected_Details = newData.filter(
+  //     (appointment) => appointment.ID == jobId
+  //   );
+  //   }
+  // }
+  setup() {
+    // Function to format the date as 'YYYY-MM-DD'
+    const formatDate = (date) => {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    };
+
+    const formatTime = (date) => {
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+      return `${hours}:${minutes}`;
+    };
+
+    // Initialize the date with the current date
+    const now = new Date();
+    const date = ref(formatDate(now));
+    const time = ref(formatTime(now));
+
+    const combinedModel = computed(() => {
+      return `${date.value} ${time.value}`;
+    });
+
+    const formattedTime = computed(() => {
+      // Ensures the time is always displayed in 24-hour format
+      const [hours, minutes] = time.value.split(":");
+      const hours24 = String(parseInt(hours, 10)).padStart(2, "0");
+      return `${hours24}:${minutes}`;
+    });
+
+    return {
+      date,
+      time,
+      combinedModel,
+      formattedTime,
+    };
   },
 };
 </script>

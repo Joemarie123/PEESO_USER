@@ -48,9 +48,11 @@
               ><div class="text-right" style="margin-top: -10px">
                 <q-badge
                   color="warning"
-                  label="See More.."
                   @click="viewJobDetails(job)"
+                  clickable
+                  class="cursor-pointer"
                 >
+                See More..
                 </q-badge>
                 <!-- <p
                   class="text-blue"

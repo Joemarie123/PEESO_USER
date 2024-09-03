@@ -247,11 +247,70 @@ export default {
           this.isButtonDisabled = true;
           console.log("Apply Success", this.ApplyPage);
           this.isDialogOpen = true;
+
+
+          this.userinfo = store.RetrievedData;
+          let data2 = new FormData();
+          data2.append("ApplicantID", this.userinfo.data[0].PMID);
+          store.Retrieve_JobPosting(data2).then((res) => {
+            this.jobposting_me = store.RetreivedJobPosting.data;
+            console.log("Updated Job Posting Details", this.jobposting_me);
+
+            const jobId = parseInt(this.$route.params.id, 10); // Convert ID to an integer
+            const filteredJobs = this.jobposting_me.filter(
+              (job) => job.ID == jobId
+            );
+            console.log("Filtered Jobs:", filteredJobs);
+            this.selected_Details =
+              filteredJobs.length > 0 ? filteredJobs[0] : null;
+            console.log("Updated Selected Details:", this.selected_Details);
+
+            // Refresh user information
+            // this.retrievedLogin = localStorage.getItem("Login");
+            // let data2 = new FormData();
+            // data2.append("LoginID", this.retrievedLogin);
+
+            // return store.RetrievedData_function(data2);
+          });
         })
         .catch((error) => {
           console.log("Apply Error", error);
         });
     },
+
+    //  refreshJobDetails() {
+    //   const store1 = useLoginCheck();
+
+    //   // Retrieve job postings again to refresh data
+    //   store1.Retrieve_JobPosting()
+    //     .then((res) => {
+    //       this.jobposting_me = store1.RetreivedJobPosting.data;
+    //       console.log("Updated Job Posting Details", this.jobposting_me);
+
+    //       const jobId = parseInt(this.$route.params.id, 10); // Convert ID to an integer
+    //       const filteredJobs = this.jobposting_me.filter(
+    //         (job) => job.ID == jobId
+    //       );
+    //       console.log("Filtered Jobs:", filteredJobs);
+    //       this.selected_Details =
+    //         filteredJobs.length > 0 ? filteredJobs[0] : null;
+    //       console.log("Updated Selected Details:", this.selected_Details);
+
+    //       // Refresh user information
+    //       this.retrievedLogin = localStorage.getItem("Login");
+    //       let data2 = new FormData();
+    //       data2.append("LoginID", this.retrievedLogin);
+
+    //       return store1.RetrievedData_function(data2);
+    //     })
+    //     .then((res) => {
+    //       this.userinfo = store1.RetrievedData;
+    //       console.log("User Info:", this.userinfo);
+    //     })
+    //     .catch((error) => {
+    //       console.log("Refresh Error", error);
+    //     });
+    // }
   },
   created() {
     const store1 = useLoginCheck();
