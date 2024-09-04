@@ -115,16 +115,70 @@
         <div class="row">
           <div class="col-12">
             <p>Reason for Re-scheduling:</p>
-            <q-input v-model="text" filled autogrow />
+            <q-input v-model="text" dense filled autogrow />
           </div>
           <div class="col-12 q-mt-sm">
             Date Preferred:
-            <div class="row q-col-gutter-lg text-center">
-              <div class="col-6">
-                <q-date v-model="date" mask="YYYY-MM-DD" color="green" dense />
+            <div class="row">
+              <div class="col-6 q-pa-sm">
+                <q-input
+                  filled
+                  v-model="date"
+                  dense
+                  mask="date"
+                  :rules="['date']"
+                >
+                  <template v-slot:append>
+                    <q-icon name="event" class="cursor-pointer">
+                      <q-popup-proxy
+                        cover
+                        transition-show="scale"
+                        transition-hide="scale"
+                      >
+                        <q-date v-model="date">
+                          <div class="row items-center justify-end">
+                            <q-btn
+                              v-close-popup
+                              label="Close"
+                              color="primary"
+                              flat
+                            />
+                          </div>
+                        </q-date>
+                      </q-popup-proxy>
+                    </q-icon>
+                  </template>
+                </q-input>
               </div>
-              <div class="col-6">
-                <q-time v-model="time" mask="HH:mm" dense />
+              <div class="col-6 q-pa-sm">
+                <q-input
+                  filled
+                  v-model="time"
+                  dense
+                  mask="time"
+                  :rules="['time']"
+                >
+                  <template v-slot:append>
+                    <q-icon name="access_time" class="cursor-pointer">
+                      <q-popup-proxy
+                        cover
+                        transition-show="scale"
+                        transition-hide="scale"
+                      >
+                        <q-time v-model="time">
+                          <div class="row items-center justify-end">
+                            <q-btn
+                              v-close-popup
+                              label="Close"
+                              color="primary"
+                              flat
+                            />
+                          </div>
+                        </q-time>
+                      </q-popup-proxy>
+                    </q-icon>
+                  </template>
+                </q-input>
               </div>
             </div>
           </div>
@@ -145,7 +199,7 @@
 
   <!-- Decline -->
   <q-dialog v-model="decline">
-    <q-card>
+    <q-card style="width: 650px; max-width: 80vw">
       <q-toolbar class="text-white" style="background-color: #06372c">
         <q-toolbar-title>Decline Appointment</q-toolbar-title>
 
@@ -153,12 +207,37 @@
       </q-toolbar>
 
       <q-card-section class="">
-        <p>Reason for Declining :</p>
-        <q-input v-model="text" filled autogrow />
+        <div class="row">
+          <div class="col-12">
+            <p>Reason for Declining:</p>
+            <q-input v-model="text" filled autogrow />
+          </div>
+          <div class="col-12 q-mt-sm">
+            Date Preferred:
+            <div class="row text-center">
+              <div class="col-6">
+                <q-date
+                  v-model="date"
+                  mask="YYYY-MM-DD"
+                  color="#06372c"
+                  dense
+                />
+              </div>
+              <div class="col-6">
+                <q-time v-model="time" mask="HH:mm" color="green" dense />
+              </div>
+            </div>
+          </div>
+        </div>
       </q-card-section>
 
       <q-card-actions align="right" class="text-primary">
-        <q-btn color="green" label="Send" v-close-popup />
+        <q-btn
+          color="green"
+          @click="DeclineClick()"
+          label="Send"
+          v-close-popup
+        />
         <q-btn color="red" label="Cancel" v-close-popup />
       </q-card-actions>
     </q-card>
@@ -234,7 +313,7 @@ export default {
 
       store.AppointmentSched(data).then((res) => {
         this.Schedule = store.AppSchedule;
-        console.log("Accept Success =>", this.Schedule);
+        console.log("Reschedule Success =>", this.Schedule);
         this.userinfo = store.RetrievedData;
 
         if (this.userinfo) {
@@ -250,7 +329,44 @@ export default {
             );
             this.selected_Details =
               filteredJobs.length > 0 ? filteredJobs[0] : null;
-            console.log("Selected Details:", this.selected_Details);
+            console.log("Selected Details Reschedule:", this.selected_Details);
+          });
+        }
+      });
+    },
+
+    //DECLINE APPOINTMENT
+    DeclineClick() {
+      const store = useLoginCheck();
+      let data = new FormData();
+
+      data.append("AppointmentID", this.selected_Details.ID);
+      data.append("action", "DECLINE");
+      data.append("Appointment_date", this.date);
+      data.append("Appointment_time", this.time);
+      data.append("status", "DECLINE");
+      data.append("remarks", "");
+      console.log("Appointment ID =>", this.selected_Details.ID);
+
+      store.AppointmentSched(data).then((res) => {
+        this.Schedule = store.AppSchedule;
+        console.log("Decline Success =>", this.Schedule);
+        this.userinfo = store.RetrievedData;
+
+        if (this.userinfo) {
+          let data = new FormData();
+          data.append("ApplicantID", this.userinfo.data[0].PMID);
+
+          store.AppointmentDtls(data).then((res) => {
+            this.appointments = store.Appointments;
+            console.log("Appointments", this.appointments);
+            const jobId = parseInt(this.$route.params.id, 10);
+            const filteredJobs = this.appointments.filter(
+              (appointment) => appointment.ID == jobId
+            );
+            this.selected_Details =
+              filteredJobs.length > 0 ? filteredJobs[0] : null;
+            console.log("Selected Details Decline:", this.selected_Details);
           });
         }
       });

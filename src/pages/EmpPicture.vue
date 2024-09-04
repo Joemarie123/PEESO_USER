@@ -43,7 +43,7 @@
         animated
       >
         <q-carousel-slide
-          v-for="(src, index) in images"
+          v-for="(src, index) in LogoCompany"
           :key="index"
           :name="index"
         >
@@ -56,8 +56,20 @@
 
 <script>
 import { ref, computed, onMounted, onBeforeUnmount } from "vue";
+import {useLoginCheck} from "src/stores/SignUp_Store";
 
 export default {
+  data(){
+    return {
+      LogoCompany: [],
+    }
+  },
+  created(){
+    const store = useLoginCheck();
+    this.LogoCompany = store.Logos;
+
+
+  },
   setup() {
     const slide = ref(0);
     const dialogVisible = ref(false);

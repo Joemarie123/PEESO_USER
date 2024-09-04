@@ -15,6 +15,7 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
     MyJobApp: [],
     appointment: null,
     AppSchedule: [],
+    Logos: [],
   }),
   getters: {
     // doubleCount: (state) => state.counter * 2,
@@ -137,6 +138,14 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
       );
       this.AppSchedule = res.data;
       console.log("Schedule =>", res.data);
+    },
+
+    async LogoView() {
+      let res = await axios.get(
+        `http://10.0.1.26:82/peesoportal/dashboard/client/getcompanylogos.php`
+      );
+      this.Logos = res.data;
+      console.log("Logos =>", res.data);
     },
 
     /*     async FetchJobDetails(id) {
