@@ -16,6 +16,7 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
     appointment: null,
     AppSchedule: [],
     Logos: [],
+    PI: [],
   }),
   getters: {
     // doubleCount: (state) => state.counter * 2,
@@ -145,7 +146,17 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
         `http://10.0.1.26:82/peesoportal/dashboard/client/getcompanylogos.php`
       );
       this.Logos = res.data;
-      console.log("Logos =>", res.data);
+      console.log("Logossss =>", res.data);
+    },
+
+    //PERSONAL_DATA
+    async PersonalData(payload) {
+      let res = await axios.get(
+        `http://10.0.1.26:82/peesoportal/pds/client/personaldata.php`,
+        payload
+      );
+      this.PI = res.data;
+      console.log("PersonalData=>", res.data);
     },
 
     /*     async FetchJobDetails(id) {

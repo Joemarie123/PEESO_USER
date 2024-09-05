@@ -2,7 +2,7 @@
   <div>
     <div
       class="q-pa-md"
-      style="display: flex; justify-content: center; flex-wrap: wrap;"
+      style="display: flex; justify-content: center; flex-wrap: wrap"
     >
       <q-carousel
         v-model="slide"
@@ -24,11 +24,16 @@
           <q-img
             v-for="(src, idx) in imageGroup"
             :key="idx"
-            :src="src"
+            :src="src.Logo"
             class="my-story-img"
             style="margin: 3px"
-            @click="openImage(src, idx + index * imagesPerSlide)"
-          />
+            @click="openImage(src, idx)"
+          >
+
+          <!-- <div class="absolute-bottom text-subtitle text-center" dense>
+              {{ src.ID }}
+          </div> -->
+          </q-img>
         </q-carousel-slide>
       </q-carousel>
     </div>
@@ -47,7 +52,7 @@
           :key="index"
           :name="index"
         >
-          <q-img :src="src" class="full-screen-image" />
+          <q-img :src="src.Logo" class="full-screen-image" />
         </q-carousel-slide>
       </q-carousel>
     </q-dialog>
@@ -56,45 +61,37 @@
 
 <script>
 import { ref, computed, onMounted, onBeforeUnmount } from "vue";
-import {useLoginCheck} from "src/stores/SignUp_Store";
+import { useLoginCheck } from "src/stores/SignUp_Store";
 
 export default {
-  data(){
-    return {
-      LogoCompany: [],
-    }
+  data() {
+    return {};
   },
-  created(){
-    const store = useLoginCheck();
-    this.LogoCompany = store.Logos;
-
-
-  },
+  created() {},
   setup() {
+    let LogoCompany = ref([]);
+
+    const store = useLoginCheck();
+    store.LogoView().then((res) => {
+      LogoCompany.value = store.Logos.data;
+      console.log("Logo=>", LogoCompany.value);
+    });
     const slide = ref(0);
     const dialogVisible = ref(false);
     const selectedImageIndex = ref(0);
-    const images = [
-      "https://cdn.quasar.dev/img/mountains.jpg",
-      "https://cdn.quasar.dev/img/parallax1.jpg",
-      "https://cdn.quasar.dev/img/parallax2.jpg",
-      "https://cdn.quasar.dev/img/quasar.jpg",
-      "https://cdn.quasar.dev/img/cat.jpg",
-      "https://cdn.quasar.dev/img/linux-avatar.png",
-      "https://cdn.quasar.dev/img/mountains.jpg",
-      "https://cdn.quasar.dev/img/parallax1.jpg",
-      "https://cdn.quasar.dev/img/parallax2.jpg",
-      "https://cdn.quasar.dev/img/quasar.jpg",
-      "https://cdn.quasar.dev/img/cat.jpg",
-      "https://cdn.quasar.dev/img/linux-avatar.png",
-    ];
 
     const imagesPerSlide = ref(3);
 
     const computedImages = computed(() => {
       let groups = [];
-      for (let i = 0; i < images.length; i += imagesPerSlide.value) {
-        groups.push(images.slice(i, i + imagesPerSlide.value));
+      console.log("computed value length=>", LogoCompany.value.length);
+      console.log("image per slide=>", imagesPerSlide.value);
+      for (let i = 0; i < LogoCompany.value.length; i += imagesPerSlide.value) {
+        console.log(
+          "sssss=>",
+          LogoCompany.value.slice(i, i + imagesPerSlide.value)
+        );
+        groups.push(LogoCompany.value.slice(i, i + imagesPerSlide.value));
       }
       return groups;
     });
@@ -116,8 +113,11 @@ export default {
     };
 
     const openImage = (src, index) => {
+      console.log("Opening image:", src, "at index:", index);
+
       selectedImageIndex.value = index;
       dialogVisible.value = true;
+      // console.log("LogoCompany:", selectedImageIndex.value);
     };
 
     onMounted(() => {
@@ -130,6 +130,7 @@ export default {
     });
 
     return {
+      LogoCompany,
       slide,
       computedImages,
       dialogVisible,
@@ -160,10 +161,11 @@ export default {
   object-fit: contain;
   border-radius: 3%;
   cursor: pointer;
+  background-color: rgb(171, 213, 181);
 }
 
 .full-screen-image {
-  height: 100vh;
+  height: 100%;
   object-fit: contain;
   background-color: black;
 }
