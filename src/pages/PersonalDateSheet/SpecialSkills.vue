@@ -27,7 +27,7 @@
                 title=""
                 wrap-cells=""
                 dense
-                :rows="skills"
+                :rows="skillsdata"
                 :columns="columnSkills"
                 row-key="id"
                 ><template v-slot:body-cell-actions="{ row }">
@@ -81,8 +81,7 @@
 </template>
 <script>
 import SpecialSkills from "../EditPDS/SpecialSkillsHobbies.vue";
-// import { useLoginStore } from "src/stores/LoginStore";
-// import { useUserInfoStore } from "src/stores/AdditionalStore";
+import { useLoginCheck } from "src/stores/SignUp_Store";
 export default {
   data() {
     return {
@@ -93,6 +92,8 @@ export default {
       skills: [],
       model: "",
       personal: [],
+      skillsdata: [],
+      userinfo: [],
       columnSkills: [
         {
           name: "SkillsandHobbies",
@@ -112,7 +113,19 @@ export default {
       ],
     };
   },
+  created() {
+    const store = useLoginCheck();
+    this.userinfo = store.RetrievedData;
 
+    let data = new FormData();
+    data.append("action", "view");
+    data.append("ControlNo", this.userinfo.data[0].ControlNo);
+
+    store.SkillsData(data).then((res) => {
+      this.skillsdata = store.SH;
+      console.log("SkillsData => ", this.skillsdata);
+    });
+  },
   methods: {
     EditBtn() {
       this.EditProfile = true;

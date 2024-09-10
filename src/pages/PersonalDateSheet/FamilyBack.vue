@@ -12,98 +12,98 @@
     </p>
     <q-separator class="q-ma-sm" />
     <div v-show="fb">
-    <div class="row">
-      <div class="col-12">
-        <q-card class="q-ma-md q-pa-md">
-          <p class="" style="font-weight: 600">SPOUSE'S INFORMATION</p>
-          <div class="row">
-            <div class="col-4 col-sm-6 col-xs-12 col-md-4">
-              <!-- <p class="name">{{ personals.SpouseName }}</p> -->
-              <p class="nameLabel">Fullname</p>
-            </div>
-            <div class="col-4 col-sm-6 col-xs-12 col-md-4">
-              <!-- <p class="name">{{ this.model }}</p> -->
-              <p class="nameLabel">Name Extension</p>
-            </div>
-            <div class="col-4 col-sm-6 col-xs-12 col-md-4">
-              <!-- <p class="name">{{ personals.Occupation }}</p> -->
-              <p class="nameLabel">Occupation</p>
-            </div>
-            <div class="col-4 col-sm-6 col-xs-12 col-md-4">
-              <!-- <p class="name">{{ personals.SpouseEmployer }}</p> -->
-              <p class="nameLabel">Employers/Business Name</p>
-            </div>
-            <div class="col-4 col-sm-6 col-xs-12 col-md-4">
-              <!-- <p class="name">{{ personals.SpouseEmpAddress }}</p> -->
-              <p class="nameLabel">Business Address</p>
-            </div>
-            <div class="col-4 col-sm-6 col-xs-12 col-md-4">
-              <!-- <p class="name">{{ personals.SpouseEmpTel }}</p> -->
-              <p class="nameLabel">Business Telephone Number</p>
-            </div>
-          </div>
-        </q-card>
-      </div>
-    </div>
-    <div>
-      <q-card class="q-ma-md q-pa-md" style="margin-top: -0px">
-        <p style="font-weight: 600" class="q-mb-lg">PARENT'S INFORMATION</p>
-        <div class="row">
-          <div class="col-12 col-sm-12 col-xs-12 col-md-6">
+      <div class="row">
+        <div class="col-12">
+          <q-card class="q-ma-md q-pa-md">
+            <p class="" style="font-weight: 600">SPOUSE'S INFORMATION</p>
             <div class="row">
-              <div class="col-12 col-lg-4 col-sm-6">
-                <p class="addressTitle">FATHER'S FULLNAME:</p>
+              <div class="col-4 col-sm-6 col-xs-12 col-md-4">
+                <p class="name">{{ userinfo.data[0].SpouseName }}</p>
+                <p class="nameLabel">Fullname</p>
               </div>
-              <div class="col-12 col-lg-8 col-sm-6">
-                <!-- <p class="address">{{ personals.FatherName }}</p> -->
+              <div class="col-4 col-sm-6 col-xs-12 col-md-4">
+                <p class="name">{{ this.model }}</p>
+                <p class="nameLabel">Name Extension</p>
               </div>
-              <div class="col-12 col-lg-4 col-sm-6">
-                <p class="addressTitle">NAME EXTENSION:</p>
+              <div class="col-4 col-sm-6 col-xs-12 col-md-4">
+                <p class="name">{{ userinfo.data[0].SpouseEmployer }}</p>
+                <p class="nameLabel">Occupation</p>
               </div>
-              <div class="col-12 col-lg-8 col-sm-6">
-                <!-- <p class="address">{{ this.model }}</p> -->
+              <div class="col-4 col-sm-6 col-xs-12 col-md-4">
+                <p class="name">{{ userinfo.data[0].SpouseEmployer }}</p>
+                <p class="nameLabel">Employers/Business Name</p>
+              </div>
+              <div class="col-4 col-sm-6 col-xs-12 col-md-4">
+                <p class="name">{{ userinfo.data[0].SpouseEmpAddress }}</p>
+                <p class="nameLabel">Business Address</p>
+              </div>
+              <div class="col-4 col-sm-6 col-xs-12 col-md-4">
+                <p class="name">{{ userinfo.data[0].SpouseEmpTel }}</p>
+                <p class="nameLabel">Business Telephone Number</p>
               </div>
             </div>
-          </div>
-          <div class="col-6 col-sm-12 col-xs-12 col-md-6">
-            <div class="row">
-              <div class="col-12 col-lg-4 col-sm-6">
-                <p class="addressTitle">MOTHER'S MAIDEN NAME:</p>
-              </div>
-              <div class="col-12 col-lg-8 col-sm-6">
-                <!-- <p class="address">{{ personals.MotherName }}</p> -->
-              </div>
-            </div>
-          </div>
+          </q-card>
         </div>
-      </q-card>
-    </div>
-    <div class="row">
-      <div class="col">
+      </div>
+      <div>
         <q-card class="q-ma-md q-pa-md" style="margin-top: -0px">
+          <p style="font-weight: 600" class="q-mb-lg">PARENT'S INFORMATION</p>
           <div class="row">
-            <div class="col-12">
-              <p style="font-weight: 600" class="">CHILDREN'S INFORMATION</p>
-              <q-table
-                :grid="$q.screen.xs"
-                class="my-sticky-header-table text-uppercase"
-                flat
-                bordered
-                title=""
-                dense
-                :rows="children"
-                :columns="columns"
-                row-key="id"
-                ></q-table>
+            <div class="col-12 col-sm-12 col-xs-12 col-md-6">
+              <div class="row">
+                <div class="col-12 col-lg-4 col-sm-6">
+                  <p class="addressTitle">FATHER'S FULLNAME:</p>
+                </div>
+                <div class="col-12 col-lg-8 col-sm-6">
+                  <p class="address">{{ userinfo.data[0].FatherName }}</p>
+                </div>
+                <div class="col-12 col-lg-4 col-sm-6">
+                  <p class="addressTitle">NAME EXTENSION:</p>
+                </div>
+                <div class="col-12 col-lg-8 col-sm-6">
+                  <p class="address">{{ this.model }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-sm-12 col-xs-12 col-md-6">
+              <div class="row">
+                <div class="col-12 col-lg-4 col-sm-6">
+                  <p class="addressTitle">MOTHER'S MAIDEN NAME:</p>
+                </div>
+                <div class="col-12 col-lg-8 col-sm-6">
+                  <p class="address">{{ userinfo.data[0].MotherName }}</p>
+                </div>
+              </div>
             </div>
           </div>
         </q-card>
       </div>
-    </div>
+      <div class="row">
+        <div class="col">
+          <q-card class="q-ma-md q-pa-md" style="margin-top: -0px">
+            <div class="row">
+              <div class="col-12">
+                <p style="font-weight: 600" class="">CHILDREN'S INFORMATION</p>
+                <q-table
+                  :grid="$q.screen.xs"
+                  class="my-sticky-header-table text-uppercase"
+                  flat
+                  bordered
+                  title=""
+                  dense
+                  :rows="childrendata"
+                  :columns="columns"
+                  row-key="id"
+                ></q-table>
+              </div>
+            </div>
+          </q-card>
+        </div>
+      </div>
     </div>
 
     <div v-show="EditProfile">
-      <FamilyBackground :onSave="SaveEdit"/>
+      <FamilyBackground :onSave="SaveEdit" />
     </div>
 
     <!-- DIALOG FOR CHILD DELETE -->
@@ -138,13 +138,18 @@
 </template>
 <script>
 import FamilyBackground from "../EditPDS/FamilyBackground.vue";
+import { useLoginCheck } from "src/stores/SignUp_Store";
 
 export default {
   data() {
     return {
+      DeleteChildrenDialog:false,
+      userinfo: [],
+      personaldata: [],
+      childrendata: [],
       EditProfile: false,
       fb: true,
-       columns: [
+      columns: [
         {
           name: "lastname",
           required: true,
@@ -170,15 +175,38 @@ export default {
       ],
     };
   },
+  created() {
+    const store = useLoginCheck();
+    this.userinfo = store.RetrievedData;
+
+    let data = new FormData();
+    data.append("action", "view");
+    data.append("ControlNo", this.userinfo.data[0].ControlNo);
+
+    store.PersonalData(data).then((res) => {
+
+      this.personaldata = store.PI;
+      console.log("PersonalInf =>", this.pi);
+    });
+
+    store.ChildrenData(data).then((res) => {
+      console.log("success=>",store.CD.success)
+       if(store.CD.success != false){
+        this.childrendata = store.CD;
+      }
+
+      console.log("ChildrenData => ", this.childrendata);
+    })
+  },
   methods: {
     EditBtn() {
       this.EditProfile = true;
       this.fb = false;
     },
-    SaveEdit(){
+    SaveEdit() {
       this.EditProfile = false;
       this.fb = true;
-    }
+    },
   },
   components: {
     FamilyBackground,

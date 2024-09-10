@@ -26,7 +26,7 @@
                   wrap-cells=""
                   title=""
                   dense
-                  :rows="personal"
+                  :rows="civildata"
                   :columns="columns"
                   row-key="id"
                   ><template v-slot:body-cell-actions="{ row }">
@@ -81,8 +81,8 @@
   </div>
 </template>
 <script>
-// import { useLoginStore } from "src/stores/LoginStore";
-// import { useUserInfoStore } from "src/stores/AdditionalStore";
+
+import { useLoginCheck } from "src/stores/SignUp_Store";
 import CivilService from "../EditPDS/CivilService.vue";
 
 export default {
@@ -92,6 +92,8 @@ export default {
       CivilID: "",
       model: "",
       personal: [],
+      civildata: [],
+      userinfo: [],
       cs: true,
       EditProfile: false,
       columns: [
@@ -154,6 +156,19 @@ export default {
         },
       ],
     };
+  },
+   created() {
+    const store = useLoginCheck();
+    this.userinfo = store.RetrievedData;
+
+    let data = new FormData();
+    data.append("action", "view");
+    data.append("ControlNo", this.userinfo.data[0].ControlNo);
+
+    store.CivilData(data).then((res) => {
+      this.civildata = store.CS;
+      console.log("CivilData => ", this.civildata);
+    });
   },
   methods: {
     EditBtn() {

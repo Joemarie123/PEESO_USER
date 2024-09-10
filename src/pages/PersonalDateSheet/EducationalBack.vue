@@ -26,7 +26,7 @@
                   bordered
                   title=""
                   dense
-                  :rows="rows"
+                  :rows="educationaldata"
                   :columns="columns"
                   row-key="id"
                 >
@@ -84,11 +84,14 @@
 </template>
 <script scoped>
 import EducationalBackground from "../EditPDS/EducationalBackground.vue";
+import { useLoginCheck } from "src/stores/SignUp_Store";
 export default {
   data() {
     return {
       EditProfile: false,
       eb: true,
+      educationaldata: [],
+      userinfo: [],
       columns: [
         {
           name: "LEVEL",
@@ -162,6 +165,19 @@ export default {
         },
       ],
     };
+  },
+  created() {
+    const store = useLoginCheck();
+    this.userinfo = store.RetrievedData;
+
+    let data = new FormData();
+    data.append("action", "view");
+    data.append("ControlNo", this.userinfo.data[0].ControlNo);
+
+    store.EducationalData(data).then((res) => {
+      this.educationaldata = store.EB;
+      console.log("EducationalData => ", this.educationaldata);
+    });
   },
   methods: {
     EditBtn() {

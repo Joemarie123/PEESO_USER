@@ -17,7 +17,16 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
     AppSchedule: [],
     Logos: [],
     PI: [],
+    CD: [],
+    EB: [],
+    CS: [],
+    LD: [],
+    SH: [],
+    NON: [],
+    MO: [],
+    REF: [],
   }),
+  persist: true,
   getters: {
     // doubleCount: (state) => state.counter * 2,
   },
@@ -151,7 +160,7 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
 
     //PERSONAL_DATA
     async PersonalData(payload) {
-      let res = await axios.get(
+      let res = await axios.post(
         `http://10.0.1.26:82/peesoportal/pds/client/personaldata.php`,
         payload
       );
@@ -159,17 +168,82 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
       console.log("PersonalData=>", res.data);
     },
 
-    /*     async FetchJobDetails(id) {
-      let res = await axios.get(
-        `http://10.0.1.26:82/peesoportal/jobs/client/getjobs.php`
+    //CHILDREN_DATA
+    async ChildrenData(payload) {
+      let res = await axios.post(
+        `http://10.0.1.26:82/peesoportal/pds/client/children.php`,
+        payload
       );
-      if (res.data && typeof res.data === "object" && res.data.ID === id) {
-        this.RetreivedJobDetails = res.data;
-      } else {
-        console.error("Job Not Found or Unexpected Response Format");
-      }
-      console.log("Retrieved Job Data", this.RetreivedJobDetails);
-    }, */
+      this.CD = res.data;
+      console.log("ChildrenData =>", res.data);
+    },
+
+    //EDUCATIONAL_DATA
+    async EducationalData(payload) {
+      let res = await axios.post(
+        `http://10.0.1.26:82/peesoportal/pds/client/education.php`,
+        payload
+      );
+      this.EB = res.data;
+      console.log("EducationalData => ", res.data);
+    },
+
+    //CIVILSERVICE_DATA
+    async CivilData(payload) {
+      let res = await axios.post(
+        `http://10.0.1.26:82/peesoportal/pds/client/civilservice.php`,
+        payload
+      );
+      this.CS = res.data;
+      console.log("CivilData => ", res.data);
+    },
+
+    //TRAININGS_DATA
+    async TrainingData(payload) {
+      let res = await axios.post(
+        `http://10.0.1.26:82/peesoportal/pds/client/trainings.php`,
+        payload
+      );
+      this.LD = res.data;
+      console.log("TrainingData => ", res.data);
+    },
+
+    //SKILLS_DATA
+    async SkillsData(payload) {
+      let res = await axios.post(
+        `http://10.0.1.26:82/peesoportal/pds/client/skills.php`,
+        payload
+      );
+      this.SH = res.data;
+      console.log("SkillsData => ", res.data);
+    },
+
+    //NONACADEMIC_DATA
+    async NonacademicData(payload) {
+      let res = await axios.post(
+        `http://10.0.1.26:82/peesoportal/pds/client/nonacademic.php`,
+        payload
+      );
+      this.NON = res.data;
+      console.log("NonacademicData => ", res.data);
+    },
+    //ORGANIZATION_DATA
+    async OrganizationData(payload) {
+      let res = await axios.post(
+        `http://10.0.1.26:82/peesoportal/pds/client/skills.php`,
+        payload
+      );
+      this.MO = res.data;
+      console.log("OrganizationData => ", res.data);
+    },
+    //REFERENCE_DATA
+    async ReferenceData(payload) {
+      let res = await axios.post(
+        `http://10.0.1.26:82/peesoportal/pds/client/skills.php`,
+        payload
+      );
+      this.REF = res.data;
+      console.log("ReferenceData => ", res.data);
+    },
   },
-  persist: true,
 });

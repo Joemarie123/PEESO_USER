@@ -9,6 +9,7 @@
             label="Spouse's Surname"
             dense
             class="q-pa-sm text-uppercase"
+            v-model="userinfo.data[0].SpouseName"
           />
         </div>
         <div class="col-12 col-md-6 col-sm-6 col-lg-6">
@@ -18,6 +19,7 @@
             label="Spouse's Firstname"
             class="q-pa-sm text-uppercase"
             dense
+            v-model="userinfo.data[0].SpouseName"
           />
         </div>
         <div class="col-12 col-md-6 col-sm-6 col-lg-6">
@@ -27,6 +29,7 @@
             label="Spouse's Middlename"
             dense
             class="q-pa-sm text-uppercase"
+            v-model="userinfo.data[0].SpouseName"
           />
         </div>
         <div class="col-12 col-md-6 col-sm-6 col-lg-6">
@@ -41,6 +44,7 @@
             :options="extension"
             style="min-width: 70%; max-width: 98%"
             behavior="menu"
+            v-model="userinfo.data[0].SpouseName"
           >
           </q-select>
         </div>
@@ -53,6 +57,7 @@
             label="Occupation"
             dense
             class="q-pa-sm text-uppercase"
+            v-model="userinfo.data[0].SpouseEmployer"
           />
         </div>
         <div class="col-12 col-md-6 col-sm-6 col-lg-6">
@@ -61,6 +66,7 @@
             label="Employers / Business Name"
             class="q-pa-sm text-uppercase"
             dense
+            v-model="userinfo.data[0].SpouseEmployer"
           />
         </div>
         <div class="col-12 col-md-6 col-sm-6 col-lg-6">
@@ -69,6 +75,7 @@
             label="Business Address"
             class="q-pa-sm text-uppercase"
             dense
+            v-model="userinfo.data[0].SpouseEmpAddress"
           />
         </div>
         <div class="col-12 col-md-6 col-sm-6 col-lg-6">
@@ -78,6 +85,7 @@
             class="q-pa-sm"
             dense
             type="number"
+            v-model="userinfo.data[0].SpouseEmpTel"
           />
         </div>
       </div>
@@ -92,6 +100,7 @@
             label="Father's Surname"
             dense
             class="q-pa-sm text-uppercase"
+            v-model="userinfo.data[0].FatherName"
           />
         </div>
         <div class="col-12 col-md-6 col-sm-6 col-lg-6">
@@ -100,6 +109,7 @@
             label="Father's Firstname"
             class="q-pa-sm text-uppercase"
             dense
+            v-model="userinfo.data[0].FatherName"
           />
         </div>
         <div class="col-12 col-md-6 col-sm-6 col-lg-6">
@@ -108,6 +118,7 @@
             label="Father's Middlename"
             dense
             class="q-pa-sm text-uppercase"
+            v-model="userinfo.data[0].FatherName"
           />
         </div>
         <div class="col-12 col-md-6 col-sm-6 col-lg-6">
@@ -122,6 +133,7 @@
             :options="extension"
             style="min-width: 70%; max-width: 98%"
             behavior="menu"
+            v-model="userinfo.data[0].FatherName"
           >
           </q-select>
         </div>
@@ -131,6 +143,7 @@
             label="Mother's Maiden Surname"
             dense
             class="q-pa-sm text-uppercase"
+            v-model="userinfo.data[0].MotherName"
           />
         </div>
         <div class="col-12 col-md-6 col-sm-6 col-lg-6">
@@ -139,6 +152,7 @@
             label="Mother's Firstname"
             class="q-pa-sm text-uppercase"
             dense
+            v-model="userinfo.data[0].MotherName"
           />
         </div>
         <div class="col-md-12 col-xs-12">
@@ -147,6 +161,7 @@
             label="Mother's Maiden Middlename"
             dense
             class="q-pa-sm text-uppercase"
+            v-model="userinfo.data[0].MotherName"
           />
         </div>
       </div>
@@ -160,9 +175,8 @@
           <q-btn
             label="Add"
             @click="secondDialog = true"
-
             class="q-mb-sm q-ml-sm"
-            style="background-color: #06372C; color: white"
+            style="background-color: #06372c; color: white"
           ></q-btn>
         </div>
 
@@ -172,7 +186,7 @@
           bordered
           title=""
           dense
-          :rows="children"
+          :rows="childrendata"
           :columns="columns"
           row-key="id"
         ></q-table>
@@ -183,7 +197,7 @@
           transition-hide="scale"
         >
           <q-card class="" style="width: 500px">
-            <q-toolbar style="background-color: #06372C; color: white">
+            <q-toolbar style="background-color: #06372c; color: white">
               <q-toolbar-title>ADD CHILDREN</q-toolbar-title>
               <q-btn icon="close" flat round dense v-close-popup />
             </q-toolbar>
@@ -196,6 +210,7 @@
                     label="Name of Children"
                     dense
                     class="q-pa-sm q-mb-sm"
+                    v-model="userinfo.data[0].ChildName"
                   />
                 </div>
                 <div class="col-12">
@@ -205,6 +220,7 @@
                     dense
                     class="q-pa-sm q-mb-sm"
                     type="date"
+                    v-model="userinfo.data[0].BirthDate"
                   />
                 </div>
               </div>
@@ -219,7 +235,7 @@
               />
               <q-btn
                 label="Add Update"
-                 style="background-color: #06372C; color: white;"
+                style="background-color: #06372c; color: white"
                 size="md"
                 @click="saveservice()"
               />
@@ -231,7 +247,7 @@
   </div>
   <div class="q-pa-sm q-ma-sm">
     <q-btn
-      style="background-color: #06372C;"
+      style="background-color: #06372c"
       class="full-width text-white"
       label="Save Changes"
       @click="onSave"
@@ -239,6 +255,7 @@
   </div>
 </template>
 <script scoped>
+import { useLoginCheck } from "src/stores/SignUp_Store";
 export default {
   props: {
     onSave: {
@@ -249,6 +266,9 @@ export default {
   data() {
     return {
       secondDialog: false,
+      userinfo: [],
+      personaldata: [],
+      childrendata: [],
       columns: [
         {
           name: "lastname",
@@ -274,6 +294,28 @@ export default {
         },
       ],
     };
+  },
+  created() {
+    const store = useLoginCheck();
+    this.userinfo = store.RetrievedData;
+
+    let data = new FormData();
+    data.append("action", "edit");
+    data.append("ControlNo", this.userinfo.data[0].ControlNo);
+
+    let data2 = new FormData();
+    data.append("action", "add");
+    data.append("ControlNo", this.userinfo.data[0].ControlNo);
+
+    store.PersonalData(data).then((res) => {
+      this.personaldata = store.PI;
+      console.log("PersonalInf =>", this.pi);
+    });
+
+    store.ChildrenData(data2).then((res) => {
+      this.childrendata = store.CD;
+      console.log("ChildrenData => ", this.childrendata);
+    });
   },
 };
 </script>

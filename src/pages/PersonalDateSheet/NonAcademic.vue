@@ -27,7 +27,7 @@
                 title=""
                 wrap-cells=""
                 dense
-                :rows="academic"
+                :rows="nonacademicdata"
                 :columns="columnAcademic"
                 row-key="id"
               >
@@ -82,6 +82,7 @@
 </template>
 <script>
 import NonAcademicDist from "../EditPDS/NonAcademicDist.vue";
+import { useLoginCheck } from "src/stores/SignUp_Store";
 export default {
   data() {
     return {
@@ -92,6 +93,8 @@ export default {
       model: "",
       personal: [],
       academic: [],
+      nonacademicdata: [],
+      userinfo: [],
       columnAcademic: [
         {
           name: "NonAcademic",
@@ -111,7 +114,20 @@ export default {
       ],
     };
   },
-   methods: {
+  created() {
+    const store = useLoginCheck();
+    this.userinfo = store.RetrievedData;
+
+    let data = new FormData();
+    data.append("action", "view");
+    data.append("ControlNo", this.userinfo.data[0].ControlNo);
+
+    store.NonacademicData(data).then((res) => {
+      this.nonacademicdata = store.NON;
+      console.log("NonacademicData => ", this.nonacademicdata);
+    });
+  },
+  methods: {
     EditBtn() {
       this.EditProfile = true;
       this.non = false;

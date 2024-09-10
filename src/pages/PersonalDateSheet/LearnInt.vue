@@ -26,7 +26,7 @@
                 title=""
                 wrap-cells=""
                 dense
-                :rows="personal"
+                :rows="trainingsdata"
                 :columns="columns"
                 row-key="id"
                 :rows-per-page-options="[10]"
@@ -81,7 +81,8 @@
   </div>
 </template>
 <script>
-import LearningDevelopment from '../EditPDS/LearningDevelopment.vue'
+import LearningDevelopment from '../EditPDS/LearningDevelopment.vue';
+import { useLoginCheck } from "src/stores/SignUp_Store";
 export default {
   data() {
     return {
@@ -91,6 +92,8 @@ export default {
        DeleteLearningDialog: false,
       LearningID: "",
       personal: [],
+        trainingsdata: [],
+      userinfo: [],
       columns: [
         {
           name: "Title",
@@ -144,6 +147,19 @@ export default {
         },
       ],
     };
+  },
+     created() {
+    const store = useLoginCheck();
+    this.userinfo = store.RetrievedData;
+
+    let data = new FormData();
+    data.append("action", "view");
+    data.append("ControlNo", this.userinfo.data[0].ControlNo);
+
+    store.TrainingData(data).then((res) => {
+      this.trainingsdata = store.LD;
+      console.log("TrainingData => ", this.trainingsdata);
+    });
   },
   methods: {
     EditBtn() {

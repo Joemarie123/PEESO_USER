@@ -151,10 +151,11 @@ export default {
 
     const store = useLoginCheck();
     this.userinfo = store.RetrievedData;
-
+console.log("mmao ni", this.userinfo);
     console.log("length", this.userinfo.length);
     if (this.userinfo) {
       console.log("USer", this.userinfo.data[0].PMID);
+
 
       let data = new FormData();
       data.append("ApplicantID", this.userinfo.data[0].PMID);

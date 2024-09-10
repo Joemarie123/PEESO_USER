@@ -7,41 +7,41 @@
           <div class="col-12 col-md-6 col-sm-6 col-lg-6">
             <q-input
               ref="lastname"
+              v-model="userinfo.data[0].Surname"
               lazy-rules
               filled
               label="Lastname"
               dense
               class="q-pa-sm"
-              style="text-transform: uppercase"
               :rules="inputRules"
             />
           </div>
           <div class="col-12 col-md-6 col-sm-6 col-lg-6">
             <q-input
               ref="firstname"
+              v-model="userinfo.data[0].Firstname"
               lazy-rules
               filled
               label="Firstname"
               class="q-pa-sm"
               dense
-              style="text-transform: uppercase"
               :rules="inputRules"
             />
           </div>
           <div class="col-12 col-md-6 col-sm-6 col-lg-6">
             <q-input
               filled
+              v-model="userinfo.data[0].MIddlename"
               label="Middlename"
               dense
               class="q-pa-sm"
-              style="text-transform: uppercase"
             />
           </div>
           <div class="col-12 col-md-6 col-sm-6 col-lg-6">
             <!-- <q-input filled label="Name Extension" dense class="q-pa-sm" /> -->
             <q-select
               filled
-              v-model="model"
+              v-model="userinfo.data[0].Suffix"
               use-input
               dense
               class="q-pa-sm"
@@ -73,6 +73,7 @@
             lazy-rules
             filled
             label="Date of Birth"
+            v-model="userinfo.data[0].BirthDate"
             dense
             class="q-pa-sm q-mb-xs"
             type="date"
@@ -82,6 +83,7 @@
         <div class="col-12 col-md-6 col-lg-6 col-sm-6">
           <q-input
             filled
+            v-model="userinfo.data[0].BirthPlace"
             label="Place of Birth"
             class="q-pa-sm q-mb-xs"
             dense
@@ -93,6 +95,7 @@
             class="q-pa-sm"
             filled
             dense
+            v-model="userinfo.data[0].Sex"
             input-debounce="0"
             label="Sex"
             :options="sexOptions"
@@ -110,6 +113,7 @@
             class="q-pa-sm"
             ref="civilstatus"
             lazy-rules
+            v-model="userinfo.data[0].CivilStatus"
             filled
             :rules="inputRules"
             dense
@@ -138,6 +142,7 @@
             label="Gender Preference"
             :options="genderPreference"
             behavior="menu"
+            v-model="userinfo.data[0].gender"
           >
             <template v-slot:no-option>
               <q-item>
@@ -154,6 +159,7 @@
             label="Height (m)"
             dense
             class="q-pa-sm"
+            v-model="userinfo.data[0].Heights"
           />
         </div>
         <div class="col-6 col-lg-3 col-md-3 col-sm-3">
@@ -163,6 +169,7 @@
             label="Weight (kg)"
             class="q-pa-sm"
             dense
+            v-model="userinfo.data[0].Weights"
           />
         </div>
 
@@ -173,14 +180,27 @@
             label="Blood Type"
             class="q-pa-sm"
             dense
+            v-model="userinfo.data[0].BloodType"
           />
         </div>
 
         <div class="col-12 col-md-6 col-lg-6 col-sm-6">
-          <q-input filled label="Telephone Number" class="q-pa-sm" dense />
+          <q-input
+            filled
+            label="Telephone Number"
+            class="q-pa-sm"
+            dense
+            v-model="userinfo.data[0].TelNo"
+          />
         </div>
         <div class="col-12 col-md-6 col-lg-6 col-sm-6">
-          <q-input filled label="Cellphone Number" class="q-pa-sm" dense />
+          <q-input
+            filled
+            label="Cellphone Number"
+            class="q-pa-sm"
+            dense
+            v-model="userinfo.data[0].CellphoneNo"
+          />
         </div>
         <div class="col-12 col-md-6 col-lg-6 col-sm-6">
           <q-input
@@ -189,6 +209,7 @@
             class="q-pa-sm"
             type="email"
             dense
+            v-model="userinfo.data[0].Email"
           />
         </div>
       </div>
@@ -202,6 +223,7 @@
             label="GSIS ID NO."
             dense
             class="q-pa-sm"
+            v-model="userinfo.data[0].GSISNo"
           />
         </div>
         <div class="col-12 col-md-6 col-lg-6 col-sm-6">
@@ -211,6 +233,7 @@
             label="PAGIBIG ID NO."
             class="q-pa-sm"
             dense
+            v-model="userinfo.data[0].PAGIBIGNo"
           />
         </div>
         <div class="col-12 col-md-6 col-lg-6 col-sm-6">
@@ -220,6 +243,7 @@
             label="PHILHEALTH ID NO."
             class="q-pa-sm"
             dense
+            v-model="userinfo.data[0].PHEALTHNo"
           />
         </div>
         <div class="col-12 col-md-6 col-lg-6 col-sm-6">
@@ -229,6 +253,7 @@
             label="SSS NO."
             dense
             class="q-pa-sm"
+            v-model="userinfo.data[0].SSSNo"
           />
         </div>
         <div class="col-12 col-md-6 col-lg-6 col-sm-6">
@@ -238,6 +263,7 @@
             label="TIN NO."
             class="q-pa-sm"
             dense
+            v-model="userinfo.data[0].TINNo"
           />
         </div>
         <div class="col-12 col-md-6 col-lg-6 col-sm-6">
@@ -248,6 +274,7 @@
             class="q-pa-sm"
             dense
             type=""
+            v-model="userinfo.data[0].ControlNo"
           />
         </div>
       </div>
@@ -262,6 +289,7 @@
             label="Citizenship"
             :options="citizenship"
             behavior="menu"
+            v-model="userinfo.data[0].cit"
           >
             <template v-slot:no-option>
               <q-item>
@@ -282,6 +310,7 @@
             class="q-pa-sm"
             dense
             type=""
+            v-model="userinfo.data[0].CountryBirth"
           />
         </div>
       </div>
@@ -301,6 +330,7 @@
               :options="religion"
               @filter="filterFn"
               behavior="menu"
+              v-model="userinfo.data[0].Religion"
             >
               <template v-slot:no-option>
                 <q-item>
@@ -341,6 +371,7 @@
             map-options
             class="q-pa-sm"
             dense
+            v-model="userinfo.data[0].Rregion"
           />
         </div>
         <div class="col-12 col-lg-6 col-md-6 col-sm-6">
@@ -352,6 +383,7 @@
             :options="provinceOptions"
             class="q-pa-sm"
             dense
+            v-model="userinfo.data[0].Rprovince"
           />
         </div>
         <div class="col-12 col-lg-6 col-md-6 col-sm-6">
@@ -363,6 +395,7 @@
             :options="cityOptions"
             class="q-pa-sm"
             dense
+            v-model="userinfo.data[0].Rcity"
           />
         </div>
         <div class="col-12 col-lg-6 col-md-6 col-sm-6">
@@ -374,6 +407,7 @@
             :options="brgyOptions"
             class="q-pa-sm"
             dense
+            v-model="userinfo.data[0].Rbarangay"
           />
         </div>
         <div class="col-12 col-lg-6 col-md-6 col-sm-6">
@@ -383,6 +417,7 @@
             label="Subdivision/Village"
             class="q-pa-sm"
             dense
+            v-model="userinfo.data[0].Rsubdivision"
           />
         </div>
         <div class="col-12 col-lg-6 col-md-6 col-sm-6">
@@ -392,6 +427,7 @@
             label="Street/Purok"
             class="q-pa-sm"
             dense
+            v-model="userinfo.data[0].Rstreet"
           />
         </div>
         <div class="col-md-8 col-xs-6">
@@ -401,10 +437,17 @@
             label="House/Block/Lot No."
             dense
             class="q-pa-sm"
+            v-model="userinfo.data[0].Rhouse"
           />
         </div>
         <div class="col-md-4 col-xs-6">
-          <q-input filled label="ZIP CODE" class="q-pa-sm" dense />
+          <q-input
+            filled
+            label="ZIP CODE"
+            class="q-pa-sm"
+            dense
+            v-model="userinfo.data[0].Rzip"
+          />
         </div>
       </div>
 
@@ -434,6 +477,7 @@
             @update:model-value="handleRRegionChange(4)"
             class="q-pa-sm"
             dense
+            v-model="userinfo.data[0].Pregion"
           />
         </div>
         <div class="col-12 col-lg-6 col-md-6 col-sm-6">
@@ -446,6 +490,7 @@
             @update:model-value="handleRRegionChange(5)"
             class="q-pa-sm"
             dense
+            v-model="userinfo.data[0].Pprovince"
           />
         </div>
         <div class="col-12 col-lg-6 col-md-6 col-sm-6">
@@ -458,6 +503,7 @@
             :options="PcityOptions"
             class="q-pa-sm"
             dense
+            v-model="userinfo.data[0].Pcity"
           />
         </div>
         <div class="col-12 col-lg-6 col-md-6 col-sm-6">
@@ -469,6 +515,7 @@
             :options="PbrgyOptions"
             class="q-pa-sm"
             dense
+            v-model="userinfo.data[0].Pbarangay"
           />
         </div>
         <div class="col-12 col-lg-6 col-md-6 col-sm-6">
@@ -478,6 +525,7 @@
             label="Subdivision/Village"
             class="q-pa-sm"
             dense
+            v-model="userinfo.data[0].Psubdivision"
           />
         </div>
         <div class="col-12 col-lg-6 col-md-6 col-sm-6">
@@ -487,6 +535,7 @@
             label="Street"
             class="q-pa-sm"
             dense
+            v-model="userinfo.data[0].Pstreet"
           />
         </div>
         <div class="col-md-8 col-xs-6">
@@ -496,6 +545,7 @@
             label="House/Block/Lot No."
             dense
             class="q-pa-sm"
+            v-model="userinfo.data[0].Phouse"
           />
         </div>
         <div class="col-md-4 col-xs-6">
@@ -505,35 +555,59 @@
             label="ZIP CODE"
             class="q-pa-sm"
             dense
+            v-model="userinfo.data[0].Pzip"
           />
         </div>
       </div>
     </q-card>
   </div>
   <div class="q-pa-sm q-ma-sm">
-    <q-btn style="background-color: #06372C;" class="full-width text-white" @click="onSave" label="Save Changes" />
+    <q-btn
+      style="background-color: #06372c"
+      class="full-width text-white"
+      @click="onSave"
+      label="Save Changes"
+    />
   </div>
 </template>
 <script>
+import { useLoginCheck } from "src/stores/SignUp_Store";
 export default {
   props: {
     onSave: {
       type: Function,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      extension: ["JR.", "SR.", "III", "IV"],
+      genderPreference:[],
+      inputRules:'',
+      extension: ["N/A","JR.", "SR.", "III", "IV"],
       status: ["SINGLE", "MARRIED", "WIDOWED", "SEPARATED", "OTHER/S"],
       citizenship: ["FILIPINO", "DUAL CITIZENSHIP"],
       sexOptions: ["MALE", "FEMALE"],
+      userinfo: [],
+      personaldata: [],
     };
+  },
+  created() {
+    const store = useLoginCheck();
+    this.userinfo = store.RetrievedData;
+
+    let data = new FormData();
+    data.append("action", "edit");
+    data.append("ControlNo", this.userinfo.data[0].ControlNo);
+
+    store.PersonalData(data).then((res) => {
+      this.personaldata = store.PI;
+      console.log("PersonalInf =>", this.pi);
+    });
   },
   methods: {
     save() {
       // this.$router.push('/PDS')
-    }
-  }
+    },
+  },
 };
 </script>

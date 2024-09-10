@@ -1,13 +1,15 @@
 <template>
   <div>
-    <p class="title q-ma-sm text-bold q-ml-md">REFERENCES<q-btn
+    <p class="title q-ma-sm text-bold q-ml-md">
+      REFERENCES<q-btn
         icon="edit"
         flat
         class=""
         dense
         style="color: orange"
         @click="EditBtn"
-      ></q-btn></p>
+      ></q-btn>
+    </p>
     <q-separator class="q-ma-sm" />
     <div class="row" v-show="ref">
       <div class="col">
@@ -23,7 +25,7 @@
                 wrap-cells=""
                 title=""
                 dense
-                :rows="reference"
+                :rows="referencedata"
                 :columns="column"
                 row-key="id"
                 ><template v-slot:body-cell-actions="{ row }">
@@ -77,14 +79,15 @@
   </div>
 </template>
 <script>
-import Reference from '../EditPDS/ReferencePDS.vue'
-
+import Reference from "../EditPDS/ReferencePDS.vue";
+import { useLoginCheck } from "src/stores/SignUp_Store";
 export default {
   data() {
     return {
       ref: true,
       EditProfile: false,
-      reference: [],
+      referencedata: [],
+      userinfo: [],
       DeleteReferenceDialog: false,
       ReferenceID: "",
       column: [
@@ -118,7 +121,20 @@ export default {
       ],
     };
   },
-   methods: {
+  created() {
+    const store = useLoginCheck();
+    this.userinfo = store.RetrievedData;
+
+    let data = new FormData();
+    data.append("action", "view");
+    data.append("ControlNo", this.userinfo.data[0].ControlNo);
+
+    store.ReferenceData(data).then((res) => {
+      this.referencedata = store.REF;
+      console.log("ReferenceData => ", this.referencedata);
+    });
+  },
+  methods: {
     EditBtn() {
       this.EditProfile = true;
       this.ref = false;

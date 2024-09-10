@@ -1,18 +1,21 @@
 <template>
   <div>
-    <p class="title q-ma-sm text-bold q-ml-md">OTHER INFORMATION <q-btn
+    <p class="title q-ma-sm text-bold q-ml-md">
+      OTHER INFORMATION
+      <q-btn
         icon="edit"
         flat
         class=""
         dense
         style="color: orange"
         @click="EditBtn"
-      ></q-btn></p>
+      ></q-btn>
+    </p>
     <q-separator class="q-ma-md" />
     <div v-show="other">
       <q-card class="q-ma-md q-pa-md" style="margin-top: -0px">
         <p style="font-weight: 600" class="q-mb-lg">RELATED QUESTION</p>
-        <div class="row" >
+        <div class="row">
           <div class="col-12 col-sm-12 col-xs-12 col-md-6">
             <div class="row">
               <div class="col-12 col-lg-11 col-sm-12">
@@ -112,26 +115,42 @@
       </q-card>
     </div>
   </div>
-   <div v-show="EditProfile">
-      <OtherInformation :onSave="SaveEdit"/>
-    </div>
+  <div v-show="EditProfile">
+    <OtherInformation :onSave="SaveEdit" />
+  </div>
 </template>
 <script>
-import OtherInformation from '../EditPDS/OtherInformation.vue'
+import OtherInformation from "../EditPDS/OtherInformation.vue";
+import { useLoginCheck } from "src/stores/SignUp_Store";
 
 export default {
   data() {
     return {
-EditProfile: false,
-other: true,
+      EditProfile: false,
+      other: true,
+      personaldata: [],
+      userinfo: [],
     };
   },
-   methods: {
+  created() {
+    const store = useLoginCheck();
+    this.userinfo = store.RetrievedData;
+
+    let data = new FormData();
+    data.append("action", "view");
+    data.append("ControlNo", this.userinfo.data[0].ControlNo);
+
+    store.PersonalData(data).then((res) => {
+      this.personaldata = store.PI;
+      console.log("PersonalInf =>", this.pi);
+    });
+  },
+  methods: {
     EditBtn() {
       this.EditProfile = true;
       this.other = false;
     },
-     SaveEdit() {
+    SaveEdit() {
       this.EditProfile = false;
       this.other = true;
     },
@@ -139,7 +158,7 @@ other: true,
   components: {
     OtherInformation,
   },
-}
+};
 </script>
 
 <style scoped>

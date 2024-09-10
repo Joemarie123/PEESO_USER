@@ -20,21 +20,21 @@
             <p class="" style="font-weight: 600">EMPLOYEE'S NAME</p>
             <div class="row">
               <div class="col-3 col-sm-6 col-xs-12 col-md-3">
-                <p class="name">{{ userinfo.Firstname }}</p>
+                <p class="name">{{ userinfo[0].Firstname }}</p>
                 <p class="nameLabel">Firstname</p>
               </div>
-              <!-- <div class="col-3 col-sm-6 col-xs-12 col-md-3">
-                <p class="name">{{ userinfo.data[0].Surname }}</p>
+              <div class="col-3 col-sm-6 col-xs-12 col-md-3">
+                <p class="name">{{ userinfo[0].Surname }}</p>
                 <p class="nameLabel">Lastname</p>
               </div>
               <div class="col-3 col-sm-6 col-xs-12 col-md-3">
-                <p class="name">{{ userinfo.data[0].MIddlename }}</p>
+                <p class="name">{{ userinfo[0].MIddlename }}</p>
                 <p class="nameLabel">Middlename</p>
               </div>
               <div class="col-3 col-sm-6 col-xs-12 col-md-3">
-                <p class="name">{{ userinfo.data[0].Suffix }}</p>
+                <p class="name">{{ userinfo[0].Suffix }}</p>
                 <p class="nameLabel">Name Extension</p>
-              </div> -->
+              </div>
             </div>
           </q-card>
         </div>
@@ -49,61 +49,61 @@
                   <p class="addressTitle">DATE OF BIRTH:</p>
                 </div>
                 <div class="col-12 col-lg-8 col-sm-6">
-                  <!-- <p class="address">{{ personals.BirthPlace }}</p> -->
+                  <p class="address">{{ userinfo[0].BirthDate }}</p>
                 </div>
                 <div class="col-12 col-lg-4 col-sm-6">
                   <p class="addressTitle">PLACE OF BIRTH:</p>
                 </div>
                 <div class="col-12 col-lg-8 col-sm-6">
-                  <!-- <p class="address">{{ personals.BirthPlace }}</p> -->
+                  <p class="address">{{ userinfo[0].BirthPlace }}</p>
                 </div>
                 <div class="col-12 col-lg-4 col-sm-6">
                   <p class="addressTitle">SEX:</p>
                 </div>
                 <div class="col-12 col-lg-8 col-sm-6">
-                  <!-- <p class="address">{{ personals.Sex }}</p> -->
+                  <p class="address">{{ userinfo[0].Sex }}</p>
                 </div>
                 <div class="col-12 col-lg-4 col-sm-6">
                   <p class="addressTitle">CIVIL STATUS:</p>
                 </div>
                 <div class="col-12 col-lg-8 col-sm-6">
-                  <!-- <p class="address">{{ personals.CivilStatus }}</p> -->
+                  <p class="address">{{ userinfo[0].CivilStatus }}</p>
                 </div>
                 <div class="col-12 col-lg-4 col-sm-6">
                   <p class="addressTitle">GENDER PREFERENCE:</p>
                 </div>
                 <div class="col-12 col-lg-8 col-sm-6">
-                  <!-- <p class="address">{{ personals.gender }}</p> -->
+                  <p class="address">{{ userinfo[0].gender }}</p>
                 </div>
                 <div class="col-12 col-lg-4 col-sm-6">
                   <p class="addressTitle">HEIGHT:</p>
                 </div>
                 <div class="col-12 col-lg-8 col-sm-6">
-                  <!-- <p class="address">{{ personals.Heights }}</p> -->
+                  <p class="address">{{ userinfo[0].Heights }}</p>
                 </div>
                 <div class="col-12 col-lg-4 col-sm-6">
                   <p class="addressTitle">WEIGHT:</p>
                 </div>
                 <div class="col-12 col-lg-8 col-sm-6">
-                  <!-- <p class="address">{{ personals.Weights }}</p> -->
+                  <p class="address">{{ userinfo[0].Weights }}</p>
                 </div>
                 <div class="col-12 col-lg-4 col-sm-6">
                   <p class="addressTitle">BLOOD TYPE:</p>
                 </div>
                 <div class="col-12 col-lg-8 col-sm-6">
-                  <!-- <p class="address">{{ personals.BloodType }}</p> -->
+                  <p class="address">{{ userinfo[0].BloodType }}</p>
                 </div>
                 <div class="col-12 col-lg-4 col-sm-6">
                   <p class="addressTitle">TELEPHONE NUMBER:</p>
                 </div>
                 <div class="col-12 col-lg-8 col-sm-6">
-                  <!-- <p class="address">{{ personals.TelNo }}</p> -->
+                  <p class="address">{{ userinfo[0].TelNo }}</p>
                 </div>
                 <div class="col-12 col-lg-4 col-sm-6">
                   <p class="addressTitle">CELLPHONE NUMBER:</p>
                 </div>
                 <div class="col-12 col-lg-8 col-sm-6">
-                  <!-- <p class="address">{{ personals.CellphoneNo }}</p> -->
+                  <p class="address">{{ userinfo[0].CellphoneNo }}</p>
                 </div>
               </div>
             </div>
@@ -113,57 +113,58 @@
                   <p class="addressTitle">EMAIL ADDRESS:</p>
                 </div>
                 <div class="col-12 col-lg-8 col-sm-6">
-                  <!-- <p class="address">{{ personals.EmailAdd }}</p> -->
+                  <p class="address">{{ userinfo[0].Email }}</p>
                 </div>
                 <div class="col-12 col-lg-4 col-sm-6">
                   <p class="addressTitle">GSIS ID NO.:</p>
                 </div>
                 <div class="col-12 col-lg-8 col-sm-6">
-                  <!-- <p class="address">{{ personals.GSISNo }}</p> -->
+                  <p class="address">{{ userinfo[0].GSISNo }}</p>
                 </div>
                 <div class="col-12 col-lg-4 col-sm-6">
                   <p class="addressTitle">PAGIBIG ID NO.:</p>
                 </div>
                 <div class="col-12 col-lg-8 col-sm-6">
-                  <!-- <p class="address">{{ personals.PAGIBIGNo }}</p> -->
+                  <p class="address">{{ userinfo[0].PAGIBIGNo }}</p>
                 </div>
                 <div class="col-12 col-lg-4 col-sm-6">
                   <p class="addressTitle">PHILHEALTH ID NO.:</p>
                 </div>
                 <div class="col-12 col-lg-8 col-sm-6">
-                  <!-- <p class="address">{{ personals.PHEALTHNo }}</p> -->
+                  <p class="address">{{ userinfo[0].PHEALTHNo }}</p>
                 </div>
                 <div class="col-12 col-lg-4 col-sm-6">
                   <p class="addressTitle">SSS NO.:</p>
                 </div>
                 <div class="col-12 col-lg-8 col-sm-6">
-                  <!-- <p class="address">{{ personals.SSSNo }}</p> -->
+                  <p class="address">{{ userinfo[0].SSSNo }}</p>
                 </div>
                 <div class="col-12 col-lg-4 col-sm-6">
                   <p class="addressTitle">TIN NO.:</p>
                 </div>
                 <div class="col-12 col-lg-8 col-sm-6">
-                  <!-- <p class="address">{{ personals.TINNo }}</p> -->
+                  <p class="address">{{ userinfo[0].TINNo }}</p>
                 </div>
                 <div class="col-12 col-lg-4 col-sm-6">
                   <p class="addressTitle">AGENCY EMPLOYEE NO.:</p>
                 </div>
                 <div class="col-12 col-lg-8 col-sm-6">
-                  <!-- <p class="address">{{ personals.ControlNo }}</p> -->
+                  <p class="address">{{ userinfo[0].ControlNo }}</p>
                 </div>
                 <div class="col-12 col-lg-4 col-sm-6">
                   <p class="addressTitle">CITIZENSHIP:</p>
                 </div>
                 <div class="col-12 col-lg-8 col-sm-6">
                   <p class="address">
-                    <!-- {{ personals.cit }} {{ personals.citizenshipStatus }} -->
+                    {{ userinfo[0].cit }}
+                    {{ userinfo[0].citizenshipStatus }}
                   </p>
                 </div>
                 <div class="col-12 col-lg-4 col-sm-6">
                   <p class="addressTitle">RELIGIOUS SECTOR:</p>
                 </div>
                 <div class="col-12 col-lg-8 col-sm-6">
-                  <!-- <p class="address">{{ personals.Religion }}</p> -->
+                  <p class="address">{{ userinfo[0].Religion }}</p>
                 </div>
               </div>
             </div>
@@ -184,49 +185,49 @@
                     <p class="addressTitle">REGION:</p>
                   </div>
                   <div class="col-12 col-lg-8 col-sm-6">
-                    <!-- <p class="address">{{ personals.Rregion }}</p> -->
+                    <p class="address">{{ userinfo[0].Rregion }}</p>
                   </div>
                   <div class="col-12 col-lg-4 col-sm-6">
                     <p class="addressTitle">PROVINCE:</p>
                   </div>
                   <div class="col-12 col-lg-8 col-sm-6">
-                    <!-- <p class="address">{{ personals.Rprovince }}</p> -->
+                    <p class="address">{{ userinfo[0].Rprovince }}</p>
                   </div>
                   <div class="col-12 col-lg-4 col-sm-6">
                     <p class="addressTitle">MUNICIPALITY:</p>
                   </div>
                   <div class="col-12 col-lg-8 col-sm-6">
-                    <!-- <p class="address">{{ personals.Rcity }}</p> -->
+                    <p class="address">{{ userinfo[0].Rcity }}</p>
                   </div>
                   <div class="col-12 col-lg-4 col-sm-6">
                     <p class="addressTitle">BARANGGAY:</p>
                   </div>
                   <div class="col-12 col-lg-8 col-sm-6">
-                    <!-- <p class="address">{{ personals.Rbarangay }}</p> -->
+                    <p class="address">{{ userinfo[0].Rbarangay }}</p>
                   </div>
                   <div class="col-12 col-lg-4 col-sm-6">
                     <p class="addressTitle">SUBDIVISION / VILLAGE:</p>
                   </div>
                   <div class="col-12 col-lg-8 col-sm-6">
-                    <!-- <p class="address">{{ personals.Rsubdivision }}</p> -->
+                    <p class="address">{{ userinfo[0].Rsubdivision }}</p>
                   </div>
                   <div class="col-12 col-lg-4 col-sm-6">
                     <p class="addressTitle">STREET PUROK:</p>
                   </div>
                   <div class="col-12 col-lg-8 col-sm-6">
-                    <!-- <p class="address">{{ personals.Rstreet }}</p> -->
+                    <p class="address">{{ userinfo[0].Rstreet }}</p>
                   </div>
                   <div class="col-12 col-lg-4 col-sm-6">
                     <p class="addressTitle">HOUSE/BLOCK/LOT NO.:</p>
                   </div>
                   <div class="col-12 col-lg-8 col-sm-6">
-                    <!-- <p class="address">{{ personals.Rhouse }}</p> -->
+                    <p class="address">{{ userinfo[0].Rhouse }}</p>
                   </div>
                   <div class="col-12 col-lg-4 col-sm-6">
                     <p class="addressTitle">ZIP CODE:</p>
                   </div>
                   <div class="col-12 col-lg-8 col-sm-6">
-                    <!-- <p class="address">{{ personals.Rzip }}</p> -->
+                    <p class="address">{{ userinfo[0].Rzip }}</p>
                   </div>
                 </div>
               </div>
@@ -240,49 +241,49 @@
                     <p class="addressTitle">REGION:</p>
                   </div>
                   <div class="col-12 col-lg-8 col-sm-6">
-                    <!-- <p class="address">{{ personals.Pregion }}</p> -->
+                    <p class="address">{{ userinfo[0].Pregion }}</p>
                   </div>
                   <div class="col-12 col-lg-4 col-sm-6">
                     <p class="addressTitle">PROVINCE:</p>
                   </div>
                   <div class="col-12 col-lg-8 col-sm-6">
-                    <!-- <p class="address">{{ personals.Pprovince }}</p> -->
+                    <p class="address">{{ userinfo[0].Pprovince }}</p>
                   </div>
                   <div class="col-12 col-lg-4 col-sm-6">
                     <p class="addressTitle">MUNICIPALITY:</p>
                   </div>
                   <div class="col-12 col-lg-8 col-sm-6">
-                    <!-- <p class="address">{{ personals.Pcity }}</p> -->
+                    <p class="address">{{ userinfo[0].Pcity }}</p>
                   </div>
                   <div class="col-12 col-lg-4 col-sm-6">
                     <p class="addressTitle">BARANGGAY:</p>
                   </div>
                   <div class="col-12 col-lg-8 col-sm-6">
-                    <!-- <p class="address">{{ personals.Pbarangay }}</p> -->
+                    <p class="address">{{ userinfo[0].Pbarangay }}</p>
                   </div>
                   <div class="col-12 col-lg-4 col-sm-6">
                     <p class="addressTitle">SUBDIVISION / VILLAGE:</p>
                   </div>
                   <div class="col-12 col-lg-8 col-sm-6">
-                    <!-- <p class="address">{{ personals.Psubdivision }}</p> -->
+                    <p class="address">{{ userinfo[0].Psubdivision }}</p>
                   </div>
                   <div class="col-12 col-lg-4 col-sm-6">
                     <p class="addressTitle">STREET PUROK:</p>
                   </div>
                   <div class="col-12 col-lg-8 col-sm-6">
-                    <!-- <p class="address">{{ personals.Pstreet }}</p> -->
+                    <p class="address">{{ userinfo[0].Pstreet }}</p>
                   </div>
                   <div class="col-12 col-lg-4 col-sm-6">
                     <p class="addressTitle">HOUSE/BLOCK/LOT NO.:</p>
                   </div>
                   <div class="col-12 col-lg-8 col-sm-6">
-                    <!-- <p class="address">{{ personals.Phouse }}</p> -->
+                    <p class="address">{{ userinfo[0].Phouse }}</p>
                   </div>
                   <div class="col-12 col-lg-4 col-sm-6">
                     <p class="addressTitle">ZIP CODE:</p>
                   </div>
                   <div class="col-12 col-lg-8 col-sm-6">
-                    <!-- <p class="address">{{ personals.Pzip }}</p> -->
+                    <p class="address">{{ userinfo[0].Pzip }}</p>
                   </div>
                 </div>
               </div>
@@ -306,23 +307,24 @@ export default {
   },
   data() {
     return {
-      retrievedLogin: "",
       userinfo: [],
       model: "",
       EditProfile: false,
       pi: true,
+      personaldata: [],
     };
   },
   created() {
-    this.retrievedLogin = localStorage.getItem("Login");
-    console.log("Retrieved Login:", this.retrievedLogin); // Check the retrieved login
-
     const store = useLoginCheck();
-    let data = new FormData();
-    data.append("LoginID", this.retrievedLogin);
+    this.userinfo = store.RetrievedData.data;
 
-    store.RetrievedData_function(data).then((res) => {
-      this.userinfo = store.RetrievedData;
+    let data = new FormData();
+    data.append("action", "view");
+    data.append("ControlNo", this.userinfo[0].ControlNo);
+
+    store.PersonalData(data).then((res) => {
+      this.personaldata = store.PI;
+      console.log("PersonalInf =>", this.pi);
     });
   },
 
@@ -334,6 +336,27 @@ export default {
     SaveEdit() {
       this.EditProfile = false;
       this.pi = true;
+
+      const store = useLoginCheck();
+      this.userinfo = store.RetrievedData.data;
+      console.log("UserInfo", this.userinfo);
+      let data = new FormData();
+      data.append("action", "edit");
+      data.append("ControlNo", this.userinfo[0].ControlNo);
+
+      Object.entries(this.userinfo[0]).forEach(([key, value]) => {
+          data.append(key, value === null ? "" : value);
+      });
+      const formDataObj = {};
+      data.forEach((value, key) => {
+        formDataObj[key] = value;
+      });
+      console.log("ajjhjashd =>", formDataObj);
+
+      store.PersonalData(data).then((res) => {
+        this.personaldata = store.PI;
+        console.log("PersonalInf =>", this.pi);
+      });
     },
   },
   components: {

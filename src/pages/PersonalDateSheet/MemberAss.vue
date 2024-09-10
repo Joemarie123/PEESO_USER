@@ -27,7 +27,7 @@
                 wrap-cells=""
                 title=""
                 dense
-                :rows="organization"
+                :rows="organizationdata"
                 :columns="columnMembership"
                 row-key="id"
                 ><template v-slot:body-cell-actions="{ row }">
@@ -81,6 +81,7 @@
 </template>
 <script>
 import MembershipAssociation from "../EditPDS/MembershipAssociation.vue";
+import { useLoginCheck } from "src/stores/SignUp_Store";
 export default {
   data() {
     return {
@@ -90,7 +91,9 @@ export default {
       DeleteMembershipDialog: false,
       MembershipID: "",
       personal: [],
-      organization: [],
+      organizationdata: [],
+
+      userinfo: [],
       columnMembership: [
         {
           name: "Membership",
@@ -110,7 +113,19 @@ export default {
       ],
     };
   },
+  created() {
+    const store = useLoginCheck();
+    this.userinfo = store.RetrievedData;
 
+    let data = new FormData();
+    data.append("action", "view");
+    data.append("ControlNo", this.userinfo.data[0].ControlNo);
+
+    store.OrganizationData(data).then((res) => {
+      this.organizationdata = store.MO;
+      console.log("OrganizationData => ", this.organizationdata);
+    });
+  },
   methods: {
     EditBtn() {
       this.EditProfile = true;

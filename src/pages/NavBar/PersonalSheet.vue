@@ -7,10 +7,20 @@
             <img src="https://cdn.quasar.dev/img/avatar2.jpg" />
           </q-avatar>
         </div>
-        <div class="col-12" style="text-align: center">
+        <!-- <div class="col-12" style="text-align: center">
           <p style="font-weight: 500; margin-bottom: -2px">
             {{ userinfo.data[0].Firstname}} {{ userinfo.data[0].Surname }}
           </p>
+          <p>Web Development, JavaScript, CSS, HTML</p>
+        </div> -->
+        <div class="col-12" style="text-align: center">
+          <p
+            v-if="userinfo && userinfo.data && userinfo.data.length > 0"
+            style="font-weight: 500; margin-bottom: -2px"
+          >
+            {{ userinfo.data[0].Firstname }} {{ userinfo.data[0].Surname }}
+          </p>
+          <p v-else>No user information available.</p>
           <p>Web Development, JavaScript, CSS, HTML</p>
         </div>
       </div>
@@ -294,27 +304,25 @@ export default {
     };
   },
 
- setup() {
+  setup() {
     const retrievedLogin = ref(null); // Corrected spelling
     const userinfo = ref(null);
     const store = useLoginCheck();
 
+    retrievedLogin.value = localStorage.getItem("Login");
+    console.log("Retrieved Login:", retrievedLogin.value); // Check the retrieved login
 
-      retrievedLogin.value = localStorage.getItem("Login");
-      console.log("Retrieved Login:", retrievedLogin.value); // Check the retrieved login
+    let data = new FormData();
+    data.append("LoginID", retrievedLogin.value);
 
-      let data = new FormData();
-      data.append("LoginID", retrievedLogin.value);
-
-      store.RetrievedData_function(data).then((res) => {
-        userinfo.value = store.RetrievedData;
-        console.log("userinfo:", userinfo.value);
-      });
-
+    store.RetrievedData_function(data).then((res) => {
+      userinfo.value = store.RetrievedData;
+      console.log("userinfo:", userinfo.value);
+    });
 
     return {
-     userinfo,
-     store
+      userinfo,
+      store,
     };
   },
 
