@@ -230,7 +230,7 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
     //ORGANIZATION_DATA
     async OrganizationData(payload) {
       let res = await axios.post(
-        `http://10.0.1.26:82/peesoportal/pds/client/skills.php`,
+        `http://10.0.1.26:82/peesoportal/pds/client/organization.php`,
         payload
       );
       this.MO = res.data;
@@ -239,7 +239,7 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
     //REFERENCE_DATA
     async ReferenceData(payload) {
       let res = await axios.post(
-        `http://10.0.1.26:82/peesoportal/pds/client/skills.php`,
+        `http://10.0.1.26:82/peesoportal/pds/client/reference.php`,
         payload
       );
       this.REF = res.data;

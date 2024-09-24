@@ -91,7 +91,7 @@
               align="left"
               class="q-mt-xs"
               :class="{
-                'active-button': activeButton === 'FAMILY BACKGROUND',
+                'active-button': activeButton == 'FAMILY BACKGROUND',
               }"
               style="width: 95%; margin-bottom: -10px"
               @click="familyback()"
