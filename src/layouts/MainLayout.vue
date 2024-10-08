@@ -19,7 +19,7 @@
           v-model="MySearch"
           color="green"
           style="width: 15%"
-           debounce="300" 
+          debounce="300"
         >
           <template v-slot:prepend>
             <q-icon name="search" />
@@ -179,11 +179,11 @@
           clickable
           v-ripple
           class="q-mt-lg"
-          @click="$router.push({ path: '/UserProfile' })"
+          @click="$router.push({ path: '/Profile' })"
         >
           <q-item-section avatar>
             <q-avatar size="40px">
-              <img src="https://cdn.quasar.dev/img/avatar3.jpg" />
+              <img :src="imageUrl" />
             </q-avatar>
           </q-item-section>
           <q-item-section class="text-weight-medium">
@@ -290,6 +290,7 @@ export default defineComponent({
   data() {
     return {
       tab: "mails",
+      imageUrl: "/upload.jpg",
       retrievedLogin: "",
       userinfo: [],
       MySearch: "",
@@ -304,18 +305,24 @@ export default defineComponent({
         data.append("Query", this.MySearch);
 
         const store = useLoginCheck();
-        store.Retrieve_JobPosting(data).then((res) => {
-          this.jobposting = store.RetreivedJobPosting.data;
-          console.log("Job Posting", this.jobposting);
-        }).catch(error => {
-          console.error("API Error:", error);
-        });
+        store
+          .Retrieve_JobPosting(data)
+          .then((res) => {
+            this.jobposting = store.RetreivedJobPosting.data;
+            console.log("Job Posting", this.jobposting);
+          })
+          .catch((error) => {
+            console.error("API Error:", error);
+          });
       }
-    }
+    },
   },
 
   watch: {
-    MySearch: 'searchJobs', // Call searchJobs whenever MySearch changes
+    MySearch: "searchJobs", // Call searchJobs whenever MySearch changes
+    "store.RetrievedData"(newval) {
+      this.imageUrl = newval.data[0].pic;
+    },
   },
 
   created() {
@@ -331,6 +338,8 @@ export default defineComponent({
     console.log("Ako ni ID,", this.userinfo);
     // });
 
+    this.imageUrl = this.userinfo.data[0].pic;
+
     console.log("User info length:", this.userinfo.length);
     if (this.userinfo && this.userinfo.data.length > 0) {
       this.searchJobs(); // Initial job search
@@ -338,12 +347,22 @@ export default defineComponent({
       console.log("No user info found");
     }
   },
+
+  /*  watch: {
+    txtjobtitle(newVal) {
+      if (newVal) {
+        this.errors.txtjobtitle = "";
+      }
+    },
+  }, */
+
   setup() {
     const leftDrawerOpen = ref(false);
     const dropdownOpen = ref(false);
     const tab = "";
-
+    const store = useLoginCheck();
     return {
+      store,
       leftDrawerOpen,
       dropdownOpen,
       toggleLeftDrawer() {

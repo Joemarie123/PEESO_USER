@@ -25,6 +25,8 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
     NON: [],
     MO: [],
     REF: [],
+    WE: [],
+    ImageDatabase: [],
   }),
   persist: true,
   getters: {
@@ -63,6 +65,16 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
         return 4;
       }
       console.log("res.data", res.data);
+    },
+
+    async Store_ImageDatabase(payload) {
+      // `http://10.0.1.26:82/HRPORTAL/login.php`
+      let res = await axios.post(
+        `http://10.0.1.26:82/peesoportal/pds/client/image.php`,
+        payload
+      );
+      this.ImageDatabase = res.data;
+      console.log("Image to Databse", res.data);
     },
 
     async Login_Store(payload) {
@@ -165,7 +177,10 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
         payload
       );
       this.PI = res.data;
-      console.log("PersonalData=>", res.data);
+      console.log("PersonalData=>", res.data.personalRecord);
+      let data = new FormData();
+      data.append("LoginID", res.data.personalRecord.LoginID);
+      this.RetrievedData_function(data);
     },
 
     //CHILDREN_DATA
@@ -176,6 +191,16 @@ export const useLoginCheck = defineStore("SignUpAccouteStore", {
       );
       this.CD = res.data;
       console.log("ChildrenData =>", res.data);
+    },
+
+    //Work Experience
+    async WorkExperience_Data(payload) {
+      let res = await axios.post(
+        `http://10.0.1.26:82/peesoportal/pds/client/workexperience.php`,
+        payload
+      );
+      this.WE = res.data;
+      console.log("Work Experience =>", res.data);
     },
 
     //EDUCATIONAL_DATA

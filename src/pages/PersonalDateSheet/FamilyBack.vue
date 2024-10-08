@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="title q-ma-sm text-bold q-ml-md">
-      FAMILY BACKGROUND<q-btn
+      FAMILY BACKGROUNDs<q-btn
         icon="edit"
         flat
         class=""
@@ -182,7 +182,7 @@ export default {
       ? store.RetrievedData.data[0]
       : store.RetrievedData.data;
 
-      
+
     console.log("Family Back", this.userinfo);
 
     let data = new FormData();

@@ -87,13 +87,18 @@
             selected_Details.Status !== 'RESCHEDULE'
           "
         >
-          <q-btn color="green" class="" v-model="AcceptBtn" @click="Accept()"
+          <q-btn
+            color="green"
+            class="q-ma-sm"
+            v-model="AcceptBtn"
+            @click="Accept()"
             >Accept</q-btn
           >
           <q-btn
             outline
             color="warning"
             class="q-ma-sm"
+            v-if="selected_Details.Status !== 'NEW SCHEDULE'"
             @click="reschedule = true"
             >Re-schedule</q-btn
           >
